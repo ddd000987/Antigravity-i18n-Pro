@@ -1,120 +1,189 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>antigravity-i18n</title>
+  <title>Antigravity-i18n-Pro</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="window-container">
+  <div class="window-container" id="windowContainer">
     <header class="app-header">
       <div class="brand">
         <img class="logo-badge" src="appicon.png" alt="" />
         <div class="title-group">
-          <h1 class="app-title">Antigravity 多语言工具</h1>
+          <h1 class="app-title">Antigravity-i18n-Pro</h1>
           <span class="version-tag" id="appVersionBadge">&nbsp;</span>
         </div>
       </div>
-      <button class="icon-btn text-link" id="btnAbout">关于</button>
+      <div class="header-actions">
+        <select class="lang-select" id="uiLanguageSelect" data-i18n-title="language.label" title="Language of this tool"></select>
+        <button class="text-link" id="btnAbout" data-i18n="header.about">About</button>
+      </div>
     </header>
 
-    <section class="card app-card">
-      <div class="card-header-line">
-        <div class="app-meta">
-          <span class="app-name" id="appName">Antigravity</span>
-          <span class="app-version-badge" id="appVersion">检测中...</span>
-        </div>
-        <button class="btn-sm btn-ghost" id="btnChangePath">更改位置</button>
+    <section class="block install">
+      <div class="app-meta">
+        <span class="app-name" id="appName">Antigravity</span>
+        <span class="app-version-badge" id="appVersion">Detecting...</span>
       </div>
-      <div class="path-display" id="appPathDisplay" title="点击更改路径">正在检测 Antigravity 安装路径...</div>
+      <div class="path-display" id="appPathDisplay">Detecting the Antigravity installation...</div>
+      <button class="btn btn-quiet btn-compact" id="btnChangePath" data-i18n="btn.changePath">Change location</button>
     </section>
 
-    <section class="card hero-card" id="statusCard">
+    <section class="block status-block" id="statusCard">
       <div class="status-pill" id="statusPill">
         <span class="status-dot" id="statusDot"></span>
-        <span class="status-label" id="statusLabel">检测中...</span>
+        <span class="status-label" id="statusLabel">Detecting...</span>
       </div>
-      <p class="status-desc" id="statusDesc">正在读取 app.asar 的实际状态...</p>
+      <p class="status-desc" id="statusDesc">Reading the actual state of app.asar...</p>
+
+      <div class="banner hidden" id="reapplyBanner" role="status">
+        <p class="banner-text" id="reapplyText"></p>
+        <div class="banner-actions">
+          <button class="btn btn-primary btn-compact" id="btnReapply" data-i18n="reapply.button">Reapply</button>
+          <button class="btn btn-secondary btn-compact hidden" id="btnReapplyLoad" data-i18n="custom.load.button">Load language file</button>
+          <button class="btn btn-ghost btn-compact" id="btnReapplyDismiss" data-i18n="reapply.dismiss">Not now</button>
+        </div>
+      </div>
 
       <div class="progress-box hidden" id="progressBox">
         <div class="progress-info">
-          <span class="progress-stage" id="progressStage">正在准备...</span>
+          <span class="progress-stage" id="progressStage">Preparing...</span>
           <span class="spinner"></span>
         </div>
-        <div class="progress-detail" id="progressDetail">请稍候...</div>
+        <div class="progress-detail" id="progressDetail">Please wait...</div>
       </div>
 
       <div class="action-row" id="actionRow">
-        <button class="btn btn-primary" id="btnPrimaryAction">应用中文</button>
-        <button class="btn btn-secondary hidden" id="btnSecondaryAction">打开 Antigravity</button>
-        <button class="text-link-danger hidden" id="btnRestore">还原为英文</button>
+        <button class="btn btn-primary" id="btnPrimaryAction">Apply</button>
+        <button class="btn btn-secondary hidden" id="btnSecondaryAction">Open Antigravity</button>
+        <button class="text-link-danger hidden" id="btnRestore" data-i18n="btn.restore">Restore English</button>
       </div>
     </section>
 
-    <section class="card locale-card">
+    <section class="block locale-card">
       <div class="locale-header">
-        <span class="section-title">界面语言</span>
-        <span class="section-note" id="localeNote">正在读取语言包...</span>
+        <span class="section-title" data-i18n="locale.title">Antigravity language</span>
+        <span class="section-note" id="localeNote">Loading language packs...</span>
       </div>
       <div class="chips" id="localeChips"></div>
     </section>
 
+    <section class="block custom-card" id="customCard">
+      <div class="locale-header">
+        <span class="section-title" data-i18n="custom.title">Custom language file</span>
+      </div>
+      <p class="card-desc" data-i18n="custom.desc">Translate Antigravity into any language: export a template, fill in the translations, then load the file here to check it and apply it. Anything left empty stays English.</p>
+
+      <div class="custom-row">
+        <div class="custom-row-text">
+          <span class="custom-row-title" data-i18n="custom.export.title">Export template</span>
+          <span class="custom-row-desc" data-i18n="custom.export.desc">Save a JSON file with every string to translate, blank or prefilled from a bundled language.</span>
+        </div>
+        <div class="custom-row-controls">
+          <select class="select" id="exportFromSelect" data-i18n-title="custom.export.from.label" title="Start from"></select>
+          <button class="btn btn-secondary btn-compact" id="btnExportTemplate" data-i18n="custom.export.button">Export template</button>
+        </div>
+      </div>
+      <div class="result-box hidden" id="exportResult"></div>
+
+      <div class="custom-row">
+        <div class="custom-row-text">
+          <span class="custom-row-title" data-i18n="custom.load.title">Load language file</span>
+          <span class="custom-row-desc" data-i18n="custom.load.desc">Check a language file for problems and see how much of it is translated.</span>
+        </div>
+        <div class="custom-row-controls">
+          <button class="btn btn-secondary btn-compact" id="btnLoadFile" data-i18n="custom.load.button">Load language file</button>
+        </div>
+      </div>
+
+      <div class="report hidden" id="reportPanel">
+        <div class="report-head">
+          <div class="report-title" id="reportTitle"></div>
+          <span class="report-badge" id="reportBadge"></span>
+        </div>
+        <div class="report-path" id="reportPath"></div>
+        <div class="meter">
+          <div class="meter-bar"><div class="meter-fill" id="reportBarFill"></div></div>
+          <span class="meter-text" id="reportPercent"></span>
+        </div>
+        <div class="report-subtitle" data-i18n="report.sections">By section</div>
+        <div class="section-rows" id="reportSections"></div>
+        <div class="report-subtitle" id="reportIssuesTitle"></div>
+        <ul class="issue-list" id="reportIssues"></ul>
+        <p class="report-hint hidden" id="reportMissingHint"></p>
+        <p class="report-hint hidden" id="reportUnknownHint"></p>
+        <p class="report-blocked hidden" id="reportBlocked" data-i18n="report.blocked">Fix the errors first, then load the file again.</p>
+        <div class="report-actions">
+          <button class="btn btn-primary btn-compact hidden" id="btnApplyFile" data-i18n="report.apply">Apply this file</button>
+        </div>
+      </div>
+
+      <div class="custom-row">
+        <div class="custom-row-text">
+          <span class="custom-row-title" data-i18n="custom.update.title">Update template</span>
+          <span class="custom-row-desc" data-i18n="custom.update.desc">Add the strings that are new in this release to a language file you already have. A backup copy is kept.</span>
+        </div>
+        <div class="custom-row-controls">
+          <button class="btn btn-secondary btn-compact" id="btnUpdateTemplate" data-i18n="custom.update.button">Update template</button>
+        </div>
+      </div>
+      <div class="result-box hidden" id="updateResult"></div>
+    </section>
+
     <footer class="app-footer">
-      <button class="text-link" id="btnToggleLogs">查看运行日志 ▾</button>
-      <span class="footer-note">便携单文件版 · 词典与软件版本配套</span>
+      <button class="text-link" id="btnToggleLogs" data-i18n="log.toggle">View log ▾</button>
+      <span class="footer-note" data-i18n="footer.note">Portable single file · dictionaries match the app version</span>
     </footer>
 
     <div class="log-drawer hidden" id="logDrawer">
       <div class="log-drawer-header">
-        <span>操作与诊断日志</span>
+        <span data-i18n="log.title">Operation and diagnostics log</span>
         <div class="log-actions">
-          <button class="btn-xs btn-ghost" id="btnCopyLogs">复制日志</button>
-          <button class="btn-xs btn-ghost" id="btnCloseLogs">关闭</button>
+          <button class="btn btn-xs btn-ghost" id="btnCopyLogs" data-i18n="log.copy">Copy log</button>
+          <button class="btn btn-xs btn-ghost" id="btnCloseLogs" data-i18n="log.close">Close</button>
         </div>
       </div>
-      <pre class="log-content" id="logContent">暂无操作日志。</pre>
+      <pre class="log-content" id="logContent">No log entries yet.</pre>
     </div>
   </div>
 
   <div class="modal-backdrop hidden" id="aboutModal">
     <div class="modal-box">
-      <h3>关于 antigravity-i18n</h3>
-      <p class="modal-desc">
-        为 Antigravity 桌面应用提供界面多语言本地化的单文件工具，纯 Go 实现，不依赖 Node 运行时。
-      </p>
+      <h3 data-i18n="about.title">About Antigravity-i18n-Pro</h3>
+      <p class="modal-desc" data-i18n="about.desc">A single-file tool that localizes the Antigravity desktop interface, with a focus on Traditional Chinese for Taiwan. Pure Go, no Node runtime.</p>
       <ul class="about-features">
-        <li><b>按字节还原</b>：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</li>
-        <li><b>只动三个文件</b>：仅替换界面外壳的 JS，其余内容从原 asar 原样拷贝。</li>
-        <li><b>完整校验与回滚</b>：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</li>
+        <li><b data-i18n="about.f1.title">Your own languages</b> <span data-i18n="about.f1.body">export a template, translate it and apply it as a language file; it is checked before anything is written.</span></li>
+        <li><b data-i18n="about.f2.title">Byte-exact restore</b> <span data-i18n="about.f2.body">a clean app.asar is kept before the first patch, and restoring brings back the official file byte for byte.</span></li>
+        <li><b data-i18n="about.f3.title">Verified and rolled back</b> <span data-i18n="about.f3.body">offsets and integrity are recalculated, and any failing step puts everything back.</span></li>
       </ul>
-      <p class="modal-note">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
+      <p class="modal-note" data-i18n="about.credit">Based on antigravity-i18n by wade19990814-hue.</p>
+      <p class="modal-note" data-i18n="about.disclaimer">A community-maintained, unofficial tool, not affiliated with Antigravity.</p>
       <div class="modal-actions">
-        <button class="btn btn-primary" id="btnCloseAbout">确定</button>
+        <button class="btn btn-primary" id="btnCloseAbout" data-i18n="btn.ok">OK</button>
       </div>
     </div>
   </div>
 
   <div class="modal-backdrop hidden" id="applyConfirmModal">
     <div class="modal-box">
-      <h3 id="applyConfirmTitle">确认切换语言？</h3>
-      <p class="modal-desc" id="applyConfirmBody">
-        Antigravity 需要先关闭。工具会请求正常退出并等待 30 秒，超时将强制结束进程。
-      </p>
-      <p class="modal-sub">未保存的编辑器内容、正在进行的会话或撤销历史可能丢失。</p>
+      <h3 id="applyConfirmTitle">Switch language?</h3>
+      <p class="modal-desc" id="applyConfirmBody">Antigravity has to be closed first.</p>
+      <p class="modal-sub" data-i18n="confirm.sub">Unsaved editor content, a running session or undo history may be lost.</p>
       <div class="modal-actions">
-        <button class="btn btn-secondary" id="btnCancelApply">取消</button>
-        <button class="btn btn-primary" id="btnConfirmApply">确认继续</button>
+        <button class="btn btn-secondary" id="btnCancelApply" data-i18n="btn.cancel">Cancel</button>
+        <button class="btn btn-primary" id="btnConfirmApply" data-i18n="btn.confirm">Continue</button>
       </div>
     </div>
   </div>
 
   <div class="modal-backdrop hidden" id="msgModal">
     <div class="modal-box">
-      <h3 id="msgTitle">提示</h3>
+      <h3 id="msgTitle"></h3>
       <p class="modal-desc" id="msgBody"></p>
       <div class="modal-actions">
-        <button class="btn btn-primary" id="btnMsgOk">知道了</button>
+        <button class="btn btn-primary" id="btnMsgOk" data-i18n="btn.gotIt">Got it</button>
       </div>
     </div>
   </div>

@@ -6,6 +6,22 @@ export function ApplyLocale(arg1, arg2) {
   return window['go']['main']['App']['ApplyLocale'](arg1, arg2);
 }
 
+export function ApplyLocaleFile(arg1, arg2) {
+  return window['go']['main']['App']['ApplyLocaleFile'](arg1, arg2);
+}
+
+export function CheckLocaleFile(arg1) {
+  return window['go']['main']['App']['CheckLocaleFile'](arg1);
+}
+
+export function ChooseLocaleFile(arg1) {
+  return window['go']['main']['App']['ChooseLocaleFile'](arg1);
+}
+
+export function ExportTemplate(arg1, arg2) {
+  return window['go']['main']['App']['ExportTemplate'](arg1, arg2);
+}
+
 export function GetLocales() {
   return window['go']['main']['App']['GetLocales']();
 }
@@ -14,8 +30,16 @@ export function GetLogs() {
   return window['go']['main']['App']['GetLogs']();
 }
 
+export function GetReapplyHint() {
+  return window['go']['main']['App']['GetReapplyHint']();
+}
+
 export function GetStatus() {
   return window['go']['main']['App']['GetStatus']();
+}
+
+export function GetUIInfo() {
+  return window['go']['main']['App']['GetUIInfo']();
 }
 
 export function GetVersion() {
@@ -26,14 +50,26 @@ export function LaunchAntigravity() {
   return window['go']['main']['App']['LaunchAntigravity']();
 }
 
+export function Reapply(arg1) {
+  return window['go']['main']['App']['Reapply'](arg1);
+}
+
 export function RestoreLocale(arg1) {
   return window['go']['main']['App']['RestoreLocale'](arg1);
 }
 
-export function SelectAppDir() {
-  return window['go']['main']['App']['SelectAppDir']();
+export function SelectAppDir(arg1) {
+  return window['go']['main']['App']['SelectAppDir'](arg1);
 }
 
 export function SetAppDir(arg1) {
   return window['go']['main']['App']['SetAppDir'](arg1);
+}
+
+export function SetUILanguage(arg1) {
+  return window['go']['main']['App']['SetUILanguage'](arg1);
+}
+
+export function UpdateTemplate(arg1) {
+  return window['go']['main']['App']['UpdateTemplate'](arg1);
 }
