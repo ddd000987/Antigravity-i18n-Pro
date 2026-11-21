@@ -14,7 +14,7 @@ English | [繁體中文](./README.zh-TW.md)
 > - **Remembers the last language** (bundled or your own file) and offers to reapply it when an Antigravity update has put the English build back; `reapply` does the same from the command line.
 > - The tool window is available in English, Traditional Chinese and Simplified Chinese, and follows the system language.
 > - Maintenance scripts used to build the translation are included in [`tools/`](./tools/README.md).
-> - The other bundled packs (de, es, fr, ja, ko, pt-BR, ru, zh-CN) are the original's, unchanged; they cover about 55% of the strings in Antigravity 2.34.
+> - The zh-CN, ja, ko, es and fr packs are completed to cover every string of Antigravity 2.34 (machine translated, with the original's wrong translations corrected); de, pt-BR and ru are the original's, unchanged, and cover about 55%.
 > - The executable is `antigravity-i18n-pro.exe`, versioned from 1.0.0.
 
 Interface localization tool for the [Google Antigravity](https://antigravity.google/) desktop app on **Windows**. One executable with a window and a command line, no Node.js or other runtime needed.
@@ -107,17 +107,17 @@ Any language can be added without rebuilding the tool.
 | Code | Language | Strings of Antigravity 2.34 covered |
 | :--- | :--- | :--- |
 | `zh-TW` | 繁體中文（台灣） Traditional Chinese (Taiwan) | 100% |
-| `zh-CN` | 简体中文 Simplified Chinese | 55% |
-| `ja` | 日本語 Japanese | 55% |
-| `ko` | 한국어 Korean | 55% |
+| `zh-CN` | 简体中文 Simplified Chinese | 100% |
+| `ja` | 日本語 Japanese | 100% |
+| `ko` | 한국어 Korean | 100% |
+| `es` | Español | 100% |
+| `fr` | Français | 100% |
 | `de` | Deutsch | 55% |
-| `es` | Español | 55% |
-| `fr` | Français | 55% |
 | `pt-BR` | Português do Brasil | 55% |
 | `ru` | Русский | 55% |
 | `en` | English | official build (select to restore) |
 
-Untranslated strings stay in English.
+Untranslated strings stay in English. Only zh-TW is reviewed by a native speaker; the other completed packs are machine translated, so corrections are welcome.
 
 ## Files the tool leaves behind
 
