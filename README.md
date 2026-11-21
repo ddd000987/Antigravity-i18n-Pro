@@ -5,7 +5,7 @@ English | [繁體中文](./README.zh-TW.md)
 > **Fork of [wade19990814-hue/antigravity-i18n](https://github.com/wade19990814-hue/antigravity-i18n).**
 > Differences from the original:
 >
-> - **Taiwan Traditional Chinese (`zh-TW`)** pack written with Taiwan terminology, and the default language: 4,001 strings, 619 dynamic rules and 11 value maps, made for Antigravity 2.34.0.
+> - **Taiwan Traditional Chinese (`zh-TW`)** pack written with Taiwan terminology, and the default language: 4,005 strings, 619 dynamic rules and 11 value maps, made for Antigravity 2.34.0.
 > - The original `zh-Hant` pack (Traditional characters with mainland wording) is removed; `zh-Hant`, `zh-HK` and `zh-MO` resolve to `zh-TW`.
 > - **Sentence layer** in the translation engine: sentences React splits across text pieces and inline elements (links, code, keys) are joined with `<>` markers and translated as a whole, with `scope: "sentence"` rules for the dynamic ones. Results are cached.
 > - **Antigravity 2.33+ support**: a new anchor for Chromium's `--lang` switch, which the original could no longer place.

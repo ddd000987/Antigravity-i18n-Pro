@@ -238,7 +238,7 @@
     },
     {
       "id": "s42",
-      "pattern": "^Permanently delete <>(.+?)\\.$",
+      "pattern": "^Permanently delete <>(.*?)\\.$",
       "template": "永久刪除 <>{1}。",
       "sample": "Permanently delete <>1.",
       "scope": "sentence"
@@ -4509,6 +4509,7 @@
     "Inherits from global settings.": "繼承自全域設定。",
     "Local permissions have higher priority.": "本機權限具有較高的優先順序。",
     "Manage project folders, agent settings, and permissions.": "管理專案資料夾、代理程式設定和權限。",
+    "Manage project folders and settings.": "管理專案資料夾和設定。",
     "of the customization budget is available": "的自訂預算額度可用",
     "Available AI Credits": "可用 AI 額度",
     "Available AI Credits:": "可用 AI 額度：",
@@ -4530,6 +4531,7 @@
     "of the customization budget is available.": "的自訂預算額度可用。",
     "Danger Zone": "危險區域",
     "Delete Project": "刪除專案",
+    "Delete project": "刪除專案",
     "Permanently delete this project and all of its conversations.": "永久刪除此專案及其所有對話。",
     "Agent settings and permissions for conversations outside of projects.": "專案外對話的代理程式設定與權限。",
     "Outside of folders file access policy": "資料夾外的檔案存取政策",
@@ -7951,6 +7953,8 @@
     "Payments, CRM, accounting, data, identity, customer support, marketing, and workflow automation.": "付款、CRM、會計、資料、身分識別、客戶支援、行銷與工作流程自動化。",
     "Simplified interface for research, writing, and everyday tasks.": "適合研究、寫作和日常工作的簡化介面。",
     "Full interface for coding, developer tools, and managing agents.": "適合寫程式、使用開發人員工具和管理代理程式的完整介面。",
+    "Agent skills, databases, and interactive viewers for scientific research.": "適用於科學研究的代理程式技能、資料庫和互動式檢視器。",
+    "APIs, services, and tools to build, test, secure, and run your apps.": "協助您建構、測試、保護及執行應用程式的 API、服務和工具。",
     "Science": "科學",
     "Design": "設計",
     "Business": "商務",
