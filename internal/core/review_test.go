@@ -136,7 +136,7 @@ func TestOperationsPreserveConcurrentArchiveUpdate(t *testing.T) {
 				}
 			}
 			svc.Progress = func(stage, _ string) {
-				if stage == "正在写回 app.asar" {
+				if stage == "Writing app.asar" {
 					if err := os.WriteFile(path, data, 0o644); err != nil {
 						t.Fatal(err)
 					}

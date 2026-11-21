@@ -55,7 +55,7 @@ func TestApplyReportsProgress(t *testing.T) {
 	if len(stages) == 0 {
 		t.Fatal("apply produced no progress at all")
 	}
-	for _, want := range []string{"正在校验语言包", "正在准备干净备份", "正在写回 app.asar"} {
+	for _, want := range []string{"Checking the language pack", "Preparing the clean backup", "Writing app.asar"} {
 		if !containsStage(stages, want) {
 			t.Fatalf("apply never reported %q; got %v", want, stages)
 		}

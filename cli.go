@@ -9,31 +9,40 @@ import (
 	"antigravity-i18n/internal/core"
 )
 
-const usage = `antigravity-i18n - localize the Antigravity desktop interface
+const usage = `antigravity-i18n-pro - localize the Antigravity desktop interface
 
 Usage:
-  antigravity-i18n [command] [options]
+  antigravity-i18n-pro [command] [options]
 
 Commands:
-  apply      Install a language pack into Antigravity
-  restore    Restore the official English version
-  status     Report the current localization state
-  locales    List the installed language packs
-  gui        Open the graphical interface (default when no command is given)
+  apply            Install a language pack or a language file into Antigravity
+  restore          Restore the official English version
+  reapply          Apply the last language again (after an Antigravity update)
+  status           Report the current localization state
+  locales          List the bundled language packs
+  check            Check a language file and show its translation progress
+  export-template  Write a translation template with every English string
+  update-template  Add new English strings to an existing language file
+  gui              Open the graphical interface (default when no command is given)
 
 Shorthands:
-  zh, cn, chinese      Same as: apply --locale zh-CN
+  tw                     Same as: apply --locale zh-TW
+  zh, cn, chinese        Same as: apply --locale zh-CN
   en, english, official  Same as: restore
 
 Options:
-  --app-dir <path>   Antigravity installation directory
-  --locale <code>    Language pack to install (default: zh-CN)
-  --no-restart       Do not relaunch Antigravity afterwards
-  --force            Skip the graceful shutdown and force Antigravity to close
-  --timeout <ms>     Positive milliseconds to wait for a graceful shutdown (default: 30000)
-  --yes              Assume yes for the shutdown confirmation
-  -h, --help         Show this help
-  -v, --version      Show the tool version
+  --app-dir <path>      Antigravity installation directory
+  --locale <code>       Language pack to install (default: zh-TW)
+  --locale-file <path>  External language file (apply, check, update-template)
+  --out <path>          Output file (export-template; update-template writes in place by default)
+  --from <code>         Prefill an exported template from a bundled pack
+  --if-needed           reapply: do nothing unless an update removed the language
+  --no-restart          Do not relaunch Antigravity afterwards
+  --force               Skip the graceful shutdown and force Antigravity to close
+  --timeout <ms>        Positive milliseconds to wait for a graceful shutdown (default: 30000)
+  --yes                 Assume yes for the shutdown confirmation
+  -h, --help            Show this help
+  -v, --version         Show the tool version
 `
 
 // commandAliases fold the language-named shorthands the Node CLI shipped onto
@@ -41,6 +50,7 @@ Options:
 // keep working after the rewrite. applyAliases name a locale of their own;
 // restoreAliases all mean the same thing and need no locale.
 var applyAliases = map[string]string{
+	"tw":      "zh-TW",
 	"zh":      "zh-CN",
 	"cn":      "zh-CN",
 	"chinese": "zh-CN",
@@ -74,9 +84,12 @@ func sameLocale(a, b string) bool {
 
 // parsedArgs is one command line after parsing.
 type parsedArgs struct {
-	cmd     string
-	opts    core.Options
-	confirm bool
+	cmd      string
+	opts     core.Options
+	confirm  bool
+	out      string
+	from     string
+	ifNeeded bool
 }
 
 // parseArgs turns raw arguments into a command and its options.
@@ -136,6 +149,32 @@ func parseArgs(args []string) (*parsedArgs, error) {
 			}
 			i++
 			out.opts.Locale = rest[i]
+		case arg == "--locale-file":
+			if i+1 >= len(rest) {
+				return nil, errors.New("--locale-file needs a path")
+			}
+			i++
+			out.opts.LocaleFile = rest[i]
+		case arg == "--out":
+			if i+1 >= len(rest) {
+				return nil, errors.New("--out needs a path")
+			}
+			i++
+			out.out = rest[i]
+		case arg == "--from":
+			if i+1 >= len(rest) {
+				return nil, errors.New("--from needs a language code")
+			}
+			i++
+			out.from = rest[i]
+		case arg == "--if-needed":
+			out.ifNeeded = true
+		case strings.HasPrefix(arg, "--locale-file="):
+			out.opts.LocaleFile = strings.TrimPrefix(arg, "--locale-file=")
+		case strings.HasPrefix(arg, "--out="):
+			out.out = strings.TrimPrefix(arg, "--out=")
+		case strings.HasPrefix(arg, "--from="):
+			out.from = strings.TrimPrefix(arg, "--from=")
 		case arg == "--no-restart":
 			out.opts.Restart = false
 		case arg == "--force":
@@ -170,9 +209,19 @@ func parseArgs(args []string) (*parsedArgs, error) {
 	}
 
 	switch cmd {
-	case "apply", "restore", "status", "locales", "gui":
+	case "apply", "restore", "status", "locales", "gui", "reapply", "export-template":
+	case "check", "update-template":
+		if out.opts.LocaleFile == "" {
+			return nil, fmt.Errorf("%s needs --locale-file <path>", cmd)
+		}
 	default:
 		return nil, fmt.Errorf("unknown command %q", cmd)
+	}
+	if cmd == "export-template" && out.out == "" {
+		return nil, errors.New("export-template needs --out <path>")
+	}
+	if cmd == "apply" && out.opts.LocaleFile != "" && out.opts.Locale != "" {
+		return nil, errors.New("use either --locale or --locale-file, not both")
 	}
 	out.cmd = cmd
 	return out, nil
@@ -188,7 +237,7 @@ func runCLI(svc *core.Service, args []string) int {
 
 	switch cmd {
 	case "version":
-		fmt.Println("antigravity-i18n " + core.Version)
+		fmt.Println("antigravity-i18n-pro " + core.Version)
 		return 0
 	case "help":
 		fmt.Print(usage)
@@ -212,10 +261,43 @@ func runCLI(svc *core.Service, args []string) int {
 		// English is not a language pack; it is the untranslated build that
 		// restore reinstalls. The GUI routes a pick of English to restore, so
 		// the CLI does the same instead of failing on an unknown locale.
-		if opts.Locale != "" && sameLocale(opts.Locale, core.EnglishLocale) {
+		if opts.LocaleFile == "" && opts.Locale != "" && sameLocale(opts.Locale, core.EnglishLocale) {
 			return cliRestore(svc, opts, confirm)
 		}
+		if opts.LocaleFile != "" {
+			// A broken file is reported before anyone is asked to close
+			// Antigravity for it.
+			report, err := svc.CheckLocaleFile(opts.LocaleFile)
+			if err != nil {
+				return fail(err.Error())
+			}
+			printReport(report)
+			if !report.OK {
+				return 1
+			}
+		}
 		return cliApply(svc, opts, confirm)
+	case "reapply":
+		return cliReapply(svc, opts, confirm, parsed.ifNeeded)
+	case "check":
+		report, err := svc.CheckLocaleFile(opts.LocaleFile)
+		if err != nil {
+			return fail(err.Error())
+		}
+		printReport(report)
+		if !report.OK {
+			return 1
+		}
+		return 0
+	case "export-template":
+		summary, err := svc.ExportTemplate(parsed.out, parsed.from)
+		if err != nil {
+			return fail(err.Error())
+		}
+		fmt.Printf("Wrote a translation template with %d entries to %s\n", summary.Entries, summary.Path)
+		return 0
+	case "update-template":
+		return cliUpdateTemplate(svc, opts.LocaleFile, parsed.out)
 	case "restore":
 		return cliRestore(svc, opts, confirm)
 	case "status":
@@ -252,6 +334,41 @@ func cliApply(svc *core.Service, opts core.Options, confirmed bool) int {
 			fmt.Println("  Could not relaunch Antigravity. Open it manually.")
 		}
 	}
+	return 0
+}
+
+func cliReapply(svc *core.Service, opts core.Options, confirmed, ifNeeded bool) int {
+	hint, err := svc.GetReapplyHint(opts.AppDir)
+	if err != nil {
+		return fail(err.Error())
+	}
+	if hint.Locale == "" || sameLocale(hint.Locale, core.EnglishLocale) {
+		if ifNeeded {
+			fmt.Println("Nothing to reapply: no translation has been applied with this tool.")
+			return 0
+		}
+		return fail(core.ErrNothingRemembered.Error())
+	}
+	if ifNeeded && !hint.Needed {
+		fmt.Printf("Antigravity still shows %s; nothing to do.\n", hint.Locale)
+		return 0
+	}
+	if hint.FileMissing {
+		return fail("the remembered language file is missing: " + hint.LocaleFile)
+	}
+	if !confirmed {
+		if !confirmShutdown(fmt.Sprintf("Reapplying %s rewrites app.asar and Antigravity must not be running.", hint.Locale)) {
+			return 1
+		}
+	}
+	result, err := svc.Reapply(opts)
+	for _, note := range svc.Notes() {
+		fmt.Println("  note:", note)
+	}
+	if err != nil {
+		return fail(err.Error())
+	}
+	fmt.Printf("Successfully reapplied %s (%s)\n", result.LocaleName, result.Locale)
 	return 0
 }
 

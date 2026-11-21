@@ -16,15 +16,31 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 		return nil, err
 	}
 
-	localeCode := opts.Locale
-	if localeCode == "" {
-		localeCode = DefaultLocale
+	var locale *Locale
+	if opts.LocaleFile != "" {
+		loc, report, err := s.loadLocaleFile(opts.LocaleFile)
+		if err != nil {
+			return nil, err
+		}
+		if loc == nil {
+			return nil, &LocaleFileError{Report: report}
+		}
+		for _, issue := range report.Issues {
+			s.notes = append(s.notes, issue.Describe())
+		}
+		locale = loc
+	} else {
+		localeCode := opts.Locale
+		if localeCode == "" {
+			localeCode = DefaultLocale
+		}
+		loc, err := s.store.LoadLocale(localeCode)
+		if err != nil {
+			return nil, err
+		}
+		locale = loc
 	}
-	locale, err := s.store.LoadLocale(localeCode)
-	if err != nil {
-		return nil, err
-	}
-	s.progress("正在校验语言包", locale.Name)
+	s.progress("Checking the language pack", locale.Name)
 
 	// Fragments are built before anything is modified, so a malformed locale
 	// fails fast instead of producing a broken UI after the rewrite.
@@ -67,7 +83,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if expectedIdentity.Name != "antigravity" {
 		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", p.AsarPath)
 	}
-	s.progress("正在读取 app.asar 身份", p.AsarPath)
+	s.progress("Reading the app.asar identity", p.AsarPath)
 
 	timeout := opts.TimeoutMs
 	if timeout <= 0 {
@@ -83,7 +99,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err := assertArchiveUnchanged(p.AsarPath, initialHash); err != nil {
 		return nil, err
 	}
-	s.progress("正在关闭 Antigravity", "")
+	s.progress("Closing Antigravity", "")
 
 	currentPatched := detectPatchState(p.AsarPath)
 	if currentPatched == nil {
@@ -107,14 +123,14 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err := ensureCleanBackupForPatch(s, p, p.CleanBackupPath, *currentPatched, expectedIdentity, txn); err != nil {
 		return nil, txn.failWithRollback("preparing the clean backup", err)
 	}
-	s.progress("正在准备干净备份", p.CleanBackupPath)
+	s.progress("Preparing the clean backup", p.CleanBackupPath)
 
 	backupPath := createUniqueBackupPath(p.ResourcesDir, fmt.Sprintf("app.asar.bak-%s", formatTimestamp()))
 	if err := copyFileExclusive(p.AsarPath, backupPath); err != nil {
 		return nil, txn.failWithRollback("creating a safety backup", err)
 	}
 	noteBackupAccumulation(s, p.ResourcesDir)
-	s.progress("已创建安全备份", backupPath)
+	s.progress("Safety backup created", backupPath)
 
 	staged, err := buildPatchedArchive(p.AsarPath, locale, preloadFragment, menuFragment, dialogFragment)
 	if err != nil {
@@ -135,7 +151,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 		return nil, txn.failWithRollback("verifying the patched archive",
 			fmt.Errorf("application identity changed in the patched archive"))
 	}
-	s.progress("正在校验补丁内容", "")
+	s.progress("Verifying the patched files", "")
 	if _, _, ok := readArchiveLocale(staged); !ok {
 		return nil, txn.failWithRollback("verifying the patched archive",
 			fmt.Errorf("the patched archive does not declare a locale"))
@@ -154,7 +170,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, txn.failWithRollback("verifying the patched archive", err)
 	}
-	s.progress("正在写回 app.asar", p.AsarPath)
+	s.progress("Writing app.asar", p.AsarPath)
 
 	if err := atomicReplaceFile(staged, p.AsarPath, func(candidate string) error {
 		running, err := s.appRunning()
@@ -173,6 +189,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 
 	writeState(p, locale.Language)
+	s.remember(locale.Language, opts.LocaleFile)
 
 	result := &ApplyResult{
 		Locale:      locale.Language,
@@ -347,7 +364,8 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 			return nil, explainWriteError(err)
 		}
 		writeState(p, "en")
-		s.progress("已经是官方英文版本", "")
+		s.remember(EnglishLocale, "")
+		s.progress("Already the official English build", "")
 		return &RestoreResult{AlreadyEnglish: true}, nil
 	}
 
@@ -366,7 +384,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	if err := ensureRestorableCleanBackup(s, p, expectedIdentity); err != nil {
 		return nil, txn.failWithRollback("locating a clean English archive", err)
 	}
-	s.progress("正在定位干净备份", p.CleanBackupPath)
+	s.progress("Locating the clean backup", p.CleanBackupPath)
 
 	// The backup is about to become app.asar, so it is re-verified here rather
 	// than trusting that the step above left a usable archive in place. A patch
@@ -380,7 +398,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	if err != nil {
 		return nil, txn.failWithRollback("reading the clean backup", err)
 	}
-	s.progress("正在关闭 Antigravity", "")
+	s.progress("Closing Antigravity", "")
 
 	wasRunning, stopped, forced, err := s.stopApp(opts.Force, timeout)
 	if err != nil {
@@ -399,9 +417,9 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		return nil, txn.failWithRollback("creating a safety backup", err)
 	}
 	noteBackupAccumulation(s, p.ResourcesDir)
-	s.progress("已创建安全备份", backupPath)
+	s.progress("Safety backup created", backupPath)
 
-	s.progress("正在写回 app.asar", p.AsarPath)
+	s.progress("Writing app.asar", p.AsarPath)
 	if err := atomicReplaceFile(p.CleanBackupPath, p.AsarPath, func(candidate string) error {
 		running, err := s.appRunning()
 		if err != nil {
@@ -419,6 +437,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	}
 
 	writeState(p, "en")
+	s.remember(EnglishLocale, "")
 
 	result := &RestoreResult{
 		BackupPath: backupPath,

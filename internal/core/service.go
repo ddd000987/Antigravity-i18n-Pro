@@ -2,11 +2,13 @@ package core
 
 // Options controls an apply or restore run.
 type Options struct {
-	AppDir    string
-	Locale    string
-	Restart   bool
-	Force     bool
-	TimeoutMs int
+	AppDir string
+	Locale string
+	// LocaleFile applies an external language file instead of a bundled pack.
+	LocaleFile string
+	Restart    bool
+	Force      bool
+	TimeoutMs  int
 }
 
 // EnglishLocale is the official untranslated build. It is not a language pack:
@@ -18,6 +20,9 @@ type Service struct {
 	store *LocaleStore
 	// Progress receives stage updates for a GUI.
 	Progress func(stage, detail string)
+	// SettingsPath is where the last choice is remembered. Empty disables
+	// remembering, which keeps tests away from the user's profile.
+	SettingsPath string
 	// notes carries warnings that should be shown to the user but must not fail
 	// an otherwise successful operation.
 	notes []string

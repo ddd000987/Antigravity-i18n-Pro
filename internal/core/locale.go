@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 // DefaultLocale is what apply uses when no locale is named. This build is
@@ -145,6 +146,12 @@ type LocaleStore struct {
 	engineFragment []byte
 	menuFragment   []byte
 	dialogFragment []byte
+
+	notes       map[string]string
+	notesFrom   string
+	catalogOnce sync.Once
+	catalogData *catalog
+	catalogErr  error
 }
 
 // NewLocaleStore builds the store from the embedded assets.
