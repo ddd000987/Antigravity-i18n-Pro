@@ -1830,6 +1830,24 @@
       "sample": "Microphone blocked. Allow in X."
     },
     {
+      "id": "modelRetryInAttempt",
+      "pattern": "^Model unavailable, retrying in (\\d+)s \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "模型無法使用，{1} 秒後重試（第 {2}/{3} 次）",
+      "sample": "Model unavailable, retrying in 5s (attempt 1/3)"
+    },
+    {
+      "id": "modelRetryIn",
+      "pattern": "^Model unavailable, retrying in (\\d+)s$",
+      "template": "模型無法使用，{1} 秒後重試",
+      "sample": "Model unavailable, retrying in 5s"
+    },
+    {
+      "id": "modelRetryAttempt",
+      "pattern": "^Model unavailable, retrying \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "模型無法使用，正在重試（第 {1}/{2} 次）",
+      "sample": "Model unavailable, retrying (attempt 2/3)"
+    },
+    {
       "id": "ui146",
       "pattern": "^Model unavailable, retrying in (.+?)s(.+?)$",
       "template": "模型無法使用，{1} 秒後重試 {2}",
@@ -8072,6 +8090,7 @@
     "Build on Zoho CRM v8: REST API, Deluge functions, ClientScript, widgets, COQL and connections, with live CRM data through your Zoho MCP server.": "在 Zoho CRM v8 上建構：REST API、Deluge 函式、ClientScript、小工具、COQL 和連線，並透過您的 Zoho MCP 伺服器使用即時 CRM 資料。",
     "Zoho Desk plugin for Antigravity. Review, prioritize, and update Zoho Desk tickets directly from Antigravity through Zoho Desk MCP and includes a Ticket Prioritization Agent for triage and priority updates.": "適用於 Antigravity 的 Zoho Desk 外掛程式。透過 Zoho Desk MCP，直接從 Antigravity 審查、排定優先順序並更新 Zoho Desk 票證，並包含用於分類處理和更新優先順序的票證優先順序代理程式。",
     "Connect Zoho Projects to Antigravity to turn tasks and issues into working code. Access project context, investigate bugs, and update work items as you develop.": "將 Zoho Projects 連線至 Antigravity，把工作和議題轉為可運作的程式碼。存取專案上下文、調查錯誤，並在開發時更新工作事項。",
-    "Run Zoho Books from Antigravity: invoicing, bills, banking, journals, projects, items, taxes, customization and automation.": "從 Antigravity 操作 Zoho Books：開立發票、帳單、銀行業務、日記帳、專案、品項、稅務、自訂和自動化。"
+    "Run Zoho Books from Antigravity: invoicing, bills, banking, journals, projects, items, taxes, customization and automation.": "從 Antigravity 操作 Zoho Books：開立發票、帳單、銀行業務、日記帳、專案、品項、稅務、自訂和自動化。",
+    "Model unavailable, retrying": "模型無法使用，正在重試"
   }
 }

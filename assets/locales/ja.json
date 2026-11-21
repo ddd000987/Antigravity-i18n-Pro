@@ -4721,7 +4721,8 @@
     "Atom One Light": "Atom One Light",
     "Google Chrome": "Google Chrome",
     "Gemini Enterprise": "Gemini Enterprise",
-    "Enterprise Gateway": "Enterprise Gateway"
+    "Enterprise Gateway": "Enterprise Gateway",
+    "Model unavailable, retrying": "モデルを利用できません。再試行しています"
   },
   "patterns": [
     {
@@ -6536,11 +6537,22 @@
       "sample": "Microphone blocked. Allow in X."
     },
     {
-      "id": "modelUnavailableRetry",
-      "pattern": "^Model unavailable, retrying(?: in (\\d+)s)?( \\(attempt (\\d+)/(\\d+)\\))?$",
-      "flags": "i",
-      "template": "モデルを利用できません。再試行中{1}{2}",
+      "id": "modelRetryInAttempt",
+      "pattern": "^Model unavailable, retrying in (\\d+)s \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "モデルを利用できません。{1} 秒後に再試行します（試行 {2}/{3}）",
       "sample": "Model unavailable, retrying in 5s (attempt 1/3)"
+    },
+    {
+      "id": "modelRetryIn",
+      "pattern": "^Model unavailable, retrying in (\\d+)s$",
+      "template": "モデルを利用できません。{1} 秒後に再試行します",
+      "sample": "Model unavailable, retrying in 5s"
+    },
+    {
+      "id": "modelRetryAttempt",
+      "pattern": "^Model unavailable, retrying \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "モデルを利用できません。再試行しています（試行 {1}/{2}）",
+      "sample": "Model unavailable, retrying (attempt 2/3)"
     },
     {
       "id": "ui146",

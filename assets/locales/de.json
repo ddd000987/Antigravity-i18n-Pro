@@ -4812,7 +4812,8 @@
     "Atom One Light": "Atom One Light",
     "Google Chrome": "Google Chrome",
     "Gemini Enterprise": "Gemini Enterprise",
-    "Enterprise Gateway": "Enterprise Gateway"
+    "Enterprise Gateway": "Enterprise Gateway",
+    "Model unavailable, retrying": "Modell nicht verfügbar, neuer Versuch läuft"
   },
   "patterns": [
     {
@@ -6672,11 +6673,22 @@
       "sample": "Microphone blocked. Allow in X."
     },
     {
-      "id": "modelUnavailableRetry",
-      "pattern": "^Model unavailable, retrying(?: in (\\d+)s)?( \\(attempt (\\d+)/(\\d+)\\))?$",
-      "flags": "i",
-      "template": "Modell nicht verfügbar, neuer Versuch{1}{2}",
+      "id": "modelRetryInAttempt",
+      "pattern": "^Model unavailable, retrying in (\\d+)s \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "Modell nicht verfügbar, neuer Versuch in {1} s (Versuch {2}/{3})",
       "sample": "Model unavailable, retrying in 5s (attempt 1/3)"
+    },
+    {
+      "id": "modelRetryIn",
+      "pattern": "^Model unavailable, retrying in (\\d+)s$",
+      "template": "Modell nicht verfügbar, neuer Versuch in {1} s",
+      "sample": "Model unavailable, retrying in 5s"
+    },
+    {
+      "id": "modelRetryAttempt",
+      "pattern": "^Model unavailable, retrying \\(attempt (\\d+)/(\\d+)\\)$",
+      "template": "Modell nicht verfügbar, neuer Versuch läuft (Versuch {1}/{2})",
+      "sample": "Model unavailable, retrying (attempt 2/3)"
     },
     {
       "id": "ui146",
