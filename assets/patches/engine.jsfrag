@@ -82,6 +82,10 @@ const agPatterns = (AG_LOCALE.patterns || []).map((rule) => ({
     pluralGroup: rule.pluralGroup || 1,
     replace: rule.replace || {},
     trimGroups: rule.trimGroups || [],
+    // 'sentence' rules describe a sentence React splits across several
+    // children; they only apply to such a joined sentence, never to a lone
+    // text node, so their short fixed text cannot hit unrelated content.
+    sentenceOnly: rule.scope === 'sentence',
 }));
 
 const agValueRules = Object.fromEntries(
@@ -166,10 +170,14 @@ function agFormat(template, match, rule) {
  * Find the dynamic rule that matches a string, if any.
  *
  * @param {string} trimmed
+ * @param {boolean} [sentence] true for a joined sentence (see the sentence layer)
  * @returns {{ rule: object, match: RegExpMatchArray }|null}
  */
-function agMatchPattern(trimmed) {
+function agMatchPattern(trimmed, sentence) {
     for (const rule of agPatterns) {
+        if (rule.sentenceOnly && !sentence) {
+            continue;
+        }
         const match = trimmed.match(rule.regex);
         if (match) {
             return { rule, match };
@@ -191,17 +199,33 @@ function agSplitTrailingPunctuation(trimmed) {
 }
 
 function hasTranslation(trimmed) {
-    if (agLookup(trimmed)) {
-        return true;
-    }
-    const split = agSplitTrailingPunctuation(trimmed);
-    if (split && agText.has(split.core)) {
-        return true;
-    }
-    return agMatchPattern(trimmed) !== null;
+    return translateString(trimmed) !== trimmed;
 }
 
-function translateString(value) {
+// UI text repeats constantly (every re-render, every list row), and a miss
+// costs a scan over every pattern, so results are memoized. The cap keeps
+// memory bounded when a page shows a lot of unique text such as chat logs.
+const agCache = new Map();
+const AG_CACHE_LIMIT = 20000;
+
+function translateString(value, sentence = false) {
+    if (typeof value !== 'string') {
+        return value;
+    }
+    const key = sentence ? '\u0001' + value : value;
+    const cached = agCache.get(key);
+    if (cached !== undefined) {
+        return cached;
+    }
+    const result = agTranslateUncached(value, sentence);
+    if (agCache.size >= AG_CACHE_LIMIT) {
+        agCache.clear();
+    }
+    agCache.set(key, result);
+    return result;
+}
+
+function agTranslateUncached(value, sentence) {
     if (typeof value !== 'string') {
         return value;
     }
@@ -215,7 +239,7 @@ function translateString(value) {
         return agSpliceLiteral(value, trimmed, direct);
     }
 
-    const matched = agMatchPattern(trimmed);
+    const matched = agMatchPattern(trimmed, sentence);
     if (matched) {
         const template = agSelectTemplate(matched.rule, matched.match);
         return agSpliceLiteral(value, trimmed, agFormat(template, matched.match, matched.rule));
@@ -243,6 +267,127 @@ function translateString(value) {
 }
 
 // ---------------------------------------------------------------------------
+// Source tracking. The engine translates from the English the page last
+// wrote, never from its own output, so re-translating a node after an update
+// (or after a sentence stops matching) always starts from the real source.
+// ---------------------------------------------------------------------------
+const agOriginal = new WeakMap();
+const agWritten = new WeakMap();
+
+function agSourceOf(node) {
+    const current = node.nodeValue;
+    if (agWritten.has(node) && agWritten.get(node) === current && agOriginal.has(node)) {
+        return agOriginal.get(node);
+    }
+    return current;
+}
+
+function agWrite(node, value) {
+    agOriginal.set(node, agSourceOf(node));
+    agWritten.set(node, value);
+    if (node.nodeValue !== value) {
+        node.nodeValue = value;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Sentence layer. React renders `"No ", plural, " yet"` as three sibling text
+// nodes, so translating node by node can never produce a correct sentence.
+// An element whose children are text plus inline elements is joined into one
+// source string, each inline element child written as the marker "<>", and
+// translated as a whole. The translation must keep every marker, in order; the
+// text between markers is written back into the existing text nodes, so no
+// node is created, moved or removed and React's own bookkeeping stays valid.
+// When the joined sentence has no translation, the children fall back to the
+// node-by-node behaviour.
+// ---------------------------------------------------------------------------
+const AG_MARK = '<>';
+const agInlineTags = new Set([
+    'A', 'ABBR', 'B', 'BDI', 'BDO', 'BR', 'CITE', 'CODE', 'DFN', 'EM', 'I', 'KBD',
+    'MARK', 'Q', 'S', 'SAMP', 'SMALL', 'SPAN', 'STRONG', 'SUB', 'SUP', 'TIME', 'U', 'VAR',
+]);
+const agGrouped = new WeakSet();
+
+/**
+ * Split an element's children into text slots around inline elements.
+ *
+ * @param {Element} element
+ * @returns {{ slots: Text[][], source: string }|null} null when the children
+ *   are not a single run of text (one plain text node is left to the per-node
+ *   path, and block or unknown children mean it is not one sentence).
+ */
+function agSentenceParts(element) {
+    const slots = [[]];
+    let source = '';
+    let textNodes = 0;
+    let marks = 0;
+    for (const child of element.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+            const text = agSourceOf(child);
+            slots[slots.length - 1].push(child);
+            source += text;
+            if (text.trim()) {
+                textNodes++;
+            }
+        }
+        else if (child.nodeType === Node.ELEMENT_NODE && agInlineTags.has(child.tagName)) {
+            slots.push([]);
+            source += AG_MARK;
+            marks++;
+        }
+        else if (child.nodeType !== Node.COMMENT_NODE) {
+            return null;
+        }
+    }
+    if (textNodes === 0 || (textNodes === 1 && marks === 0) || !/[A-Za-z]{2}/.test(source)) {
+        return null;
+    }
+    return { slots, source: source.replace(/\s+/g, ' ') };
+}
+
+// Put every text child back on the node-by-node translation of its source.
+function agUngroup(element) {
+    agGrouped.delete(element);
+    for (const child of element.childNodes) {
+        if (child.nodeType !== Node.TEXT_NODE) {
+            continue;
+        }
+        const source = agSourceOf(child);
+        const trimmed = source.trim();
+        agWrite(child, trimmed && hasTranslation(trimmed) ? translateString(source) : source);
+    }
+}
+
+/**
+ * Translate an element's text children as one sentence.
+ *
+ * @param {Element} element
+ * @returns {boolean} true when the element now shows a joined translation.
+ */
+function agTranslateSentence(element) {
+    if (isSkippableElement(element)) {
+        return false;
+    }
+    const parts = agSentenceParts(element);
+    const translated = parts ? translateString(parts.source, true) : null;
+    const pieces = translated && translated !== parts.source ? translated.split(AG_MARK) : null;
+    const fits = pieces
+        && pieces.length === parts.slots.length
+        && pieces.every((piece, i) => parts.slots[i].length > 0 || !piece.trim());
+    if (!fits) {
+        if (agGrouped.has(element)) {
+            agUngroup(element);
+        }
+        return false;
+    }
+    pieces.forEach((piece, i) => {
+        parts.slots[i].forEach((node, j) => agWrite(node, j === 0 ? piece : ''));
+    });
+    agGrouped.add(element);
+    return true;
+}
+
+// ---------------------------------------------------------------------------
 // DOM traversal layer. Locale neutral: it decides *where* text may be replaced
 // and defers *what* to translateString() above.
 // ---------------------------------------------------------------------------
@@ -260,11 +405,20 @@ function shouldTranslateTextNode(node) {
     if (parent.tagName === 'INPUT' || parent.tagName === 'TEXTAREA') {
         return false;
     }
-    const trimmed = node.nodeValue?.trim();
+    // The sentence layer owns the text children of a joined element.
+    if (agGrouped.has(parent)) {
+        return false;
+    }
+    const trimmed = agSourceOf(node)?.trim();
     if (!trimmed || !hasTranslation(trimmed)) {
         return false;
     }
     return true;
+}
+function translateTextNode(node) {
+    if (shouldTranslateTextNode(node)) {
+        agWrite(node, translateString(agSourceOf(node)));
+    }
 }
 function translateAttributes(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
@@ -291,12 +445,7 @@ function translateNode(root) {
         return;
     }
     if (root.nodeType === Node.TEXT_NODE) {
-        if (shouldTranslateTextNode(root)) {
-            const next = translateString(root.nodeValue);
-            if (next !== root.nodeValue) {
-                root.nodeValue = next;
-            }
-        }
+        translateTextNode(root);
         return;
     }
     if (root.nodeType !== Node.ELEMENT_NODE) {
@@ -309,6 +458,7 @@ function translateNode(root) {
         return;
     }
     translateAttributes(root);
+    agTranslateSentence(root);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
         acceptNode(node) {
             if (node.nodeType === Node.ELEMENT_NODE && isSkippableElement(node)) {
@@ -323,15 +473,13 @@ function translateNode(root) {
     let node = walker.nextNode();
     while (node) {
         if (node.nodeType === Node.TEXT_NODE) {
-            if (shouldTranslateTextNode(node)) {
-                const next = translateString(node.nodeValue);
-                if (next !== node.nodeValue) {
-                    node.nodeValue = next;
-                }
-            }
+            translateTextNode(node);
         }
         else {
             translateAttributes(node);
+            // Elements are visited before their children, so a joined sentence
+            // claims its text nodes before the per-node pass reaches them.
+            agTranslateSentence(node);
         }
         node = walker.nextNode();
     }
@@ -347,12 +495,20 @@ function installLocalePatch() {
     const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
             if (mutation.type === 'characterData') {
-                translateNode(mutation.target);
+                // A changed piece may complete, change or break the sentence
+                // its parent shows, so the parent is re-evaluated first.
+                const parent = mutation.target.parentElement;
+                if (!parent || !agTranslateSentence(parent)) {
+                    translateNode(mutation.target);
+                }
             }
             else if (mutation.type === 'attributes') {
                 translateAttributes(mutation.target);
             }
             else {
+                if (mutation.target.nodeType === Node.ELEMENT_NODE) {
+                    agTranslateSentence(mutation.target);
+                }
                 mutation.addedNodes.forEach(translateNode);
             }
         }

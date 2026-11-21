@@ -11,8 +11,14 @@ import (
 	"strings"
 )
 
-// DefaultLocale is what apply uses when no locale is named.
-const DefaultLocale = "zh-CN"
+// DefaultLocale is what apply uses when no locale is named. This build is
+// focused on Traditional Chinese as written in Taiwan.
+const DefaultLocale = "zh-TW"
+
+// legacyChineseLocale is the only pack releases before locale files shipped.
+// Markers and archives written by those releases carry no code, or a bare
+// 'zh', and both mean Simplified Chinese.
+const legacyChineseLocale = "zh-CN"
 
 // LocaleCodeRe restricts locale codes to a BCP 47 shape.
 var LocaleCodeRe = regexp.MustCompile(`^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$`)
@@ -37,20 +43,22 @@ var rtlLanguages = map[string]bool{
 
 // localeAliases are spellings that resolve onto a bundled pack instead of naming
 // a file of their own: 'zh' and 'zh-Hans' (any casing) both mean the Simplified
-// Chinese pack shipped as zh-CN. Matching itself is case-insensitive, so
-// 'zh-hant' resolves onto the zh-Hant file without a separate alias.
+// Chinese pack shipped as zh-CN, while 'tw', 'zh-Hant' and the Hong Kong and
+// Macau regions resolve onto the Taiwan pack, the only Traditional Chinese one.
+// Matching itself is case-insensitive, so no alias is needed for casing.
 //
 // The extra entries cover the spellings people actually type: region subtags
-// for the two Chinese scripts, the bare language for a pack shipped with a
+// for the Chinese scripts, the bare language for a pack shipped with a
 // region (pt -> pt-BR), and the two codes that are commonly mistaken for their
 // ISO 639-1 form (jp -> ja, kr -> ko). Rejecting these would be technically
 // correct and practically annoying.
 var localeAliases = map[string]string{
-	"zh":      DefaultLocale,
-	"zh-hans": DefaultLocale,
-	"zh-tw":   "zh-Hant",
-	"zh-hk":   "zh-Hant",
-	"zh-mo":   "zh-Hant",
+	"zh":      legacyChineseLocale,
+	"zh-hans": legacyChineseLocale,
+	"tw":      "zh-TW",
+	"zh-hant": "zh-TW",
+	"zh-hk":   "zh-TW",
+	"zh-mo":   "zh-TW",
 	"pt":      "pt-BR",
 	"jp":      "ja",
 	"kr":      "ko",
@@ -118,6 +126,7 @@ type PatternRule struct {
 	ID          string            `json:"id"`
 	Pattern     string            `json:"pattern"`
 	Flags       string            `json:"flags"`
+	Scope       string            `json:"scope,omitempty"`
 	Template    string            `json:"template"`
 	Templates   map[string]string `json:"templates"`
 	Sample      string            `json:"sample"`
@@ -570,6 +579,12 @@ func validateLocale(code string, loc *Locale) error {
 		}
 		if err := validateRegexFlags(code, label, rule.Flags, false); err != nil {
 			return err
+		}
+		// 'sentence' rules only ever see a sentence the engine joined from
+		// several children; any other value is a typo that would silently turn
+		// the rule into one that also hits lone text nodes.
+		if rule.Scope != "" && rule.Scope != "sentence" {
+			return fmt.Errorf("locale '%s': %s scope must be 'sentence' when set", code, label)
 		}
 		if rule.ID != "" {
 			if seenIDs[rule.ID] {

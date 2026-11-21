@@ -82,6 +82,10 @@
             "description": "Non-stateful regex flags, typically 'i'. Global and sticky flags are rejected because dynamic rules need capture groups from one exact match.",
             "pattern": "^[dimsuv]*$"
           },
+          "scope": {
+            "enum": ["sentence"],
+            "description": "'sentence' limits the rule to a sentence the UI splits across several children (text pieces and inline elements, joined with '<>' for each element). Such a rule never applies to a lone text node."
+          },
           "template": {
             "type": "string",
             "description": "Output text for languages with no plural agreement. {1}, {2}, ... expand to capture groups; referencing a group the pattern does not have is rejected. Mutually exclusive with 'templates'."

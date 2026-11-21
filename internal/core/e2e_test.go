@@ -141,7 +141,7 @@ func TestApplyThenRestoreIsByteExact(t *testing.T) {
 	// The language switch must have been inserted, which is the one anchor the
 	// synthetic main.js does not already carry.
 	main := string(mustReadFile(t, asarPath, "dist/main.js"))
-	if !strings.Contains(main, "appendSwitch('lang', 'zh-CN')") {
+	if !strings.Contains(main, "appendSwitch('lang', 'zh-TW')") {
 		t.Fatalf("language switch was not inserted into main.js")
 	}
 	menu := string(mustReadFile(t, asarPath, "dist/menu.js"))
@@ -268,7 +268,7 @@ func TestStatusReportsLanguage(t *testing.T) {
 	if status.CurrentLanguage != DefaultLocale {
 		t.Fatalf("language after apply = %q, want %s", status.CurrentLanguage, DefaultLocale)
 	}
-	if status.LocaleName != "简体中文" {
+	if status.LocaleName != "繁體中文（台灣）" {
 		t.Fatalf("locale name = %q", status.LocaleName)
 	}
 	if !status.HasCleanBackup {

@@ -110,7 +110,7 @@ func normalizeLanguage(language string) string {
 		return "unknown"
 	}
 	if language == "zh" {
-		return DefaultLocale
+		return legacyChineseLocale
 	}
 	return language
 }
@@ -142,7 +142,7 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 			currentLanguage = code
 			localeName = name
 		} else {
-			currentLanguage = DefaultLocale
+			currentLanguage = legacyChineseLocale
 		}
 	} else {
 		currentLanguage = "en"

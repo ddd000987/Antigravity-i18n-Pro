@@ -168,6 +168,12 @@ var langSwitchRe = regexp.MustCompile(`if \(!electron_1\.app\.commandLine\.hasSw
 // switch is inserted when the older language block is absent.
 var debugPortRe = regexp.MustCompile(`if\s*\(!electron_1\.app\.commandLine\.hasSwitch\('remote-debugging-port'\)\)\s*\{\s*electron_1\.app\.commandLine\.appendSwitch\('remote-debugging-port',\s*'0'\);\s*\}`)
 
+// occludedSwitchRe matches a top-level startup switch present in Antigravity
+// 2.33 and later, where neither the language block nor the debugging port
+// block exists any more. It must start a line so a match inside a function
+// body or a string is not mistaken for the top-level statement.
+var occludedSwitchRe = regexp.MustCompile(`(?m)^electron_1\.app\.commandLine\.appendSwitch\('disable-backgrounding-occluded-windows'\);`)
+
 // applyLanguageSwitch points Chromium's --lang switch at the locale being
 // installed.
 //
@@ -193,6 +199,12 @@ func applyLanguageSwitch(source string, locale *Locale) (string, error) {
 		return langSwitchRe.ReplaceAllStringFunc(source, func(string) string { return block }), nil
 	}
 	if loc := debugPortRe.FindStringIndex(source); loc != nil {
+		return source[:loc[1]] + "\n" + block + source[loc[1]:], nil
+	}
+	// Antigravity 2.33+ no longer appends remote-debugging-port either, so
+	// the switch goes after a top-level startup switch that still runs before
+	// the app is ready.
+	if loc := occludedSwitchRe.FindStringIndex(source); loc != nil {
 		return source[:loc[1]] + "\n" + block + source[loc[1]:], nil
 	}
 	return source, nil
