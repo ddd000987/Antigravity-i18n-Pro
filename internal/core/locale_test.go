@@ -56,6 +56,40 @@ func TestAllLocalesValidate(t *testing.T) {
 	}
 }
 
+// The sentence layer writes each piece of a translation into the text nodes
+// between the same inline elements as the source, and drops the whole
+// translation when a piece lands where the source has no text node. A
+// translation of "Wait for <>" that ends with text after the marker therefore
+// never shows, so every shipped text must leave the source's empty slots empty.
+func TestSentenceTextsKeepEmptySlots(t *testing.T) {
+	assets := os.DirFS("../..")
+	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, code := range store.ListLocales() {
+		loc, err := store.LoadLocale(code)
+		if err != nil {
+			t.Fatalf("locale %s: %v", code, err)
+		}
+		for source, translation := range loc.Text {
+			if !strings.Contains(source, inlineMarker) {
+				continue
+			}
+			from := strings.Split(source, inlineMarker)
+			to := strings.Split(translation, inlineMarker)
+			if len(from) != len(to) {
+				continue // marker count is checked by validation
+			}
+			for i := range from {
+				if strings.TrimSpace(from[i]) == "" && strings.TrimSpace(to[i]) != "" {
+					t.Errorf("locale %s: %q -> %q puts text in slot %d, which is empty in the source", code, source, translation, i)
+				}
+			}
+		}
+	}
+}
+
 // Fragments must come out as valid JavaScript: they are injected into the app's
 // own scripts, and a syntax error there stops Antigravity from starting.
 func TestFragmentsBuild(t *testing.T) {
