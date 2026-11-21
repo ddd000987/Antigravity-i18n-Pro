@@ -3,7 +3,7 @@ param(
     [string]$Target = 'all'
 )
 
-# Builds antigravity-i18n with the version taken from .\VERSION.
+# Builds Antigravity-i18n-Pro with the version taken from .\VERSION.
 #
 # VERSION is the single source of truth. This script stamps it into the Go
 # binary with -ldflags, so the CLI, the window title bar and the
@@ -42,13 +42,13 @@ $goBin = 'D:\programs\go\bin'
 if (Test-Path -LiteralPath $goBin) { $env:PATH = "$goBin;$env:PATH" }
 $env:PATH = "$env:USERPROFILE\go\bin;$env:PATH"
 
-Write-Host "Building antigravity-i18n $version ($Target)"
+Write-Host "Building Antigravity-i18n-Pro $version ($Target)"
 
 if ($Target -in @('all', 'gui')) {
     Write-Host '  -> GUI (wails build)'
     & wails build -clean -ldflags $ldflags
     if ($LASTEXITCODE -ne 0) { throw "wails build failed with exit code $LASTEXITCODE" }
-    $gui = Join-Path $PSScriptRoot 'build\bin\antigravity-i18n.exe'
+    $gui = Join-Path $PSScriptRoot 'build\bin\antigravity-i18n-pro.exe'
     $resourceVersion = (Get-Item -LiteralPath $gui).VersionInfo
     if ($resourceVersion.FileVersion -ne $version -or $resourceVersion.ProductVersion -ne $version) {
         throw "Windows file/product version does not match VERSION ($version). Check build/windows/info.json."
@@ -57,10 +57,12 @@ if ($Target -in @('all', 'gui')) {
 }
 
 if ($Target -in @('all', 'cli')) {
+    # Built after the GUI: "wails build -clean" empties build\bin first, so
+    # "-Target gui" on its own also removes a previously built CLI.
     Write-Host '  -> CLI (go build)'
-    & go build -ldflags $ldflags -o 'bin\antigravity-i18n.exe' .
+    & go build -ldflags $ldflags -o 'build\bin\antigravity-i18n-pro-cli.exe' .
     if ($LASTEXITCODE -ne 0) { throw "go build failed with exit code $LASTEXITCODE" }
-    $cli = Join-Path $PSScriptRoot 'bin\antigravity-i18n.exe'
+    $cli = Join-Path $PSScriptRoot 'build\bin\antigravity-i18n-pro-cli.exe'
     Write-Host ("     {0}  {1:N2} MB" -f $cli, ((Get-Item -LiteralPath $cli).Length / 1MB))
 }
 
