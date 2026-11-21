@@ -1,0 +1,23 @@
+{
+  "name": "antigravity-i18n-pro-tools",
+  "version": "1.0.0",
+  "description": "Maintenance scripts for the Antigravity i18n Pro translation catalogs: extract untranslated UI strings from an Antigravity bundle, merge translations, lint, and test the DOM translation engine.",
+  "main": "lib/locale.js",
+  "scripts": {
+    "test": "node engine.test.js"
+  },
+  "keywords": [
+    "antigravity",
+    "i18n",
+    "localization"
+  ],
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "acorn": "^8.19.0",
+    "acorn-walk": "^8.3.5",
+    "jsdom": "^24.1.3",
+    "opencc-js": "^1.0.5"
+  },
+  "private": true
+}

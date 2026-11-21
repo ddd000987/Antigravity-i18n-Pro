@@ -12,3 +12,5 @@ Thumbs.db
 # Go
 *.test
 *.out
+# Maintenance tools
+tools/node_modules/
