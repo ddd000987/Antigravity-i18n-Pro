@@ -39,6 +39,8 @@ Run `antigravity-i18n-pro.exe`:
 
 The tool's own language can be changed in the top-right corner.
 
+The executables are not code-signed, so Windows SmartScreen may warn the first time you run one: choose "More info" and then "Run anyway". `SHA256SUMS.txt` in the release lets you check the download.
+
 ### After an Antigravity update
 
 Every Antigravity update replaces `app.asar`, which removes the translation. The tool remembers what you applied last: open it after an update and it offers to apply the same language (or your own file) again. From the command line:
