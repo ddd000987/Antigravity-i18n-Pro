@@ -52,10 +52,10 @@ antigravity-i18n-pro.exe reapply --if-needed # 只有被更新蓋掉時才套用
 
 ### 只更新翻譯
 
-每個 [Release](../../releases) 都會附上內建的語言檔，檔名是 `antigravity-<代碼>.json`（例如 `antigravity-zh-TW.json`）。如果某次 Release 只修正翻譯，不必換執行檔：下載新的語言檔，在視窗按「載入語言檔」，或
+每個 [Release](../../releases) 都會附上內建的語言檔，檔名是 `language-<代碼>.json`（例如 `language-zh-TW.json`；1.1.0 以前是 `antigravity-<代碼>.json`）。如果某次 Release 只修正翻譯，不必換執行檔：下載新的語言檔，在視窗按「載入語言檔」，或
 
 ```powershell
-antigravity-i18n-pro.exe apply --locale-file antigravity-zh-TW.json
+antigravity-i18n-pro.exe apply --locale-file language-zh-TW.json
 ```
 
 工具會記住這個檔案，Antigravity 更新後重新套用時也會用它。想改回執行檔內建的語言包，在視窗重新選一次該語言即可。`SHA256SUMS.txt` 列出每個 Release 檔案的校驗碼。

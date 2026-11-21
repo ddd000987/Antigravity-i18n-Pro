@@ -52,10 +52,10 @@ antigravity-i18n-pro.exe reapply --if-needed # only if an update removed it
 
 ### Updating the translation only
 
-Every [release](../../releases) also includes the bundled language files, named `antigravity-<code>.json` (for example `antigravity-zh-TW.json`). When a release only fixes translations, you can keep your executable: download the new file and use "Load language file" in the window, or
+Every [release](../../releases) also includes the bundled language files, named `language-<code>.json` (for example `language-zh-TW.json`; 1.1.0 and earlier used `antigravity-<code>.json`). When a release only fixes translations, you can keep your executable: download the new file and use "Load language file" in the window, or
 
 ```powershell
-antigravity-i18n-pro.exe apply --locale-file antigravity-zh-TW.json
+antigravity-i18n-pro.exe apply --locale-file language-zh-TW.json
 ```
 
 The tool remembers the file, so reapplying after an Antigravity update uses it too. To switch back to the pack built into the executable, pick the language in the window again. `SHA256SUMS.txt` lists the checksum of every release file.

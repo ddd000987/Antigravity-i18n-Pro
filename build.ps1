@@ -5,7 +5,8 @@ param(
 
 # Targets: all (GUI and CLI), gui, cli, and release (all, then the release
 # files in build\release: both executables, every bundled language file as
-# antigravity-<code>.json, and SHA256SUMS.txt).
+# language-<code>.json, and SHA256SUMS.txt). GitHub lists release files by
+# name, so this prefix keeps the executables at the top of the list.
 
 # Builds Antigravity-i18n-Pro with the version taken from .\VERSION.
 #
@@ -87,7 +88,7 @@ if ($Target -eq 'release') {
     foreach ($file in $locales) {
         & $cli check --locale-file $file.FullName | Out-Null
         if ($LASTEXITCODE -ne 0) { throw "$($file.Name) does not pass the language file check" }
-        Copy-Item -LiteralPath $file.FullName -Destination (Join-Path $release ('antigravity-' + $file.Name))
+        Copy-Item -LiteralPath $file.FullName -Destination (Join-Path $release ('language-' + $file.Name))
     }
 
     $sums = Get-ChildItem -LiteralPath $release -File | Sort-Object Name | ForEach-Object {

@@ -216,9 +216,11 @@ func (a *App) ExportTemplate(from, title string) (*core.TemplateSummary, error) 
 	if a.ctx == nil {
 		return nil, errors.New("app context not initialized")
 	}
-	name := "antigravity-translation-template.json"
+	// Same names as the release files, so a prefilled export reads as that
+	// language's file.
+	name := "language-template.json"
 	if from != "" {
-		name = "antigravity-" + from + ".json"
+		name = "language-" + from + ".json"
 	}
 	path, err := wailsRuntime.SaveFileDialog(a.ctx, wailsRuntime.SaveDialogOptions{
 		Title:           title,
