@@ -48,6 +48,16 @@ antigravity-i18n-pro.exe reapply             # apply the last language again
 antigravity-i18n-pro.exe reapply --if-needed # only if an update removed it
 ```
 
+### Updating the translation only
+
+Every [release](../../releases) also includes the bundled language files, named `antigravity-<code>.json` (for example `antigravity-zh-TW.json`). When a release only fixes translations, you can keep your executable: download the new file and use "Load language file" in the window, or
+
+```powershell
+antigravity-i18n-pro.exe apply --locale-file antigravity-zh-TW.json
+```
+
+The tool remembers the file, so reapplying after an Antigravity update uses it too. To switch back to the pack built into the executable, pick the language in the window again. `SHA256SUMS.txt` lists the checksum of every release file.
+
 ### Command line
 
 ```powershell
@@ -120,13 +130,16 @@ Untranslated strings stay in English.
 Requirements: Go 1.26+ and the [Wails v2](https://wails.io/) CLI (`go install github.com/wailsapp/wails/v2/cmd/wails@v2.16.0`).
 
 ```powershell
-.\build.ps1          # GUI: build\bin\antigravity-i18n-pro.exe, CLI: build\bin\antigravity-i18n-pro-cli.exe
+.\build.ps1                   # GUI: build\bin\antigravity-i18n-pro.exe, CLI: build\bin\antigravity-i18n-pro-cli.exe
+.\build.ps1 -Target release   # also build\release: both executables, the language files and SHA256SUMS.txt
 go test ./...
 
 # Also patch a copy of a real archive (the installation is not touched):
 $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
+
+Pushing a tag `vX.Y.Z` that matches `VERSION` runs [`release.yml`](./.github/workflows/release.yml), which builds the release files and attaches them to a draft release; publish it once its notes are written.
 
 Updating the translation for a new Antigravity release is described in [`tools/README.md`](./tools/README.md).
 

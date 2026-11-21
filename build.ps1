@@ -1,7 +1,11 @@
 param(
-    [ValidateSet('all', 'gui', 'cli')]
+    [ValidateSet('all', 'gui', 'cli', 'release')]
     [string]$Target = 'all'
 )
+
+# Targets: all (GUI and CLI), gui, cli, and release (all, then the release
+# files in build\release: both executables, every bundled language file as
+# antigravity-<code>.json, and SHA256SUMS.txt).
 
 # Builds Antigravity-i18n-Pro with the version taken from .\VERSION.
 #
@@ -44,7 +48,7 @@ $env:PATH = "$env:USERPROFILE\go\bin;$env:PATH"
 
 Write-Host "Building Antigravity-i18n-Pro $version ($Target)"
 
-if ($Target -in @('all', 'gui')) {
+if ($Target -in @('all', 'gui', 'release')) {
     Write-Host '  -> GUI (wails build)'
     & wails build -clean -ldflags $ldflags
     if ($LASTEXITCODE -ne 0) { throw "wails build failed with exit code $LASTEXITCODE" }
@@ -56,7 +60,7 @@ if ($Target -in @('all', 'gui')) {
     Write-Host ("     {0}  {1:N2} MB" -f $gui, ((Get-Item -LiteralPath $gui).Length / 1MB))
 }
 
-if ($Target -in @('all', 'cli')) {
+if ($Target -in @('all', 'cli', 'release')) {
     # Built after the GUI: "wails build -clean" empties build\bin first, so
     # "-Target gui" on its own also removes a previously built CLI.
     Write-Host '  -> CLI (go build)'
@@ -64,6 +68,34 @@ if ($Target -in @('all', 'cli')) {
     if ($LASTEXITCODE -ne 0) { throw "go build failed with exit code $LASTEXITCODE" }
     $cli = Join-Path $PSScriptRoot 'build\bin\antigravity-i18n-pro-cli.exe'
     Write-Host ("     {0}  {1:N2} MB" -f $cli, ((Get-Item -LiteralPath $cli).Length / 1MB))
+}
+
+if ($Target -eq 'release') {
+    # The language files are published next to the executables so a translation
+    # fix can be installed with "Load language file" without a new executable.
+    # Each one is checked with the CLI just built, which is the same check the
+    # window runs before applying a file.
+    Write-Host '  -> Release files'
+    $release = Join-Path $PSScriptRoot 'build\release'
+    if (Test-Path -LiteralPath $release) { Remove-Item -LiteralPath $release -Recurse -Force }
+    New-Item -ItemType Directory -Path $release | Out-Null
+
+    Copy-Item -LiteralPath $gui, $cli -Destination $release
+
+    $locales = Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'assets\locales') -Filter '*.json' |
+        Where-Object { $_.Name -ne 'locale.schema.json' }
+    foreach ($file in $locales) {
+        & $cli check --locale-file $file.FullName | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "$($file.Name) does not pass the language file check" }
+        Copy-Item -LiteralPath $file.FullName -Destination (Join-Path $release ('antigravity-' + $file.Name))
+    }
+
+    $sums = Get-ChildItem -LiteralPath $release -File | Sort-Object Name | ForEach-Object {
+        '{0}  {1}' -f (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant(), $_.Name
+    }
+    [System.IO.File]::WriteAllText((Join-Path $release 'SHA256SUMS.txt'), (($sums -join "`n") + "`n"), (New-Object System.Text.UTF8Encoding($false)))
+
+    Get-ChildItem -LiteralPath $release -File | ForEach-Object { Write-Host ('     ' + $_.Name) }
 }
 
 Write-Host "Done: $version"

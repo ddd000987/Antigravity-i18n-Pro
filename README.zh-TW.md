@@ -48,6 +48,16 @@ antigravity-i18n-pro.exe reapply             # 重新套用上次的語言
 antigravity-i18n-pro.exe reapply --if-needed # 只有被更新蓋掉時才套用
 ```
 
+### 只更新翻譯
+
+每個 [Release](../../releases) 都會附上內建的語言檔，檔名是 `antigravity-<代碼>.json`（例如 `antigravity-zh-TW.json`）。如果某次 Release 只修正翻譯，不必換執行檔：下載新的語言檔，在視窗按「載入語言檔」，或
+
+```powershell
+antigravity-i18n-pro.exe apply --locale-file antigravity-zh-TW.json
+```
+
+工具會記住這個檔案，Antigravity 更新後重新套用時也會用它。想改回執行檔內建的語言包，在視窗重新選一次該語言即可。`SHA256SUMS.txt` 列出每個 Release 檔案的校驗碼。
+
 ### 命令列
 
 ```powershell
@@ -120,13 +130,16 @@ antigravity-i18n-pro.exe locales                 # 內建語言包與涵蓋率
 需求：Go 1.26 以上，以及 [Wails v2](https://wails.io/) CLI（`go install github.com/wailsapp/wails/v2/cmd/wails@v2.16.0`）。
 
 ```powershell
-.\build.ps1          # 視窗版：build\bin\antigravity-i18n-pro.exe，命令列版：build\bin\antigravity-i18n-pro-cli.exe
+.\build.ps1                   # 視窗版：build\bin\antigravity-i18n-pro.exe，命令列版：build\bin\antigravity-i18n-pro-cli.exe
+.\build.ps1 -Target release   # 另外產生 build\release：兩個執行檔、語言檔和 SHA256SUMS.txt
 go test ./...
 
 # 另外對真實 app.asar 的副本做打包測試（不會動到安裝）：
 $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
+
+推送和 `VERSION` 相符的 tag `vX.Y.Z` 會執行 [`release.yml`](./.github/workflows/release.yml)，建置 Release 檔案並附到一個草稿 Release；寫好說明後再發布。
 
 Antigravity 推出新版時如何更新翻譯，請見 [`tools/README.md`](./tools/README.md)。
 
