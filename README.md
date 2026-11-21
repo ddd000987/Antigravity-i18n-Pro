@@ -14,7 +14,7 @@ English | [繁體中文](./README.zh-TW.md)
 > - **Remembers the last language** (bundled or your own file) and offers to reapply it when an Antigravity update has put the English build back; `reapply` does the same from the command line.
 > - The tool window is available in English, Traditional Chinese and Simplified Chinese, and follows the system language.
 > - Maintenance scripts used to build the translation are included in [`tools/`](./tools/README.md).
-> - The zh-CN, ja, ko, es and fr packs are completed to cover every string of Antigravity 2.34 (machine translated, with the original's wrong translations corrected); de, pt-BR and ru are the original's, unchanged, and cover about 55%.
+> - Every pack other than zh-TW is completed to cover every string of Antigravity 2.34 (machine translated, with the original's wrong translations corrected).
 > - The executable is `antigravity-i18n-pro.exe`, versioned from 1.0.0.
 
 Interface localization tool for the [Google Antigravity](https://antigravity.google/) desktop app on **Windows**. One executable with a window and a command line, no Node.js or other runtime needed.
@@ -114,9 +114,9 @@ Any language can be added without rebuilding the tool.
 | `ko` | 한국어 Korean | 100% |
 | `es` | Español | 100% |
 | `fr` | Français | 100% |
-| `de` | Deutsch | 55% |
-| `pt-BR` | Português do Brasil | 55% |
-| `ru` | Русский | 55% |
+| `de` | Deutsch | 100% |
+| `pt-BR` | Português do Brasil | 100% |
+| `ru` | Русский | 100% |
 | `en` | English | official build (select to restore) |
 
 Untranslated strings stay in English. Only zh-TW is reviewed by a native speaker; the other completed packs are machine translated, so corrections are welcome.

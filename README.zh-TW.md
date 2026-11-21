@@ -14,7 +14,7 @@
 > - **記住上次的語言**（內建或自訂檔），Antigravity 更新把英文版裝回去後，開啟工具時會提示重新套用；命令列也有 `reapply`。
 > - 工具視窗本身有英文、繁體中文、簡體中文介面，預設跟隨系統語言。
 > - 附上製作翻譯用的維護腳本，見 [`tools/`](./tools/README.md)。
-> - zh-CN、ja、ko、es、fr 語言包補齊到涵蓋 Antigravity 2.34 的所有字串（機器翻譯，並修正了原版譯錯的地方）；de、pt-BR、ru 沿用原版未修改，約涵蓋 55%。
+> - zh-TW 以外的語言包都補齊到涵蓋 Antigravity 2.34 的所有字串（機器翻譯，並修正了原版譯錯的地方）。
 > - 執行檔改名為 `antigravity-i18n-pro.exe`，版本從 1.0.0 起算。
 
 [Google Antigravity](https://antigravity.google/) 桌面版（**Windows**）的介面在地化工具。單一執行檔，同時有視窗與命令列，不需要 Node.js 或其他執行環境。
@@ -114,9 +114,9 @@ antigravity-i18n-pro.exe locales                 # 內建語言包與涵蓋率
 | `ko` | 한국어 | 100% |
 | `es` | Español | 100% |
 | `fr` | Français | 100% |
-| `de` | Deutsch | 55% |
-| `pt-BR` | Português do Brasil | 55% |
-| `ru` | Русский | 55% |
+| `de` | Deutsch | 100% |
+| `pt-BR` | Português do Brasil | 100% |
+| `ru` | Русский | 100% |
 | `en` | English | 官方版本（選擇即還原） |
 
 沒有翻譯的字串會維持英文。只有 zh-TW 經過母語人士校對，其他補齊的語言包是機器翻譯，歡迎協助修正。
