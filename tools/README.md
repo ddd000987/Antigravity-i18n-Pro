@@ -28,7 +28,7 @@ The catalog of what a language pack must contain is zh-TW (`assets/locales/zh-TW
 
 1. `node new-locale.js <code> --name <native name> --english-name <English name>` creates the empty pack and a glossary stub. (The Go side rejects a pack without any text, so run `go test` only after the first merge.)
 2. `node todo.js <dir> --locale <code>` writes `<dir>/todo-N.json` and `manifest.json`. Use a new folder for every run; `--dry` only prints the counts.
-3. Translate each `todo-N.json` into `todo-N.out.json` following `translation-prompts/TRANSLATE.md`, for example one model subagent per batch. The first batch starts with the glossary terms.
+3. Translate each `todo-N.json` into `todo-N.out.json` following `translation-prompts/TRANSLATE.md`, one model subagent per batch (see "Running the translators" below). The first batch starts with the glossary terms.
 4. `node merge-todo.js <dir>` writes the valid translations and runs `order-rules.js` on the pack. Read `<dir>/problems.json` (rejected: wrong `{n}` or `<>`, whitespace, bad plural object, unknown id) and `<dir>/review.json` (written but suspicious: equal to English, lost keep name, glossary term not used, lost ellipsis), fix them and merge again; the merge is idempotent.
 5. After the first batch is merged, `node glossary-seed.js --locale <code>` fills `glossary/<code>.json` from the pack's own renderings of the terms (edit the `notes` there: formality, punctuation, regional vocabulary). Later batches then carry the glossary. Re-run `todo.js` in a new folder for the items that are still missing (rejected ones and ones the translator skipped) until it reports nothing to translate.
 6. `node glossary-check.js --locale <code>` for terminology the pack uses inconsistently, `lint.js` and `patcheck.js` where they apply to the language, then `go test ./...` from the repository root.
@@ -39,7 +39,16 @@ The catalog of what a language pack must contain is zh-TW (`assets/locales/zh-TW
 
 **After a new Antigravity release**
 
-Update zh-TW first with the workflow above (it defines the catalog), then run `node todo.js <dir> --locale zh-CN,ja,ko,es,fr,de,pt-BR,ru`. Each new string is sent once for all languages (an item's `need` lists the languages that lack it), and one translator writes all languages for it. Merge with `merge-todo.js` as above.
+Update zh-TW first with "Typical workflow after a new Antigravity release" below (zh-TW defines the catalog), then catch every other pack up in one pass: `node todo.js <dir> --locale zh-CN,ja,ko,es,fr,de,pt-BR,ru --size 50`. Each new string is sent once for all languages (an item's `need` lists the languages that lack it), and one translator writes all languages for it. `--size` counts items, not translations, so 50 items for eight languages is about as much output as one 400-item single-language batch. Merge with `merge-todo.js` as above. Do not run the eight languages one at a time: that pays the translator's fixed cost eight times for the same strings.
+
+**Running the translators**
+
+Most of a translator's cost is fixed start-up context, so the way it is briefed matters more than the model's speed.
+
+- One subagent per `todo-N.json`, a capable mid-tier model (for example Sonnet), at most three at a time. A small batch left over at the end can go with the previous one.
+- The brief is only three paths: `tools/translation-prompts/TRANSLATE.md`, the input `todo-N.json`, and the output `todo-N.out.json`. The batch already carries the relevant glossary, keep names, style notes and screen-location notes, so tell the subagent not to open the locale packs, `tools/glossary/`, the bundle, or any other file.
+- Ask it to report only the number of items written and skipped, not the translations themselves: its report lands in the coordinating session's context.
+- The coordinating session does not read the `.out.json` files either. It runs `merge-todo.js` and reads `problems.json` and `review.json`, then sends only the failing items back (a fresh `todo.js` run in a new folder lists exactly those).
 
 ## Where things live on Windows
 
@@ -54,6 +63,8 @@ The cache can hold several versions of the bundle (the file modification time te
 
 ## Typical workflow after a new Antigravity release
 
+Steps 2–8 update zh-TW, the reference catalog; step 10 brings the other packs up to it.
+
 1. **Get the bundle.** Run Antigravity once, then `node cache-js.js scratch/js` extracts every distinct JavaScript file from the Chromium cache, largest first with its date. The newest file of about 12 MB is `main.js` (the cache can still hold the previous release's bundle too). Keep scratch files outside the repository.
 2. **Find the gaps.** `extract.js` (UI props and children), `sweep.js` (every sentence-like literal) and `sentences.js` (sentences split across elements) list what the locale does not cover. `splits.js`, `server-copy.js` and `server-names.js` give extra views; `gap.js`/`overlap.js` compare with another project's dictionary.
 3. **Translate.** Turn the work files into batches (`batches.js`, or the sweep/gap files directly) and translate them following `translation-prompts/*.md`. The result files are `batch-N.out.json`, `sweep-N.out.json`, `gap-N.out.json` and `sent-N.out.json`.
@@ -62,7 +73,8 @@ The cache can hold several versions of the bundle (the file modification time te
 6. **Lint.** `lint.js` (terminology, punctuation, Mainland vocabulary) and `patcheck.js` (pattern rules). `gloss.js` shows glossary consistency.
 7. **Engine tests.** `npm test`, then `node sent-e2e.js <trDir>` to check that every split sentence renders translated in jsdom, and `node bench.js` for timing.
 8. **Go tests.** From the repository root: `go test ./...`. The Go side is the authority on locale validity (including RE2 compatibility of every pattern), so a locale is only done when it passes there.
-9. **Refresh the screen-location hints** with `ui-notes.js` (below) so the exported translation template stays accurate.
+9. **Refresh the screen-location hints** with `ui-notes.js` (below) so the exported translation template stays accurate. Do this before step 10, so the other languages' batches carry the notes for the new strings.
+10. **Other languages.** Run the multi-language `todo.js` pass from "After a new Antigravity release" above, translate the batches as in "Running the translators", merge with `merge-todo.js`, then `glossary-check.js`, `npm test` and `go test ./...`. Update the string counts in `README.md` and `README.zh-TW.md` if they changed.
 
 ## Scripts
 
