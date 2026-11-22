@@ -1,7 +1,10 @@
 package core
 
 import (
+	"io/fs"
 	"os"
+	"path"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -40,8 +43,19 @@ func TestAllLocalesValidate(t *testing.T) {
 		t.Fatal(err)
 	}
 	list := store.ListLocales()
-	if len(list) != 9 {
-		t.Fatalf("expected 9 locales, got %d: %v", len(list), list)
+	// Every pack file must be listed, so adding a language is adding a file.
+	files, err := fs.Glob(assets, "assets/locales/*.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	packs := 0
+	for _, f := range files {
+		if path.Base(f) != "locale.schema.json" {
+			packs++
+		}
+	}
+	if len(list) != packs || !slices.Contains(list, DefaultLocale) {
+		t.Fatalf("expected %d locales including %s, got %d: %v", packs, DefaultLocale, len(list), list)
 	}
 	for _, code := range list {
 		loc, err := store.LoadLocale(code)
