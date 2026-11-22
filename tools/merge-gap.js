@@ -1,5 +1,5 @@
 // Merges the translated gap files into the locale, normalising terms the same
-// way fix.js does, and reports anything suspicious for manual review. The term
+// way archive/fix.js does, and reports anything suspicious for manual review. The term
 // tables are zh-TW specific. Modifies the locale file in place.
 //
 // Usage:  node merge-gap.js <trDir> [--locale <code|path>]

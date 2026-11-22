@@ -1,0 +1,8 @@
+{
+  "_about": "Names every language keeps exactly as written. merge-todo.js warns when a source contains one of them and the translation does not. Match is case-sensitive and on whole words.",
+  "keep": [
+    "Antigravity", "Gemini", "Google", "Google AI", "Google AI Ultra", "Google Cloud", "Google Workspace", "Chrome", "Firebase", "GitHub", "GitLab", "Git",
+    "MCP", "Model Context Protocol", "Claude", "OpenAI", "Docker", "Kubernetes", "SSH", "WSL", "JSON", "YAML", "API", "HTTP", "HTTPS",
+    "CLI", "IDE", "SDK", "VS Code", "Node.js", "npm", "Python", "macOS", "Windows", "Linux", "Jetski", "CitC"
+  ]
+}

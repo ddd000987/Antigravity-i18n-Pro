@@ -5,8 +5,8 @@
 //
 // Usage:  node greet.js [--locale <code|path>]
 // Input/Output: the locale (default zh-TW), rewritten in place
-const { parseArgs } = require('./lib/cli');
-const { loadLocale, saveLocale, DEFAULT_LOCALE } = require('./lib/locale');
+const { parseArgs } = require('../lib/cli');
+const { loadLocale, saveLocale, DEFAULT_LOCALE } = require('../lib/locale');
 const { opts } = parseArgs(process.argv.slice(2), { usage: 'node greet.js [--locale <code|path>]', options: { locale: DEFAULT_LOCALE } });
 const l = loadLocale(opts.locale);
 Object.assign(l.text, {

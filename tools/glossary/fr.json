@@ -1,0 +1,90 @@
+{
+  "language": "fr",
+  "notes": [
+    "Use vous; French spacing before : ; ? ! is not required in UI labels."
+  ],
+  "terms": {
+    "Agent": "Agent",
+    "Subagent": "Sous-agent",
+    "Browser Subagent": "Sous-agent du navigateur",
+    "Coordinator": "Coordinateur",
+    "Conversation": "Conversation",
+    "Side Question": "Question secondaire",
+    "Workspace": "Espace de travail",
+    "Project": "Projet",
+    "Prompt": "Invite",
+    "Model": "Modèle",
+    "Thinking": "Réflexion",
+    "Context": "Contexte",
+    "Token": "Jetons",
+    "Quota": "Quota",
+    "Credits": "Crédits",
+    "Plan": "Forfait",
+    "Task": "Tâche",
+    "Artifact": "Artefact",
+    "Knowledge": "Connaissance",
+    "Skill": "Compétence",
+    "Rules": "Règles",
+    "Workflows": [
+      "Flux de travail",
+      "Workflows"
+    ],
+    "Hooks": "Hooks",
+    "Customizations": "Personnalisations",
+    "Plugin": "Plugin",
+    "Extension": "Extension",
+    "Marketplace": "Marché",
+    "MCP server": "Serveur MCP",
+    "Permissions": "Autorisations",
+    "Allow": "Autoriser",
+    "Deny": "Refuser",
+    "Approve": "Approuver",
+    "Review": "Examiner",
+    "Accept": "Accepter",
+    "Reject": "Rejeter",
+    "Dismiss": "Ignorer",
+    "Sandbox": "Bac à sable",
+    "Terminal": "Terminal",
+    "Command": "Commande",
+    "Run": "Exécuter",
+    "Editor": "Éditeur",
+    "Pane": [
+      "Volet",
+      "Panneau"
+    ],
+    "Side Panel": "Panneau latéral",
+    "Sidebar": "Barre latérale",
+    "Tab": "Onglet",
+    "Settings": [
+      "Paramètres",
+      "Réglages"
+    ],
+    "Repository": "Dépôt",
+    "Branch": "Branche",
+    "Commit": "Valider",
+    "Fork": "Dupliquer",
+    "Worktree": "Arbre de travail",
+    "Diff": [
+      "Différences",
+      "Différentiel",
+      "diff"
+    ],
+    "Changes": "Changements",
+    "Pull request": [
+      "Pull request",
+      "Demande de tirage"
+    ],
+    "Merge": "Fusionner",
+    "Match case": "Respecter la casse",
+    "Remote": "À distance",
+    "Local": "Local",
+    "Archive": "Archiver",
+    "Pin": "Épingler",
+    "Sign in": "Se connecter",
+    "Account": "Compte",
+    "Undo": "Annuler",
+    "Retry": "Réessayer",
+    "Copied": "Copié",
+    "Telemetry": "Télémétrie"
+  }
+}

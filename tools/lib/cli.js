@@ -4,13 +4,14 @@
 //     usage: 'node tool.js <in> [--locale <code|path>]',
 //     min: 1,                       // required positional arguments
 //     options: { locale: 'zh-TW' }, // --name <value> options with their defaults (null = no default)
+//     flags: ['dry'],               // optional --name switches that take no value (opts.name is true when given)
 //   });
 //
 // Missing positionals or unknown options print the usage line and exit 1.
 // --help prints the usage line and exits 0.
 'use strict';
 
-function parseArgs(argv, { usage, min = 0, max = Infinity, options = {} }) {
+function parseArgs(argv, { usage, min = 0, max = Infinity, options = {}, flags = [] }) {
   const fail = (msg) => {
     if (msg) console.error(msg);
     console.error(`Usage: ${usage}`);
@@ -18,6 +19,8 @@ function parseArgs(argv, { usage, min = 0, max = Infinity, options = {} }) {
   };
   const args = [];
   const opts = { ...options };
+  for (const f of flags) opts[f] = false;
+  for (const f of flags) opts[f] = false;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--help' || a === '-h') {
@@ -26,6 +29,7 @@ function parseArgs(argv, { usage, min = 0, max = Infinity, options = {} }) {
     }
     if (a.startsWith('--')) {
       const name = a.slice(2);
+      if (flags.includes(name)) { opts[name] = true; continue; }
       if (!(name in options)) fail(`unknown option ${a}`);
       if (i + 1 >= argv.length) fail(`option ${a} needs a value`);
       opts[name] = argv[++i];

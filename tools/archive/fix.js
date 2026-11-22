@@ -6,8 +6,8 @@
 //
 // Usage:  node fix.js [--locale <code|path>]
 // Input/Output: the locale (default zh-TW), rewritten in place; the change log is printed
-const { parseArgs } = require('./lib/cli');
-const { loadLocale, saveLocale, DEFAULT_LOCALE } = require('./lib/locale');
+const { parseArgs } = require('../lib/cli');
+const { loadLocale, saveLocale, DEFAULT_LOCALE } = require('../lib/locale');
 const { opts } = parseArgs(process.argv.slice(2), { usage: 'node fix.js [--locale <code|path>]', options: { locale: DEFAULT_LOCALE } });
 const loc = loadLocale(opts.locale);
 const log = [];
