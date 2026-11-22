@@ -874,6 +874,16 @@
       "sample": "You have used some of your weekly limit, it will fully refresh in 2 days, 3 hours."
     },
     {
+      "id": "resetsIn",
+      "pattern": "^Resets in (.+)$",
+      "flags": "i",
+      "template": "將在 {1} 後重設",
+      "replace": {
+        "1": "compactDuration"
+      },
+      "sample": "Resets in 2d 3h"
+    },
+    {
       "id": "loadOlderMessages",
       "pattern": "^Load older messages, showing (\\d+) of (\\d+)$",
       "flags": "i",
@@ -4046,6 +4056,28 @@
         "flags": "g",
         "template": "{1} 秒"
       }
+    ],
+    "compactDuration": [
+      {
+        "pattern": "<1m",
+        "flags": "g",
+        "template": "不到 1 分鐘"
+      },
+      {
+        "pattern": "(\\d+)d",
+        "flags": "g",
+        "template": "{1} 天"
+      },
+      {
+        "pattern": "(\\d+)h",
+        "flags": "g",
+        "template": "{1} 小時"
+      },
+      {
+        "pattern": "(\\d+)m",
+        "flags": "g",
+        "template": "{1} 分鐘"
+      }
     ]
   },
   "menu": {
@@ -6541,6 +6573,7 @@
     "Run the app against a Linux environment. Connecting relaunches the app into the selected WSL distro.": "讓應用程式在 Linux 環境中執行。連線時會將應用程式重新啟動至所選的 WSL 發行版。",
     "Run visibility": "執行可見度",
     "Running": "執行中",
+    "Waiting for your input": "正在等候您的輸入",
     "Running (Dev only)": "執行中（僅限開發）",
     "Running command": "正在執行指令",
     "Running processes are killed. This cannot be undone.": "執行中的處理程序將被終止。此動作無法復原。",
@@ -7350,6 +7383,7 @@
     "No comments yet": "尚無留言",
     "No commit to amend": "沒有可修訂的提交",
     "No commits to push": "沒有可推送的提交",
+    "No remote configured": "尚未設定遠端",
     "No conversations found": "找不到對話",
     "No custom agents yet.": "尚無自訂代理程式。",
     "No Match Found": "找不到相符結果",
