@@ -23,7 +23,7 @@ Interface localization tool for the [Google Antigravity](https://antigravity.goo
 
 - **Single executable**: GUI by default, full CLI in the same file.
 - **Byte-exact restore**: a pristine `app.asar.clean-backup` is kept before anything changes, and restoring brings back an archive identical (SHA-256) to the official release.
-- **Touches only the interface shell**: the app's own UI, native menus and the quit dialog. The code editor (Monaco), terminals (xterm) and AI conversation content are left alone.
+- **Touches only the interface shell**: the app's own UI, native menus (app, tray and context menus), native dialogs and the small built-in pages such as the SSH disconnected page. The code editor (Monaco), terminals (xterm) and AI conversation content are left alone.
 - **Checked and transactional**: generated JavaScript is syntax-checked before it is written, and any failure rolls back.
 - **Offline**: no network access, no data collection.
 

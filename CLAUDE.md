@@ -20,7 +20,7 @@ Go/Wails tool (GUI + CLI, Windows) that patches the Antigravity desktop app's `r
 
 ## Tests
 
-- `go test ./...` from the repo root; `cd tools && npm test` (engine tests and the batch-workflow round trip).
+- `go test ./...` from the repo root; `cd tools && npm test` (engine tests, main-process fragment tests and the batch-workflow round trip).
 - Keep long outputs short (`| tail`, `| grep`).
 
 ## Releasing

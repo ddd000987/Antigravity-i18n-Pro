@@ -152,7 +152,7 @@
     },
     "dialogs": {
       "type": "object",
-      "description": "Exact source labels in the native quit confirmation dialog. Used only in the main process; button order and behavior are preserved.",
+      "description": "Strings owned by the main process: message, error and file dialogs, tray and context menus built there, and the small data:text/html pages it loads. Matched whole (multi-line text line by line); a key with {n} placeholders also matches the same sentence with any values there. Overrides menu for the same key.",
       "additionalProperties": { "type": "string", "minLength": 1 }
     },
     "text": {

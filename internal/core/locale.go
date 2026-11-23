@@ -718,8 +718,18 @@ func (s *LocaleStore) buildMenuFragment(loc *Locale) (string, error) {
 	return out, nil
 }
 
+// buildDialogFragment builds the main-process fragment. Its lookup table is the
+// menu map overlaid with the dialogs map: both are native strings, and menus
+// built outside menu.js (tray, context menus) reuse the menu translations.
 func (s *LocaleStore) buildDialogFragment(loc *Locale) (string, error) {
-	data, err := json.Marshal(loc.Dialogs)
+	native := make(map[string]string, len(loc.Menu)+len(loc.Dialogs))
+	for k, v := range loc.Menu {
+		native[k] = v
+	}
+	for k, v := range loc.Dialogs {
+		native[k] = v
+	}
+	data, err := json.Marshal(native)
 	if err != nil {
 		return "", err
 	}

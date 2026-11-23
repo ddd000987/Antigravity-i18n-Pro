@@ -1,30 +1,147 @@
 /* antigravity-i18n:begin */
-// Native quit confirmation is owned by the main process, outside the DOM.
+// Native UI owned by the main process (menus, the tray menu, message, error
+// and file dialogs) is outside the DOM engine's reach, so it is translated
+// here. DIALOG_DATA is the pack's menu and dialogs maps merged, dialogs
+// winning. A string is translated only when it equals a key; a key with {n}
+// placeholders also matches the same sentence with any values in those
+// places. Everything else (errors, paths, user content) passes through.
 (function installLocaleDialogs() {
-    const labels = new Map(Object.entries(DIALOG_DATA_PLACEHOLDER));
-    const dialog = electron_1.dialog;
-    const translate = (value) => labels.has(value) ? labels.get(value) : value;
-    for (const method of ['showMessageBox', 'showMessageBoxSync']) {
-        const original = dialog[method];
-        if (typeof original !== 'function') continue;
-        dialog[method] = function (...args) {
-            // Preserve both (options) and (window, options) overloads.
-            const index = args.length > 1 && args[1] && typeof args[1] === 'object' ? 1 : 0;
-            const options = args[index];
-            // Only the app's known quit prompt is translated. Arbitrary app
-            // errors, paths and user-supplied dialog contents pass through.
-            if (options && options.title === 'Confirm Quit'
-                && options.message === 'Are you sure you want to quit?') {
-                args[index] = {
-                    ...options,
-                    title: translate(options.title),
-                    message: translate(options.message),
-                    detail: translate(options.detail),
-                    ...(Array.isArray(options.buttons) ? { buttons: options.buttons.map(translate) } : {}),
-                };
-            }
+    const exact = new Map(Object.entries(DIALOG_DATA_PLACEHOLDER));
+    const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const templates = [];
+    for (const [key, value] of exact) {
+        if (!/\{\d+\}/.test(key)) continue;
+        const order = [];
+        const source = key.split(/\{(\d+)\}/).map((part, i) => {
+            if (i % 2) { order.push(part); return '([\\s\\S]+?)'; }
+            return escape(part);
+        }).join('');
+        templates.push({ re: new RegExp(`^${source}$`), order, value });
+    }
+    const translateWhole = (text) => {
+        if (exact.has(text)) return exact.get(text);
+        for (const t of templates) {
+            const m = t.re.exec(text);
+            if (!m) continue;
+            return t.value.replace(/\{(\d+)\}/g, (whole, n) => {
+                const at = t.order.indexOf(n);
+                return at >= 0 ? m[at + 1] : whole;
+            });
+        }
+        return text;
+    };
+    // Dialog details are often several sentences joined with newlines, so a
+    // text with no whole match is translated line by line.
+    const translate = (text) => {
+        if (typeof text !== 'string' || text === '') return text;
+        const whole = translateWhole(text);
+        if (whole !== text || !text.includes('\n')) return whole;
+        return text.split('\n').map((line) => (line === '' ? line : translateWhole(line))).join('\n');
+    };
+    const translateFields = (options, fields) => {
+        if (!options || typeof options !== 'object') return options;
+        const copy = { ...options };
+        for (const f of fields) {
+            if (typeof copy[f] === 'string') copy[f] = translate(copy[f]);
+        }
+        return copy;
+    };
+    // A failed rewrite must never stop the native call itself.
+    const wrap = (owner, method, rewrite) => {
+        const original = owner && owner[method];
+        if (typeof original !== 'function') return;
+        owner[method] = function (...args) {
+            try { rewrite(args); } catch { /* keep the original arguments */ }
             return Reflect.apply(original, this, args);
         };
+    };
+    // Dialog methods accept (options) and (window, options).
+    const optionsIndex = (args) => (args.length > 1 && args[1] && typeof args[1] === 'object' ? 1 : 0);
+
+    const dialog = electron_1.dialog;
+    for (const method of ['showMessageBox', 'showMessageBoxSync']) {
+        wrap(dialog, method, (args) => {
+            const i = optionsIndex(args);
+            const options = translateFields(args[i], ['title', 'message', 'detail', 'checkboxLabel']);
+            if (options && Array.isArray(options.buttons)) options.buttons = options.buttons.map(translate);
+            args[i] = options;
+        });
+    }
+    for (const method of ['showOpenDialog', 'showOpenDialogSync', 'showSaveDialog', 'showSaveDialogSync']) {
+        wrap(dialog, method, (args) => {
+            const i = optionsIndex(args);
+            const options = translateFields(args[i], ['title', 'buttonLabel', 'message', 'nameFieldLabel']);
+            if (options && Array.isArray(options.filters)) {
+                options.filters = options.filters.map((f) => translateFields(f, ['name']));
+            }
+            args[i] = options;
+        });
+    }
+    wrap(dialog, 'showErrorBox', (args) => {
+        args[0] = translate(args[0]);
+        args[1] = translate(args[1]);
+    });
+
+    // Every menu item, whether built from a template or constructed directly,
+    // reaches the native menu through Menu.prototype.insert (append and
+    // buildFromTemplate call it), so this one hook covers the app, tray and
+    // context menus. The label has to be translated before the native insert
+    // reads it, and the app relabels some items later (the tray's running
+    // agent count, the updater's menu item), so the property becomes an
+    // accessor that translates whatever is assigned to it.
+    const Menu = electron_1.Menu;
+    wrap(Menu && Menu.prototype, 'insert', (args) => {
+        const item = args[1];
+        if (!item || typeof item !== 'object') return;
+        for (const f of ['label', 'sublabel', 'toolTip']) {
+            const own = Object.getOwnPropertyDescriptor(item, f);
+            if (!own || !('value' in own) || !own.writable || !own.configurable) continue;
+            let value = translate(own.value);
+            Object.defineProperty(item, f, {
+                configurable: true,
+                enumerable: own.enumerable,
+                get: () => value,
+                set: (next) => { value = translate(next); },
+            });
+        }
+    });
+
+    // A few small pages (the SSH disconnected page and prompts, the IDE
+    // install wizard, the passkey sheet) are loaded as data:text/html URLs,
+    // which the renderer engine does not translate. The text between their
+    // tags is looked up like any other native string before the page loads;
+    // scripts and styles are left as they are. WebContents is not exported,
+    // so its prototype is taken from the first instance, which is created
+    // before anything can be loaded into it.
+    const DATA_HTML = /^data:text\/html(?:;charset=utf-8)?,/i;
+    const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", '#x27': "'", nbsp: ' ' };
+    const decodeEntities = (s) => s.replace(/&(amp|lt|gt|quot|#39|#x27|nbsp);/g, (m, e) => ENTITIES[e]);
+    const encodeEntities = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+    const translateText = (whole, text) => {
+        const core = text.trim();
+        if (!core) return whole;
+        const source = decodeEntities(core);
+        const translated = translate(source);
+        if (translated === source) return whole;
+        const lead = text.slice(0, text.indexOf(core));
+        const trail = text.slice(lead.length + core.length);
+        return `>${lead}${encodeEntities(translated)}${trail}<`;
+    };
+    const translateHtml = (html) => html
+        .split(/(<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>)/i)
+        .map((part, i) => (i % 2 ? part : part.replace(/>([^<>]+)</g, translateText)))
+        .join('');
+    const app = electron_1.app;
+    if (app && typeof app.once === 'function') {
+        app.once('web-contents-created', (_event, contents) => {
+            wrap(Object.getPrototypeOf(contents), 'loadURL', (args) => {
+                const m = typeof args[0] === 'string' && DATA_HTML.exec(args[0]);
+                if (!m) return;
+                const html = decodeURIComponent(args[0].slice(m[0].length));
+                const translated = translateHtml(html);
+                if (translated !== html) args[0] = `data:text/html;charset=utf-8,${encodeURIComponent(translated)}`;
+            });
+        });
     }
 })();
 /* antigravity-i18n:end */

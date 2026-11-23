@@ -17,6 +17,8 @@ const repoRoot = path.resolve(__dirname, '..', '..');
 const DEFAULT_LOCALE = 'zh-TW';
 const DEFAULT_ENGINE = path.join(repoRoot, 'assets', 'patches', 'engine.jsfrag');
 const PLACEHOLDER = 'LOCALE_DATA_PLACEHOLDER';
+const DEFAULT_DIALOG = path.join(repoRoot, 'assets', 'patches', 'dialog.jsfrag');
+const DIALOG_PLACEHOLDER = 'DIALOG_DATA_PLACEHOLDER';
 
 // Mirrors the field list of buildPreloadFragment in internal/core/locale.go.
 // Native maps (menu, dialogs) and report-only metadata (allowSourceEqual) are
@@ -66,4 +68,16 @@ function buildPreloadFragment(locale, enginePath = DEFAULT_ENGINE) {
   return template.slice(0, at) + JSON.stringify(rendererData(locale)) + template.slice(at + PLACEHOLDER.length);
 }
 
-module.exports = { repoRoot, DEFAULT_LOCALE, DEFAULT_ENGINE, localePath, loadLocale, saveLocale, rendererData, buildPreloadFragment };
+// Mirrors buildDialogFragment in internal/core/locale.go.
+function buildDialogFragment(locale, templatePath = DEFAULT_DIALOG) {
+  const template = fs.readFileSync(templatePath, 'utf8');
+  const at = template.indexOf(DIALOG_PLACEHOLDER);
+  if (at < 0) throw new Error(`${templatePath} has no ${DIALOG_PLACEHOLDER}`);
+  const native = { ...(locale.menu || {}), ...(locale.dialogs || {}) };
+  return template.slice(0, at) + JSON.stringify(native) + template.slice(at + DIALOG_PLACEHOLDER.length);
+}
+
+module.exports = {
+  repoRoot, DEFAULT_LOCALE, DEFAULT_ENGINE, localePath, loadLocale, saveLocale, rendererData,
+  buildPreloadFragment, buildDialogFragment,
+};

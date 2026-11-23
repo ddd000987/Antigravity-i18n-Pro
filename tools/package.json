@@ -4,7 +4,7 @@
   "description": "Maintenance scripts for the Antigravity i18n Pro translation catalogs: extract untranslated UI strings from an Antigravity bundle, merge translations, lint, and test the DOM translation engine.",
   "main": "lib/locale.js",
   "scripts": {
-    "test": "node engine.test.js && node todo.test.js"
+    "test": "node engine.test.js && node main.test.js && node todo.test.js"
   },
   "keywords": [
     "antigravity",
