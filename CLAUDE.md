@@ -23,6 +23,12 @@ Go/Wails tool (GUI + CLI, Windows) that patches the Antigravity desktop app's `r
 - `go test ./...` from the repo root; `cd tools && npm test` (engine tests and the batch-workflow round trip).
 - Keep long outputs short (`| tail`, `| grep`).
 
+## Releasing
+
+- Set `VERSION`, commit "Release X.Y.Z" (with `wails.json`, which `build.ps1` stamps), push `main` and an annotated tag `vX.Y.Z`. `.github/workflows/release.yml` then tests, builds and attaches the files to a **draft** release.
+- Publish that draft: write the notes (English first, then Traditional Chinese; only what changed since the previous release) and run `gh release edit vX.Y.Z --notes-file <notes> --draft=false --latest`. Never `gh release create` or upload locally built files; the workflow fails if the tag already has a release.
+- The `upstream` remote (wade19990814-hue/antigravity-i18n) is a different project with its own releases. Pass `--repo ddd000987/Antigravity-i18n-Pro` to `gh` when reading releases.
+
 ## Repository conventions
 
 - Code, comments, docs, commits in English; `README.zh-TW.md` mirrors `README.md` (both list the bundled languages).
