@@ -1,0 +1,90 @@
+{
+  "language": "tr",
+  "notes": [
+    "Follow VS Code Turkish: address the user with the polite siz form; button and menu labels use the bare imperative (Kaydet, Aç, Çalıştır).",
+    "Attach suffixes to names, codes and placeholders with an apostrophe and vowel harmony (Antigravity'yi, MCP'ye, {0}'ı); use İ/i and I/ı correctly in capitals."
+  ],
+  "terms": {
+    "Agent": [
+      "Ajan",
+      "Aracı"
+    ],
+    "Subagent": "Alt ajan",
+    "Browser Subagent": "Tarayıcı alt ajanı",
+    "Coordinator": "Koordinatör",
+    "Conversation": "Konuşma",
+    "Side Question": "Yan soru",
+    "Workspace": "Çalışma alanı",
+    "Project": "Proje",
+    "Prompt": [
+      "İstem",
+      "Prompt"
+    ],
+    "Model": "Model",
+    "Thinking": "Düşünme",
+    "Context": "Bağlam",
+    "Token": "Token",
+    "Quota": "Kota",
+    "Credits": "Kredi",
+    "Plan": "Plan",
+    "Task": "Görev",
+    "Artifact": "Yapıt",
+    "Knowledge": "Bilgi",
+    "Skill": "Beceri",
+    "Rules": "Kurallar",
+    "Workflows": "İş akışları",
+    "Hooks": [
+      "Kancalar",
+      "Hook"
+    ],
+    "Customizations": "Özelleştirmeler",
+    "Plugin": "Eklenti",
+    "Extension": "Uzantı",
+    "Marketplace": "Marketplace",
+    "MCP server": "MCP sunucusu",
+    "Permissions": [
+      "İzinler",
+      "İzin"
+    ],
+    "Allow": "İzin ver",
+    "Deny": "Reddet",
+    "Approve": "Onayla",
+    "Review": "İncele",
+    "Accept": "Kabul et",
+    "Reject": "Reddet",
+    "Dismiss": "Kapat",
+    "Sandbox": [
+      "Korumalı alan",
+      "Sandbox"
+    ],
+    "Terminal": "Terminal",
+    "Command": "Komut",
+    "Run": "Çalıştır",
+    "Editor": "Düzenleyici",
+    "Pane": "Bölme",
+    "Side Panel": "Yan panel",
+    "Sidebar": "Kenar çubuğu",
+    "Tab": "Sekme",
+    "Settings": "Ayarlar",
+    "Repository": "Depo",
+    "Branch": "Dal",
+    "Commit": "Commit",
+    "Fork": "Fork",
+    "Worktree": "Çalışma ağacı",
+    "Diff": "Fark",
+    "Changes": "Değişiklikler",
+    "Pull request": "Çekme isteği",
+    "Merge": "Birleştir",
+    "Match case": "Büyük/küçük harf eşleştir",
+    "Remote": "Uzak",
+    "Local": "Yerel",
+    "Archive": "Arşivle",
+    "Pin": "Sabitle",
+    "Sign in": "Oturum aç",
+    "Account": "Hesap",
+    "Undo": "Geri al",
+    "Retry": "Yeniden dene",
+    "Copied": "Kopyalandı",
+    "Telemetry": "Telemetri"
+  }
+}

@@ -117,6 +117,8 @@ antigravity-i18n-pro.exe locales                 # 內建語言包與涵蓋率
 | `de` | Deutsch | 100% |
 | `pt-BR` | Português do Brasil | 100% |
 | `ru` | Русский | 100% |
+| `it` | Italiano | 100% |
+| `tr` | Türkçe | 100% |
 | `en` | English | 官方版本（選擇即還原） |
 
 沒有翻譯的字串會維持英文。只有 zh-TW 經過母語人士校對，其他補齊的語言包是機器翻譯，歡迎協助修正。

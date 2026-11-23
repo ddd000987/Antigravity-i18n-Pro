@@ -39,7 +39,7 @@ The catalog of what a language pack must contain is zh-TW (`assets/locales/zh-TW
 
 **After a new Antigravity release**
 
-Update zh-TW first with "Typical workflow after a new Antigravity release" below (zh-TW defines the catalog), then catch every other pack up in one pass: `node todo.js <dir> --locale zh-CN,ja,ko,es,fr,de,pt-BR,ru --size 50`. Each new string is sent once for all languages (an item's `need` lists the languages that lack it), and one translator writes all languages for it. `--size` counts items, not translations, so 50 items for eight languages is about as much output as one 400-item single-language batch. Merge with `merge-todo.js` as above. Do not run the eight languages one at a time: that pays the translator's fixed cost eight times for the same strings.
+Update zh-TW first with "Typical workflow after a new Antigravity release" below (zh-TW defines the catalog), then catch every other pack up in one pass: `node todo.js <dir> --locale zh-CN,ja,ko,es,fr,de,pt-BR,ru,it,tr --size 40`. Each new string is sent once for all languages (an item's `need` lists the languages that lack it), and one translator writes all languages for it. `--size` counts items, not translations, so 40 items for ten languages is about as much output as one 400-item single-language batch. Merge with `merge-todo.js` as above. Do not run the ten languages one at a time: that pays the translator's fixed cost ten times for the same strings.
 
 **Running the translators**
 

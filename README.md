@@ -117,6 +117,8 @@ Any language can be added without rebuilding the tool.
 | `de` | Deutsch | 100% |
 | `pt-BR` | Português do Brasil | 100% |
 | `ru` | Русский | 100% |
+| `it` | Italiano | 100% |
+| `tr` | Türkçe | 100% |
 | `en` | English | official build (select to restore) |
 
 Untranslated strings stay in English. Only zh-TW is reviewed by a native speaker; the other completed packs are machine translated, so corrections are welcome.
