@@ -11,6 +11,7 @@ English | [繁體中文](./README.zh-TW.md)
 > - The original `zh-Hant` pack (Traditional characters with mainland wording) is removed; `zh-Hant`, `zh-HK` and `zh-MO` resolve to `zh-TW`.
 > - **Sentence layer** in the translation engine: sentences React splits across text pieces and inline elements (links, code, keys) are joined with `<>` markers and translated as a whole, with `scope: "sentence"` rules for the dynamic ones. Results are cached.
 > - **Antigravity 2.33+ support**: a new anchor for Chromium's `--lang` switch, which the original could no longer place.
+> - **Beyond the page**: right-click and tray menus, every message, open and save dialog, the built-in pages (SSH, WSL setup, IDE install, passkey) and the Swarm side panel are translated too; the original covers only the menu bar and the quit confirmation.
 > - **Your own language files**: export a translation template, check a file (JSON errors, `{n}` placeholders and `<>` markers, each reported with its line), apply it, and see the translation progress.
 > - **Update template**: merges the strings a new Antigravity release adds into your file and marks them, without touching what you already translated.
 > - **Remembers the last language** (bundled or your own file) and offers to reapply it when an Antigravity update has put the English build back; `reapply` does the same from the command line.
@@ -125,7 +126,7 @@ Any language can be added without rebuilding the tool.
 | `tr` | Türkçe | 100% |
 | `en` | English | official build (select to restore) |
 
-Untranslated strings stay in English. Only zh-TW is reviewed by a native speaker; the other completed packs are machine translated, so corrections are welcome.
+Untranslated strings stay in English, and so do the options of drop-down lists in the Swarm side panel and the text drawn into its exported GIFs. Only zh-TW is reviewed by a native speaker; the other completed packs are machine translated, so corrections are welcome.
 
 ## Files the tool leaves behind
 
