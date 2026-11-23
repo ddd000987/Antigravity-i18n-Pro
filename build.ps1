@@ -31,12 +31,16 @@ if ($version -notmatch '^\d+\.\d+\.\d+([-+][0-9A-Za-z.\-]+)?$') {
 # Wails reads the PE resource fields from wails.json, and its templating cannot
 # see -ldflags, so the same number is written here to keep the compiled binary's
 # file version equal to the version the app reports at runtime.
+# Only the version string is replaced, read and written as UTF-8: Windows
+# PowerShell 5.1 would otherwise read the file in the ANSI code page (turning
+# the copyright sign into mojibake) and ConvertTo-Json would reformat it.
 $wailsJson = Join-Path $PSScriptRoot 'wails.json'
-$config = Get-Content -LiteralPath $wailsJson -Raw | ConvertFrom-Json
+$utf8 = New-Object System.Text.UTF8Encoding($false)
+$text = [System.IO.File]::ReadAllText($wailsJson, $utf8)
+$config = $text | ConvertFrom-Json
 if ($config.info.productVersion -ne $version) {
-    $config.info.productVersion = $version
-    $json = $config | ConvertTo-Json -Depth 10
-    [System.IO.File]::WriteAllText($wailsJson, $json + "`n", (New-Object System.Text.UTF8Encoding($false)))
+    $text = [regex]::Replace($text, '("productVersion"\s*:\s*")[^"]*(")', "`${1}$version`${2}")
+    [System.IO.File]::WriteAllText($wailsJson, $text, $utf8)
     Write-Host "wails.json productVersion -> $version"
 }
 
