@@ -3,7 +3,9 @@
 [English](./README.md) | 繁體中文
 
 > **本專案 fork 自 [wade19990814-hue/antigravity-i18n](https://github.com/wade19990814-hue/antigravity-i18n)。**
-> 與原版的差異：
+>
+> <details>
+> <summary>與原版的差異</summary>
 >
 > - **台灣繁體中文（`zh-TW`）**語言包，使用台灣用語，並設為預設語言：4,303 條文字、685 條動態規則、12 個值對照表，對應 Antigravity 2.34.0。
 > - 移除原版的 `zh-Hant`（繁體字但為大陸用語）；`zh-Hant`、`zh-HK`、`zh-MO` 都會對應到 `zh-TW`。
@@ -16,6 +18,8 @@
 > - 附上製作翻譯用的維護腳本，見 [`tools/`](./tools/README.md)。
 > - zh-TW 以外的語言包都補齊到涵蓋 Antigravity 2.34 的所有字串（機器翻譯，並修正了原版譯錯的地方）。
 > - 執行檔改名為 `antigravity-i18n-pro.exe`，版本從 1.0.0 起算。
+>
+> </details>
 
 [Google Antigravity](https://antigravity.google/) 桌面版（**Windows**）的介面在地化工具。單一執行檔，同時有視窗與命令列，不需要 Node.js 或其他執行環境。
 

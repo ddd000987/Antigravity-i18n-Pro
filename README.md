@@ -3,7 +3,9 @@
 English | [繁體中文](./README.zh-TW.md)
 
 > **Fork of [wade19990814-hue/antigravity-i18n](https://github.com/wade19990814-hue/antigravity-i18n).**
-> Differences from the original:
+>
+> <details>
+> <summary>Differences from the original</summary>
 >
 > - **Taiwan Traditional Chinese (`zh-TW`)** pack written with Taiwan terminology, and the default language: 4,303 strings, 685 dynamic rules and 12 value maps, made for Antigravity 2.34.0.
 > - The original `zh-Hant` pack (Traditional characters with mainland wording) is removed; `zh-Hant`, `zh-HK` and `zh-MO` resolve to `zh-TW`.
@@ -16,6 +18,8 @@ English | [繁體中文](./README.zh-TW.md)
 > - Maintenance scripts used to build the translation are included in [`tools/`](./tools/README.md).
 > - Every pack other than zh-TW is completed to cover every string of Antigravity 2.34 (machine translated, with the original's wrong translations corrected).
 > - The executable is `antigravity-i18n-pro.exe`, versioned from 1.0.0.
+>
+> </details>
 
 Interface localization tool for the [Google Antigravity](https://antigravity.google/) desktop app on **Windows**. One executable with a window and a command line, no Node.js or other runtime needed.
 
