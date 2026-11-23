@@ -89,6 +89,9 @@ const (
 	localeDataPlaceholder = "LOCALE_DATA_PLACEHOLDER"
 	menuDataPlaceholder   = "MENU_DATA_PLACEHOLDER"
 	dialogDataPlaceholder = "DIALOG_DATA_PLACEHOLDER"
+	// sidecarEnginePlaceholder is in the dialog template, where the renderer
+	// engine is embedded for sidecar frames.
+	sidecarEnginePlaceholder = "SIDECAR_ENGINE_PLACEHOLDER"
 )
 
 // Locale is one language pack. Fields are decoded lazily: dictionary maps may be
@@ -737,7 +740,33 @@ func (s *LocaleStore) buildDialogFragment(loc *Locale) (string, error) {
 	if n == 0 {
 		return "", fmt.Errorf("the dialog template has no %s", dialogDataPlaceholder)
 	}
+
+	// The fragment also carries the renderer engine, which it runs in sidecar
+	// frames, as a string literal.
+	engine, err := s.buildPreloadFragment(loc)
+	if err != nil {
+		return "", err
+	}
+	literal, err := json.Marshal(sidecarEngine(engine))
+	if err != nil {
+		return "", err
+	}
+	out, n = replaceFirst(out, sidecarEnginePlaceholder, string(literal))
+	if n == 0 {
+		return "", fmt.Errorf("the dialog template has no %s", sidecarEnginePlaceholder)
+	}
 	return out, nil
+}
+
+// sidecarEngine is the renderer engine as embedded in main.js. Its block
+// sentinels are removed: inside main.js they would be read as the bounds of
+// the main-process block, and the next patch run would cut that block short.
+func sidecarEngine(engine string) string {
+	for _, pair := range blockSentinels {
+		engine = strings.ReplaceAll(engine, pair[0], "")
+		engine = strings.ReplaceAll(engine, pair[1], "")
+	}
+	return strings.TrimSpace(engine)
 }
 
 func containsString(list []string, want string) bool {

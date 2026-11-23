@@ -5,7 +5,7 @@ English | [繁體中文](./README.zh-TW.md)
 > **Fork of [wade19990814-hue/antigravity-i18n](https://github.com/wade19990814-hue/antigravity-i18n).**
 > Differences from the original:
 >
-> - **Taiwan Traditional Chinese (`zh-TW`)** pack written with Taiwan terminology, and the default language: 4,152 strings, 633 dynamic rules and 11 value maps, made for Antigravity 2.34.0.
+> - **Taiwan Traditional Chinese (`zh-TW`)** pack written with Taiwan terminology, and the default language: 4,303 strings, 685 dynamic rules and 12 value maps, made for Antigravity 2.34.0.
 > - The original `zh-Hant` pack (Traditional characters with mainland wording) is removed; `zh-Hant`, `zh-HK` and `zh-MO` resolve to `zh-TW`.
 > - **Sentence layer** in the translation engine: sentences React splits across text pieces and inline elements (links, code, keys) are joined with `<>` markers and translated as a whole, with `scope: "sentence"` rules for the dynamic ones. Results are cached.
 > - **Antigravity 2.33+ support**: a new anchor for Chromium's `--lang` switch, which the original could no longer place.
@@ -23,7 +23,7 @@ Interface localization tool for the [Google Antigravity](https://antigravity.goo
 
 - **Single executable**: GUI by default, full CLI in the same file.
 - **Byte-exact restore**: a pristine `app.asar.clean-backup` is kept before anything changes, and restoring brings back an archive identical (SHA-256) to the official release.
-- **Touches only the interface shell**: the app's own UI, native menus (app, tray and context menus), native dialogs and the small built-in pages such as the SSH disconnected page. The code editor (Monaco), terminals (xterm) and AI conversation content are left alone.
+- **Touches only the interface shell**: the app's own UI, native menus (app, tray and context menus), native dialogs, the small built-in pages such as the SSH disconnected page, and the Swarm side panel. The code editor (Monaco), terminals (xterm) and AI conversation content are left alone.
 - **Checked and transactional**: generated JavaScript is syntax-checked before it is written, and any failure rolls back.
 - **Offline**: no network access, no data collection.
 

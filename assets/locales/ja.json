@@ -4307,7 +4307,158 @@
     "Minimized": "最小化済み",
     "Starting preview…": "プレビューを開始しています…",
     "Pan": "パン",
-    "Grid": "グリッド"
+    "Grid": "グリッド",
+    "Active": "アクティブ",
+    "Active: mid-turn (thinking, running a tool, or waiting on the model)": "アクティブ：ターン実行中（思考中、ツール実行中、またはモデル応答待ち）",
+    "Waiting: turn ended, asleep on the board until a post wakes it": "待機中：ターン終了、新しい投稿で起動するまでボード上で休止中",
+    "Killed: removed from the swarm": "終了済み：スウォームから削除されました",
+    "Swarms started in this conversation appear here automatically, with their board, members and @mention graph. Start one with <>.": "この会話で開始されたスウォームは、ボード、メンバー、@メンショングラフとともにここに自動的に表示されます。<> で開始できます。",
+    "Open this pane from a conversation to see its swarm. Swarms started there appear here automatically; start one with <>.": "スウォームを表示するには、会話からこのペインを開いてください。そこで開始されたスウォームはここに自動的に表示されます。<> で開始できます。",
+    "Reconnecting": "再接続中",
+    "Updates automatically": "自動更新",
+    "Click to hide from the board": "クリックしてボードから非表示",
+    "Posts in every channel": "すべてのチャンネルの投稿",
+    "main: the whole swarm reads it": "main：スウォーム全体が閲覧します",
+    "All channels": "すべてのチャンネル",
+    "all channels": "すべてのチャンネル",
+    "Filters (active)": "フィルター（適用中）",
+    "Not on the roster": "メンバー一覧にありません",
+    "not on roster": "メンバー一覧外",
+    "No posts match": "一致する投稿がありません",
+    "Try a different search or member filter.": "別の検索語句やメンバーフィルターをお試しください。",
+    "No posts yet": "投稿はまだありません",
+    "Posts to the swarm board will appear here as members talk.": "メンバーがやり取りすると、スウォームボードへの投稿がここに表示されます。",
+    "Click to open conversation": "クリックして会話を開く",
+    "Pause replay": "リプレイを一時停止",
+    "Play replay": "リプレイを再生",
+    "Exporting…": "エクスポート中…",
+    "Nothing to export yet.": "エクスポートする内容がまだありません。",
+    "Could not download GIF from embedded pane.": "埋め込みペインから GIF をダウンロードできませんでした。",
+    "Could not export GIF.": "GIF をエクスポートできませんでした。",
+    "Export GIF": "GIF をエクスポート",
+    "The narrator (<>) was stopped. Ask the coordinator to add a new one (<>).": "ナレーター（<>）が停止しました。コーディネーターに新しいナレーター（<>）の追加を依頼してください。",
+    "The narrator's view.json is over 64 KB, so it isn't shown.": "ナレーターの view.json が 64 KB を超えているため表示されません。",
+    "The narrator's view.json isn't valid JSON yet.": "ナレーターの view.json はまだ有効な JSON ではありません。",
+    "The narrator hasn't published an overview yet.": "ナレーターはまだ概要を公開していません。",
+    "The narrator is updating the overview": "ナレーターが概要を更新しています",
+    "The narrator is waiting for new board posts": "ナレーターはボードの新しい投稿を待っています",
+    "The narrator was killed; the overview no longer updates": "ナレーターが終了したため、概要は更新されなくなりました",
+    "updating": "更新中",
+    "watching": "監視中",
+    "stopped": "停止済み",
+    "paused: quota": "一時停止：クォータ",
+    "paused: error": "一時停止：エラー",
+    "stale": "最新でない",
+    "Retry narrator's page": "ナレーターページを再試行",
+    "Narrator's page": "ナレーターページ",
+    "Narrator’s page": "ナレーターページ",
+    "narrator's page · AI-generated": "ナレーターページ · AI 生成",
+    "overview · from the narrator's notes": "概要 · ナレーターのメモより",
+    "overview · from the narrator’s notes": "概要 · ナレーターのメモより",
+    "That link isn't allowed here.": "そのリンクはここでは許可されていません。",
+    "Opening files needs the app.": "ファイルを開くにはアプリが必要です。",
+    "Narrator view (AI-generated)": "ナレータービュー（AI 生成）",
+    "Click a link in the view to open it.": "ビュー内のリンクをクリックして開きます。",
+    "Copy failed": "コピーに失敗しました",
+    "The team": "チーム",
+    "Planned next": "次の予定",
+    "Threads": "スレッド",
+    "Progress": "進捗",
+    "Compare with now": "現在と比較",
+    "Open full timeline": "完全なタイムラインを開く",
+    "Nothing blocked": "ブロックされた項目はありません",
+    "Needs you": "対応が必要",
+    "Stuck": "停滞中",
+    "Nothing waiting": "待機中の項目はありません",
+    "Nothing stuck": "停滞中の項目はありません",
+    "Nothing needs you": "対応が必要な項目はありません",
+    "Nothing running": "実行中の項目はありません",
+    "Nothing planned": "予定されている項目はありません",
+    "Latest action": "最新のアクション",
+    "No tasks completed yet.": "完了したタスクはまだありません。",
+    "<> tasks done": "<> 件のタスクが完了",
+    "Hide compare": "比較を非表示",
+    "Compare then and now": "当時と現在を比較",
+    "Scrub through progress": "ドラッグして進捗を確認",
+    "Moving": "進行中",
+    "Swarm stalled — no agents working": "スウォームが停止しています — 稼働中のエージェントはありません",
+    "Search members": "メンバーを検索",
+    "Coordinator · Working": "コーディネーター · 作業中",
+    "Retired": "退役済み",
+    "Team": "チーム",
+    "Standing by": "待機中",
+    "Your swarm is starting": "スウォームを起動しています",
+    "One goal": "1つの目標",
+    "The coordinator splits it into tasks.": "コーディネーターがタスクに分割します。",
+    "Many workers": "複数のワーカー",
+    "Each takes a task, and they run in parallel.": "それぞれがタスクを担当し、並列で実行されます。",
+    "One board": "1つのボード",
+    "Updates land here. You step in only when asked.": "更新はここに届きます。求められたときだけ対応すれば大丈夫です。",
+    "Waiting for the first update": "最初の更新を待機しています",
+    "All workers": "すべてのワーカー",
+    "Filter by worker": "ワーカーで絞り込む",
+    "Frames": "フレーム",
+    "The coordinator asked. Answer it in its chat.": "コーディネーターから質問があります。チャットで回答してください。",
+    "Resting": "休憩中",
+    "no tasks": "タスクなし",
+    "No one is on this thread yet.": "このスレッドにはまだ誰も参加していません。",
+    "Tasks done": "完了したタスク",
+    "Message just sent": "メッセージを送信したばかりです",
+    "Waiting on": "待機対象",
+    "Fit the whole swarm": "スウォーム全体に合わせる",
+    "Where each worker is, by thread": "スレッド別の各ワーカーの位置",
+    "Give feedback on this item": "この項目にフィードバックを送信",
+    "Looking for this conversation's swarm…": "この会話のスウォームを探しています…",
+    "Looking for this conversation’s swarm…": "この会話のスウォームを探しています…",
+    "Board": "ボード",
+    "Graph": "グラフ",
+    "Want this view different? Tell the coordinator.": "この表示を変更したいですか？コーディネーターに伝えてください。",
+    "Open coordinator chat": "コーディネーターのチャットを開く",
+    "Follow": "フォロー",
+    "Latest": "最新",
+    "Hive": "ハイブ",
+    "Hide inactive": "非アクティブを非表示",
+    "Expand @all": "@all を展開",
+    "@mention, width = count": "@メンション、太さ = 件数",
+    "via @all": "@all 経由",
+    "posted with no mention": "メンションなしで投稿",
+    "@all posts, drawn by Expand @all": "@all の投稿（「@all を展開」で描画）",
+    "No swarm in this conversation": "この会話にスウォームはありません",
+    "Watching for a swarm": "スウォームを待機中",
+    "Right-click image to save, or open in a new tab.": "画像を右クリックして保存するか、新しいタブで開きます。",
+    "Swarm views": "スウォームビュー",
+    "System alerts": "システムアラート",
+    "Search posts": "投稿を検索",
+    "Channels": "チャンネル",
+    "Show posts by one member": "1人のメンバーの投稿を表示",
+    "Filter by poster": "投稿者で絞り込む",
+    "Show posts that call on one member": "1人のメンバーに呼びかける投稿を表示",
+    "Filter by recipient": "宛先で絞り込む",
+    "Show posts in one channel": "1つのチャンネルの投稿を表示",
+    "Filter by channel": "チャンネルで絞り込む",
+    "Keep the newest post in view": "最新の投稿を常に表示",
+    "Show or hide each member's posts": "各メンバーの投稿を表示または非表示",
+    "Replay": "リプレイ",
+    "Jump to start": "先頭に移動",
+    "Previous post (←)": "前の投稿（←）",
+    "Previous post": "前の投稿",
+    "Play / pause replay (space)": "リプレイを再生/一時停止（スペース）",
+    "Next post (→)": "次の投稿（→）",
+    "Next post": "次の投稿",
+    "Scrub through board posts": "ボードの投稿をスクラブ",
+    "Replay position": "リプレイ位置",
+    "Show everything and follow live": "すべて表示してライブで追従",
+    "Graph view": "グラフビュー",
+    "Threads as cells, with each worker where it works": "スレッドをセルとして表示し、各ワーカーをその作業場所に配置",
+    "Who @mentions whom": "誰が誰を @メンション したか",
+    "Hide killed and inactive members from the graph": "終了済みおよび非アクティブなメンバーをグラフから非表示",
+    "Draw @all as an edge to every member": "@all を各メンバーへのエッジとして描画",
+    "Replay pacing": "リプレイのペース",
+    "Replay speed": "リプレイ速度",
+    "Export graph replay as an animated GIF": "グラフリプレイをアニメーション GIF としてエクスポート",
+    "Close preview": "プレビューを閉じる",
+    "Exported swarm graph replay": "エクスポートされたスウォームグラフリプレイ",
+    "Clear filters": "フィルターをクリア"
   },
   "patterns": [
     {
@@ -6056,16 +6207,34 @@
       "sample": "Label for X"
     },
     {
+      "id": "swarmLastSeenDay",
+      "pattern": "^last seen ([\\d,]+)d ago$",
+      "template": "最終確認：{1}日前",
+      "sample": "last seen 3d ago"
+    },
+    {
       "id": "ui134",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)d ago$",
       "template": "{1}日前に最終確認",
       "sample": "last seen Xd ago"
     },
     {
+      "id": "swarmLastSeenHour",
+      "pattern": "^last seen ([\\d,]+)h ago$",
+      "template": "最終確認：{1}時間前",
+      "sample": "last seen 2h ago"
+    },
+    {
       "id": "ui135",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)h ago$",
       "template": "{1}時間前に最終確認",
       "sample": "last seen Xh ago"
+    },
+    {
+      "id": "swarmLastSeenMin",
+      "pattern": "^last seen ([\\d,]+)m ago$",
+      "template": "最終確認：{1}分前",
+      "sample": "last seen 5m ago"
     },
     {
       "id": "ui136",
@@ -7980,6 +8149,310 @@
       "sample": "Message queued. 3 messages in queue. Sends after agent finishes working. Actions available: Send Now, Edit, Delete."
     },
     {
+      "id": "swarmChannelArchived",
+      "pattern": "^#(\\S+) is archived: this addresses nobody$",
+      "template": "#{1} はアーカイブされています：宛先がありません",
+      "sample": "#design is archived: this addresses nobody"
+    },
+    {
+      "id": "swarmChannelEveryone",
+      "pattern": "^Everyone in #(\\S+)$",
+      "template": "#{1} の全員",
+      "sample": "Everyone in #design"
+    },
+    {
+      "id": "swarmRunsElsewhere",
+      "pattern": "^(.+) runs on another machine; open it there\\.$",
+      "template": "{1} は別のマシンで実行されています。そちらで開いてください。",
+      "sample": "worker-1 runs on another machine; open it there."
+    },
+    {
+      "id": "swarmRunsOnOpen",
+      "pattern": "^(.+) runs on (.+); open it there\\.$",
+      "template": "{1} は {2} で実行されています。そちらで開いてください。",
+      "sample": "worker-1 runs on devbox; open it there."
+    },
+    {
+      "id": "swarmEdgeVia",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct, ([\\d,]+) via @all$",
+      "template": "{1} → {2}：直接 {3}件、@all 経由 {4}件",
+      "sample": "lead → worker-1: 3 direct, 2 via @all"
+    },
+    {
+      "id": "swarmEdge",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct$",
+      "template": "{1} → {2}：直接 {3}件",
+      "sample": "lead → worker-1: 3 direct"
+    },
+    {
+      "id": "swarmNotOnRoster",
+      "pattern": "^(.+) \\(not on the roster\\)$",
+      "template": "{1}（メンバー一覧に未登録）",
+      "sample": "worker-9 (not on the roster)"
+    },
+    {
+      "id": "swarmGraphReplayAlt",
+      "pattern": "^(.+) graph replay$",
+      "template": "{1} のグラフ再生",
+      "sample": "Fix the build graph replay"
+    },
+    {
+      "id": "swarmExported",
+      "pattern": "^Exported (.+) \\(([\\d,]+) frames? · (.+)\\)$",
+      "template": "{1} をエクスポートしました（{2} フレーム · {3}）",
+      "sample": "Exported swarm.gif (12 frames · 1.2 MB)"
+    },
+    {
+      "id": "swarmGifReady",
+      "pattern": "^GIF ready \\(([\\d,]+) frames? · (.+)\\) — right-click image to save\\.$",
+      "template": "GIF の準備ができました（{1} フレーム · {2}）— 画像を右クリックして保存してください。",
+      "sample": "GIF ready (12 frames · 1.2 MB) — right-click image to save."
+    },
+    {
+      "id": "swarmExportingPct",
+      "pattern": "^Exporting (\\d+)%$",
+      "template": "エクスポート中 {1}%",
+      "sample": "Exporting 40%"
+    },
+    {
+      "id": "swarmDurAgo",
+      "pattern": "^(\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "{1}前",
+      "sample": "3m 05s ago"
+    },
+    {
+      "id": "swarmNarratorFailed",
+      "pattern": "^The narrator's last step failed: (.+)$",
+      "template": "ナレーターの最後のステップに失敗しました：{1}",
+      "sample": "The narrator's last step failed: quota exceeded"
+    },
+    {
+      "id": "swarmPostsSinceView",
+      "pattern": "^([\\d,]+) posts? since the view was updated$",
+      "template": "ビュー更新以降に {1} 件の投稿",
+      "sample": "3 posts since the view was updated"
+    },
+    {
+      "id": "swarmNarratorReadUpTo",
+      "pattern": "^Narrator read up to #([\\d,]+) of ([\\d,]+)$",
+      "template": "ナレーターは {2} 件中 #{1} まで読み込み済み",
+      "sample": "Narrator read up to #12 of 15"
+    },
+    {
+      "id": "swarmReadUpdated",
+      "pattern": "^read #([\\d,]+) · updated (\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "#{1} まで既読 · {2}前に更新",
+      "sample": "read #12 · updated 3m 05s ago"
+    },
+    {
+      "id": "swarmRead",
+      "pattern": "^read #([\\d,]+)$",
+      "template": "#{1} まで既読",
+      "sample": "read #12"
+    },
+    {
+      "id": "swarmLastChange",
+      "pattern": "^Last change: “(.+)”$",
+      "template": "最後の変更：「{1}」",
+      "sample": "Last change: “bigger cards”"
+    },
+    {
+      "id": "swarmOverviewReason",
+      "pattern": "^overview · from the narrator's notes · (.+)$",
+      "template": "概要 · ナレーターのメモより · {1}",
+      "sample": "overview · from the narrator's notes · no view.html yet",
+      "replace": {
+        "1": "s_swarmViewReason"
+      }
+    },
+    {
+      "id": "swarmOpenNeedsApp",
+      "pattern": "^Opening (.+)'s conversation needs the app\\.$",
+      "template": "{1} の会話を開くにはアプリが必要です。",
+      "sample": "Opening worker-1's conversation needs the app."
+    },
+    {
+      "id": "swarmCopiedRemoteIts",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on its machine\\.$",
+      "template": "「{1}」がコピーされました。そのマシン上のコーディネーターに貼り付けてください。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on its machine."
+    },
+    {
+      "id": "swarmCopiedRemote",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on (.+)\\.$",
+      "template": "「{1}」がコピーされました。{2} 上のコーディネーターに貼り付けてください。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on devbox."
+    },
+    {
+      "id": "swarmTellRemoteIts",
+      "pattern": "^Tell it “(.+) …” to the coordinator on its machine\\.$",
+      "template": "そのマシン上のコーディネーターに「{1} …」と伝えてください。",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on its machine."
+    },
+    {
+      "id": "swarmTellRemote",
+      "pattern": "^Tell it “(.+) …” to the coordinator on (.+)\\.$",
+      "template": "{2} 上のコーディネーターに「{1} …」と伝えてください。",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on devbox."
+    },
+    {
+      "id": "swarmCopiedLocal",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator and say what you want changed\\.$",
+      "template": "「{1}」がコピーされました。コーディネーターに貼り付けて、変更したい内容を伝えてください。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator and say what you want changed."
+    },
+    {
+      "id": "swarmTellLocal",
+      "pattern": "^Tell the coordinator: “(.+) …”$",
+      "template": "コーディネーターに伝えてください：「{1} …」",
+      "sample": "Tell the coordinator: “user feedback on card t1: …”"
+    },
+    {
+      "id": "swarmMoreItems",
+      "pattern": "^\\+([\\d,]+) more$",
+      "template": "+{1} 件",
+      "sample": "+3 more"
+    },
+    {
+      "id": "swarmWaitingCount",
+      "pattern": "^([\\d,]+) waiting on @(\\S+)$",
+      "template": "{1} 件が @{2} を待機中",
+      "sample": "2 waiting on @coordinator"
+    },
+    {
+      "id": "swarmWaitingOn",
+      "pattern": "^Waiting on (@?\\S+)$",
+      "template": "{1} を待機中",
+      "sample": "Waiting on @coordinator"
+    },
+    {
+      "id": "swarmStuckCount",
+      "pattern": "^([\\d,]+) stuck$",
+      "template": "{1} 件が停滞中",
+      "sample": "1 stuck"
+    },
+    {
+      "id": "swarmNeedsYouCount",
+      "pattern": "^([\\d,]+) needs? you$",
+      "template": "{1} 件があなたの対応待ち",
+      "sample": "2 need you"
+    },
+    {
+      "id": "swarmInReviewCount",
+      "pattern": "^([\\d,]+) in review$",
+      "template": "{1} 件が確認中",
+      "sample": "3 in review"
+    },
+    {
+      "id": "swarmThreadsOpen",
+      "pattern": "^([\\d,]+) threads? open$",
+      "template": "{1} 件のスレッドが開いています",
+      "sample": "2 threads open"
+    },
+    {
+      "id": "s131",
+      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
+      "template": "{1}/{2}",
+      "sample": "3 of 3",
+      "scope": "sentence"
+    },
+    {
+      "id": "swarmOfCount",
+      "pattern": "^([\\d,]+) of ([\\d,]+)$",
+      "template": "{2} 中 {1}",
+      "sample": "3 of 5"
+    },
+    {
+      "id": "swarmUpNext",
+      "pattern": "^Up next · ([\\d,]+)$",
+      "template": "次の予定 · {1}",
+      "sample": "Up next · 4"
+    },
+    {
+      "id": "swarmSourceMachines",
+      "pattern": "^(.+) · ([\\d,]+) machines?$",
+      "template": "{1} · {2} 台のマシン",
+      "sample": "Team board · 2 machines"
+    },
+    {
+      "id": "swarmSourceReconnecting",
+      "pattern": "^(.+) · reconnecting$",
+      "template": "{1} · 再接続中",
+      "sample": "Team board · reconnecting"
+    },
+    {
+      "id": "swarmSourceConnecting",
+      "pattern": "^(.+) · connecting$",
+      "template": "{1} · 接続中",
+      "sample": "Team board · connecting"
+    },
+    {
+      "id": "swarmSourceUnavailable",
+      "pattern": "^(.+) · unavailable$",
+      "template": "{1} · 利用不可",
+      "sample": "Team board · unavailable"
+    },
+    {
+      "id": "swarmGoToPost",
+      "pattern": "^Go to #([\\d,]+) on the Board$",
+      "template": "ボードの #{1} へ移動",
+      "sample": "Go to #12 on the Board"
+    },
+    {
+      "id": "swarmRunsOn",
+      "pattern": "^Runs on (.+)$",
+      "template": "{1} で実行",
+      "sample": "Runs on devbox"
+    },
+    {
+      "id": "swarmPostFromText",
+      "pattern": "^#([\\d,]+) from @(\\S+): (.+)$",
+      "template": "@{2} からの #{1}：{3}",
+      "sample": "#12 from @lead: please review"
+    },
+    {
+      "id": "swarmPostFrom",
+      "pattern": "^#([\\d,]+) from @(\\S+)$",
+      "template": "@{2} からの #{1}",
+      "sample": "#12 from @lead"
+    },
+    {
+      "id": "swarmCoordinatorDone",
+      "pattern": "^Coordinator · ([\\d,]+) of ([\\d,]+) done$",
+      "template": "コーディネーター · {2} 件中 {1} 件完了",
+      "sample": "Coordinator · 3 of 5 done"
+    },
+    {
+      "id": "swarmOfDone",
+      "pattern": "^([\\d,]+) of ([\\d,]+) done$",
+      "template": "{2} 件中 {1} 件完了",
+      "sample": "3 of 5 done"
+    },
+    {
+      "id": "swarmSlashDone",
+      "pattern": "^([\\d,]+)/([\\d,]+) done$",
+      "template": "{1}/{2} 完了",
+      "sample": "3/5 done"
+    },
+    {
+      "id": "swarmWorkingFor",
+      "pattern": "^Working for @(\\S+)$",
+      "template": "@{1} のために作業中",
+      "sample": "Working for @lead"
+    },
+    {
+      "id": "swarmBees",
+      "pattern": "^([\\d,]+) bees?$",
+      "template": "{1} 匹のハチ",
+      "sample": "3 bees"
+    },
+    {
+      "id": "swarmOpenMember",
+      "pattern": "^Open @(\\S+)$",
+      "template": "@{1} を開く",
+      "sample": "Open @worker-1"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "クリア{1}",
@@ -8309,13 +8782,6 @@
       "scope": "sentence"
     },
     {
-      "id": "s131",
-      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
-      "template": "{1}/{2}",
-      "sample": "3 of 3",
-      "scope": "sentence"
-    },
-    {
       "id": "s139",
       "pattern": "^Triggered ([^a-z\\s].*?|\\S+?)$",
       "template": "トリガー：{1}",
@@ -8413,6 +8879,11 @@
     "s_emptyMessagePlural": {
       "scheduled tasks": "スケジュール済みタスク",
       "automations": "自動化"
+    },
+    "s_swarmViewReason": {
+      "view.html is over 64 KB": "view.html が 64 KB を超えています",
+      "no view.html yet": "view.html がまだありません",
+      "loading the narrator view": "ナレータービューを読み込み中"
     }
   },
   "valueRules": {

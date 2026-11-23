@@ -4303,7 +4303,158 @@
     "Minimized": "Minimizado",
     "Starting preview…": "Iniciando vista previa…",
     "Pan": "Desplazar",
-    "Grid": "Cuadrícula"
+    "Grid": "Cuadrícula",
+    "Active": "Activo",
+    "Active: mid-turn (thinking, running a tool, or waiting on the model)": "Activo: en medio de un turno (pensando, ejecutando una herramienta o esperando al modelo)",
+    "Waiting: turn ended, asleep on the board until a post wakes it": "En espera: turno finalizado, inactivo en el tablero hasta que una publicación lo active",
+    "Killed: removed from the swarm": "Terminado: eliminado del enjambre",
+    "Swarms started in this conversation appear here automatically, with their board, members and @mention graph. Start one with <>.": "Los enjambres iniciados en esta conversación aparecen aquí automáticamente, con su tablero, miembros y gráfico de @menciones. Inicia uno con <>.",
+    "Open this pane from a conversation to see its swarm. Swarms started there appear here automatically; start one with <>.": "Abre este panel desde una conversación para ver su enjambre. Los enjambres iniciados allí aparecen aquí automáticamente; inicia uno con <>.",
+    "Reconnecting": "Reconectando",
+    "Updates automatically": "Se actualiza automáticamente",
+    "Click to hide from the board": "Haz clic para ocultar del tablero",
+    "Posts in every channel": "Publicaciones en todos los canales",
+    "main: the whole swarm reads it": "main: todo el enjambre lo lee",
+    "All channels": "Todos los canales",
+    "all channels": "todos los canales",
+    "Filters (active)": "Filtros (activos)",
+    "Not on the roster": "No está en la lista de miembros",
+    "not on roster": "fuera de la lista",
+    "No posts match": "No hay publicaciones que coincidan",
+    "Try a different search or member filter.": "Prueba con otra búsqueda o filtro de miembros.",
+    "No posts yet": "Aún no hay publicaciones",
+    "Posts to the swarm board will appear here as members talk.": "Las publicaciones en el tablero del enjambre aparecerán aquí a medida que los miembros conversen.",
+    "Click to open conversation": "Haz clic para abrir la conversación",
+    "Pause replay": "Pausar reproducción",
+    "Play replay": "Reproducir",
+    "Exporting…": "Exportando…",
+    "Nothing to export yet.": "Aún no hay nada para exportar.",
+    "Could not download GIF from embedded pane.": "No se pudo descargar el GIF desde el panel integrado.",
+    "Could not export GIF.": "No se pudo exportar el GIF.",
+    "Export GIF": "Exportar GIF",
+    "The narrator (<>) was stopped. Ask the coordinator to add a new one (<>).": "El narrador (<>) se detuvo. Pide al coordinador que agregue uno nuevo (<>).",
+    "The narrator's view.json is over 64 KB, so it isn't shown.": "El archivo view.json del narrador supera los 64 KB, por lo que no se muestra.",
+    "The narrator's view.json isn't valid JSON yet.": "El archivo view.json del narrador aún no es un JSON válido.",
+    "The narrator hasn't published an overview yet.": "El narrador aún no ha publicado un resumen.",
+    "The narrator is updating the overview": "El narrador está actualizando el resumen",
+    "The narrator is waiting for new board posts": "El narrador está esperando nuevas publicaciones en el tablero",
+    "The narrator was killed; the overview no longer updates": "El narrador fue terminado; el resumen ya no se actualiza",
+    "updating": "actualizando",
+    "watching": "observando",
+    "stopped": "detenido",
+    "paused: quota": "en pausa: cuota",
+    "paused: error": "en pausa: error",
+    "stale": "desactualizado",
+    "Retry narrator's page": "Reintentar página del narrador",
+    "Narrator's page": "Página del narrador",
+    "Narrator’s page": "Página del narrador",
+    "narrator's page · AI-generated": "página del narrador · generada por IA",
+    "overview · from the narrator's notes": "resumen · de las notas del narrador",
+    "overview · from the narrator’s notes": "resumen · de las notas del narrador",
+    "That link isn't allowed here.": "Ese enlace no está permitido aquí.",
+    "Opening files needs the app.": "Para abrir archivos se necesita la aplicación.",
+    "Narrator view (AI-generated)": "Vista del narrador (generada por IA)",
+    "Click a link in the view to open it.": "Haz clic en un enlace de la vista para abrirlo.",
+    "Copy failed": "Error al copiar",
+    "The team": "El equipo",
+    "Planned next": "Planificado a continuación",
+    "Threads": "Hilos",
+    "Progress": "Progreso",
+    "Compare with now": "Comparar con ahora",
+    "Open full timeline": "Abrir línea de tiempo completa",
+    "Nothing blocked": "Nada bloqueado",
+    "Needs you": "Te necesita",
+    "Stuck": "Atascado",
+    "Nothing waiting": "Nada en espera",
+    "Nothing stuck": "Nada atascado",
+    "Nothing needs you": "Nada te necesita",
+    "Nothing running": "Nada en ejecución",
+    "Nothing planned": "Nada planificado",
+    "Latest action": "Última acción",
+    "No tasks completed yet.": "Aún no hay tareas completadas.",
+    "<> tasks done": "<> tareas completadas",
+    "Hide compare": "Ocultar comparación",
+    "Compare then and now": "Comparar entonces y ahora",
+    "Scrub through progress": "Recorrer el progreso",
+    "Moving": "En marcha",
+    "Swarm stalled — no agents working": "Enjambre detenido — no hay agentes trabajando",
+    "Search members": "Buscar miembros",
+    "Coordinator · Working": "Coordinador · Trabajando",
+    "Retired": "Retirado",
+    "Team": "Equipo",
+    "Standing by": "En espera",
+    "Your swarm is starting": "Tu enjambre se está iniciando",
+    "One goal": "Un objetivo",
+    "The coordinator splits it into tasks.": "El coordinador lo divide en tareas.",
+    "Many workers": "Varios trabajadores",
+    "Each takes a task, and they run in parallel.": "Cada uno toma una tarea y se ejecutan en paralelo.",
+    "One board": "Un tablero",
+    "Updates land here. You step in only when asked.": "Las actualizaciones llegan aquí. Solo intervienes cuando te lo piden.",
+    "Waiting for the first update": "Esperando la primera actualización",
+    "All workers": "Todos los trabajadores",
+    "Filter by worker": "Filtrar por trabajador",
+    "Frames": "Fotogramas",
+    "The coordinator asked. Answer it in its chat.": "El coordinador hizo una pregunta. Respóndele en su chat.",
+    "Resting": "En reposo",
+    "no tasks": "sin tareas",
+    "No one is on this thread yet.": "Aún no hay nadie en este hilo.",
+    "Tasks done": "Tareas completadas",
+    "Message just sent": "Mensaje recién enviado",
+    "Waiting on": "Esperando a",
+    "Fit the whole swarm": "Ajustar todo el enjambre",
+    "Where each worker is, by thread": "Dónde está cada trabajador, por hilo",
+    "Give feedback on this item": "Enviar comentarios sobre este elemento",
+    "Looking for this conversation's swarm…": "Buscando el enjambre de esta conversación…",
+    "Looking for this conversation’s swarm…": "Buscando el enjambre de esta conversación…",
+    "Board": "Tablero",
+    "Graph": "Grafo",
+    "Want this view different? Tell the coordinator.": "¿Quieres cambiar esta vista? Díselo al coordinador.",
+    "Open coordinator chat": "Abrir chat del coordinador",
+    "Follow": "Seguir",
+    "Latest": "Más reciente",
+    "Hive": "Colmena",
+    "Hide inactive": "Ocultar inactivos",
+    "Expand @all": "Expandir @all",
+    "@mention, width = count": "@mención, grosor = cantidad",
+    "via @all": "mediante @all",
+    "posted with no mention": "publicado sin mención",
+    "@all posts, drawn by Expand @all": "publicaciones de @all, mostradas con Expandir @all",
+    "No swarm in this conversation": "No hay ningún enjambre en esta conversación",
+    "Watching for a swarm": "Esperando un enjambre",
+    "Right-click image to save, or open in a new tab.": "Haz clic derecho en la imagen para guardarla o ábrela en una pestaña nueva.",
+    "Swarm views": "Vistas del enjambre",
+    "System alerts": "Alertas del sistema",
+    "Search posts": "Buscar publicaciones",
+    "Channels": "Canales",
+    "Show posts by one member": "Mostrar publicaciones de un miembro",
+    "Filter by poster": "Filtrar por autor",
+    "Show posts that call on one member": "Mostrar publicaciones dirigidas a un miembro",
+    "Filter by recipient": "Filtrar por destinatario",
+    "Show posts in one channel": "Mostrar publicaciones de un canal",
+    "Filter by channel": "Filtrar por canal",
+    "Keep the newest post in view": "Mantener visible la publicación más reciente",
+    "Show or hide each member's posts": "Mostrar u ocultar las publicaciones de cada miembro",
+    "Replay": "Repetición",
+    "Jump to start": "Ir al principio",
+    "Previous post (←)": "Publicación anterior (←)",
+    "Previous post": "Publicación anterior",
+    "Play / pause replay (space)": "Reproducir / pausar repetición (Espacio)",
+    "Next post (→)": "Publicación siguiente (→)",
+    "Next post": "Publicación siguiente",
+    "Scrub through board posts": "Recorrer las publicaciones del tablero",
+    "Replay position": "Posición de repetición",
+    "Show everything and follow live": "Mostrar todo y seguir en vivo",
+    "Graph view": "Vista de grafo",
+    "Threads as cells, with each worker where it works": "Hilos como celdas, con cada worker donde trabaja",
+    "Who @mentions whom": "Quién @menciona a quién",
+    "Hide killed and inactive members from the graph": "Ocultar miembros terminados e inactivos del grafo",
+    "Draw @all as an edge to every member": "Dibujar @all como una arista hacia cada miembro",
+    "Replay pacing": "Ritmo de repetición",
+    "Replay speed": "Velocidad de repetición",
+    "Export graph replay as an animated GIF": "Exportar repetición del grafo como GIF animado",
+    "Close preview": "Cerrar vista previa",
+    "Exported swarm graph replay": "Repetición del grafo del enjambre exportada",
+    "Clear filters": "Borrar filtros"
   },
   "patterns": [
     {
@@ -6091,16 +6242,34 @@
       "sample": "Label for X"
     },
     {
+      "id": "swarmLastSeenDay",
+      "pattern": "^last seen ([\\d,]+)d ago$",
+      "template": "visto por última vez hace {1} d",
+      "sample": "last seen 3d ago"
+    },
+    {
       "id": "ui134",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)d ago$",
       "template": "visto por última vez hace {1} d",
       "sample": "last seen Xd ago"
     },
     {
+      "id": "swarmLastSeenHour",
+      "pattern": "^last seen ([\\d,]+)h ago$",
+      "template": "visto por última vez hace {1} h",
+      "sample": "last seen 2h ago"
+    },
+    {
       "id": "ui135",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)h ago$",
       "template": "visto por última vez hace {1} h",
       "sample": "last seen Xh ago"
+    },
+    {
+      "id": "swarmLastSeenMin",
+      "pattern": "^last seen ([\\d,]+)m ago$",
+      "template": "visto por última vez hace {1} min",
+      "sample": "last seen 5m ago"
     },
     {
       "id": "ui136",
@@ -8072,6 +8241,328 @@
       "sample": "Message queued. 3 messages in queue. Sends after agent finishes working. Actions available: Send Now, Edit, Delete."
     },
     {
+      "id": "swarmChannelArchived",
+      "pattern": "^#(\\S+) is archived: this addresses nobody$",
+      "template": "#{1} está archivado: esto no se dirige a nadie",
+      "sample": "#design is archived: this addresses nobody"
+    },
+    {
+      "id": "swarmChannelEveryone",
+      "pattern": "^Everyone in #(\\S+)$",
+      "template": "Todos en #{1}",
+      "sample": "Everyone in #design"
+    },
+    {
+      "id": "swarmRunsElsewhere",
+      "pattern": "^(.+) runs on another machine; open it there\\.$",
+      "template": "{1} se ejecuta en otra máquina; ábrelo allí.",
+      "sample": "worker-1 runs on another machine; open it there."
+    },
+    {
+      "id": "swarmRunsOnOpen",
+      "pattern": "^(.+) runs on (.+); open it there\\.$",
+      "template": "{1} se ejecuta en {2}; ábrelo allí.",
+      "sample": "worker-1 runs on devbox; open it there."
+    },
+    {
+      "id": "swarmEdgeVia",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct, ([\\d,]+) via @all$",
+      "template": "{1} → {2}: {3} directos, {4} mediante @all",
+      "sample": "lead → worker-1: 3 direct, 2 via @all"
+    },
+    {
+      "id": "swarmEdge",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct$",
+      "template": "{1} → {2}: {3} directos",
+      "sample": "lead → worker-1: 3 direct"
+    },
+    {
+      "id": "swarmNotOnRoster",
+      "pattern": "^(.+) \\(not on the roster\\)$",
+      "template": "{1} (no está en la lista)",
+      "sample": "worker-9 (not on the roster)"
+    },
+    {
+      "id": "swarmGraphReplayAlt",
+      "pattern": "^(.+) graph replay$",
+      "template": "Repetición del gráfico de {1}",
+      "sample": "Fix the build graph replay"
+    },
+    {
+      "id": "swarmExported",
+      "pattern": "^Exported (.+) \\(([\\d,]+) frames? · (.+)\\)$",
+      "template": "Se exportó {1} ({2} fotogramas · {3})",
+      "sample": "Exported swarm.gif (12 frames · 1.2 MB)"
+    },
+    {
+      "id": "swarmGifReady",
+      "pattern": "^GIF ready \\(([\\d,]+) frames? · (.+)\\) — right-click image to save\\.$",
+      "templates": {
+        "one": "GIF listo ({1} fotograma · {2}) — haz clic derecho en la imagen para guardarla.",
+        "other": "GIF listo ({1} fotogramas · {2}) — haz clic derecho en la imagen para guardarla."
+      },
+      "sample": "GIF ready (12 frames · 1.2 MB) — right-click image to save."
+    },
+    {
+      "id": "swarmExportingPct",
+      "pattern": "^Exporting (\\d+)%$",
+      "template": "Exportando {1}%",
+      "sample": "Exporting 40%"
+    },
+    {
+      "id": "swarmDurAgo",
+      "pattern": "^(\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "hace {1}",
+      "sample": "3m 05s ago"
+    },
+    {
+      "id": "swarmNarratorFailed",
+      "pattern": "^The narrator's last step failed: (.+)$",
+      "template": "Falló el último paso del narrador: {1}",
+      "sample": "The narrator's last step failed: quota exceeded"
+    },
+    {
+      "id": "swarmPostsSinceView",
+      "pattern": "^([\\d,]+) posts? since the view was updated$",
+      "templates": {
+        "one": "{1} publicación desde que se actualizó la vista",
+        "other": "{1} publicaciones desde que se actualizó la vista"
+      },
+      "sample": "3 posts since the view was updated"
+    },
+    {
+      "id": "swarmNarratorReadUpTo",
+      "pattern": "^Narrator read up to #([\\d,]+) of ([\\d,]+)$",
+      "template": "El narrador leyó hasta #{1} de {2}",
+      "sample": "Narrator read up to #12 of 15"
+    },
+    {
+      "id": "swarmReadUpdated",
+      "pattern": "^read #([\\d,]+) · updated (\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "leído #{1} · actualizado hace {2}",
+      "sample": "read #12 · updated 3m 05s ago"
+    },
+    {
+      "id": "swarmRead",
+      "pattern": "^read #([\\d,]+)$",
+      "template": "leído #{1}",
+      "sample": "read #12"
+    },
+    {
+      "id": "swarmLastChange",
+      "pattern": "^Last change: “(.+)”$",
+      "template": "Último cambio: “{1}”",
+      "sample": "Last change: “bigger cards”"
+    },
+    {
+      "id": "swarmOverviewReason",
+      "pattern": "^overview · from the narrator's notes · (.+)$",
+      "template": "resumen · de las notas del narrador · {1}",
+      "sample": "overview · from the narrator's notes · no view.html yet",
+      "replace": {
+        "1": "s_swarmViewReason"
+      }
+    },
+    {
+      "id": "swarmOpenNeedsApp",
+      "pattern": "^Opening (.+)'s conversation needs the app\\.$",
+      "template": "Para abrir la conversación de {1} se necesita la aplicación.",
+      "sample": "Opening worker-1's conversation needs the app."
+    },
+    {
+      "id": "swarmCopiedRemoteIts",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on its machine\\.$",
+      "template": "Copiado: “{1}”. Pégalo al coordinador en su máquina.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on its machine."
+    },
+    {
+      "id": "swarmCopiedRemote",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on (.+)\\.$",
+      "template": "Copiado: “{1}”. Pégalo al coordinador en {2}.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on devbox."
+    },
+    {
+      "id": "swarmTellRemoteIts",
+      "pattern": "^Tell it “(.+) …” to the coordinator on its machine\\.$",
+      "template": "Dile “{1} …” al coordinador en su máquina.",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on its machine."
+    },
+    {
+      "id": "swarmTellRemote",
+      "pattern": "^Tell it “(.+) …” to the coordinator on (.+)\\.$",
+      "template": "Dile “{1} …” al coordinador en {2}.",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on devbox."
+    },
+    {
+      "id": "swarmCopiedLocal",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator and say what you want changed\\.$",
+      "template": "Copiado: “{1}”. Pégalo al coordinador y dile qué quieres cambiar.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator and say what you want changed."
+    },
+    {
+      "id": "swarmTellLocal",
+      "pattern": "^Tell the coordinator: “(.+) …”$",
+      "template": "Dile al coordinador: “{1} …”",
+      "sample": "Tell the coordinator: “user feedback on card t1: …”"
+    },
+    {
+      "id": "swarmMoreItems",
+      "pattern": "^\\+([\\d,]+) more$",
+      "template": "+{1} más",
+      "sample": "+3 more"
+    },
+    {
+      "id": "swarmWaitingCount",
+      "pattern": "^([\\d,]+) waiting on @(\\S+)$",
+      "template": "{1} esperando a @{2}",
+      "sample": "2 waiting on @coordinator"
+    },
+    {
+      "id": "swarmWaitingOn",
+      "pattern": "^Waiting on (@?\\S+)$",
+      "template": "Esperando a {1}",
+      "sample": "Waiting on @coordinator"
+    },
+    {
+      "id": "swarmStuckCount",
+      "pattern": "^([\\d,]+) stuck$",
+      "templates": {
+        "one": "{1} bloqueado",
+        "other": "{1} bloqueados"
+      },
+      "sample": "1 stuck"
+    },
+    {
+      "id": "swarmNeedsYouCount",
+      "pattern": "^([\\d,]+) needs? you$",
+      "templates": {
+        "one": "{1} te necesita",
+        "other": "{1} te necesitan"
+      },
+      "sample": "2 need you"
+    },
+    {
+      "id": "swarmInReviewCount",
+      "pattern": "^([\\d,]+) in review$",
+      "template": "{1} en revisión",
+      "sample": "3 in review"
+    },
+    {
+      "id": "swarmThreadsOpen",
+      "pattern": "^([\\d,]+) threads? open$",
+      "templates": {
+        "one": "{1} hilo abierto",
+        "other": "{1} hilos abiertos"
+      },
+      "sample": "2 threads open"
+    },
+    {
+      "id": "s131",
+      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
+      "template": "{1} de {2}",
+      "sample": "3 of 3",
+      "scope": "sentence"
+    },
+    {
+      "id": "swarmOfCount",
+      "pattern": "^([\\d,]+) of ([\\d,]+)$",
+      "template": "{1} de {2}",
+      "sample": "3 of 5"
+    },
+    {
+      "id": "swarmUpNext",
+      "pattern": "^Up next · ([\\d,]+)$",
+      "template": "A continuación · {1}",
+      "sample": "Up next · 4"
+    },
+    {
+      "id": "swarmSourceMachines",
+      "pattern": "^(.+) · ([\\d,]+) machines?$",
+      "template": "{1} · {2} máquinas",
+      "sample": "Team board · 2 machines"
+    },
+    {
+      "id": "swarmSourceReconnecting",
+      "pattern": "^(.+) · reconnecting$",
+      "template": "{1} · reconectando",
+      "sample": "Team board · reconnecting"
+    },
+    {
+      "id": "swarmSourceConnecting",
+      "pattern": "^(.+) · connecting$",
+      "template": "{1} · conectando",
+      "sample": "Team board · connecting"
+    },
+    {
+      "id": "swarmSourceUnavailable",
+      "pattern": "^(.+) · unavailable$",
+      "template": "{1} · no disponible",
+      "sample": "Team board · unavailable"
+    },
+    {
+      "id": "swarmGoToPost",
+      "pattern": "^Go to #([\\d,]+) on the Board$",
+      "template": "Ir a #{1} en el tablero",
+      "sample": "Go to #12 on the Board"
+    },
+    {
+      "id": "swarmRunsOn",
+      "pattern": "^Runs on (.+)$",
+      "template": "Se ejecuta en {1}",
+      "sample": "Runs on devbox"
+    },
+    {
+      "id": "swarmPostFromText",
+      "pattern": "^#([\\d,]+) from @(\\S+): (.+)$",
+      "template": "#{1} de @{2}: {3}",
+      "sample": "#12 from @lead: please review"
+    },
+    {
+      "id": "swarmPostFrom",
+      "pattern": "^#([\\d,]+) from @(\\S+)$",
+      "template": "#{1} de @{2}",
+      "sample": "#12 from @lead"
+    },
+    {
+      "id": "swarmCoordinatorDone",
+      "pattern": "^Coordinator · ([\\d,]+) of ([\\d,]+) done$",
+      "template": "Coordinador · {1} de {2} completados",
+      "sample": "Coordinator · 3 of 5 done"
+    },
+    {
+      "id": "swarmOfDone",
+      "pattern": "^([\\d,]+) of ([\\d,]+) done$",
+      "template": "{1} de {2} completados",
+      "sample": "3 of 5 done"
+    },
+    {
+      "id": "swarmSlashDone",
+      "pattern": "^([\\d,]+)/([\\d,]+) done$",
+      "template": "{1}/{2} completados",
+      "sample": "3/5 done"
+    },
+    {
+      "id": "swarmWorkingFor",
+      "pattern": "^Working for @(\\S+)$",
+      "template": "Trabajando para @{1}",
+      "sample": "Working for @lead"
+    },
+    {
+      "id": "swarmBees",
+      "pattern": "^([\\d,]+) bees?$",
+      "templates": {
+        "one": "{1} abeja",
+        "other": "{1} abejas"
+      },
+      "sample": "3 bees"
+    },
+    {
+      "id": "swarmOpenMember",
+      "pattern": "^Open @(\\S+)$",
+      "template": "Abrir @{1}",
+      "sample": "Open @worker-1"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "Borrar{1}",
@@ -8434,13 +8925,6 @@
       "scope": "sentence"
     },
     {
-      "id": "s131",
-      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
-      "template": "{1} de {2}",
-      "sample": "3 of 3",
-      "scope": "sentence"
-    },
-    {
       "id": "s139",
       "pattern": "^Triggered ([^a-z\\s].*?|\\S+?)$",
       "template": "Activado {1}",
@@ -8538,6 +9022,11 @@
     "s_emptyMessagePlural": {
       "scheduled tasks": "tareas programadas",
       "automations": "automatizaciones"
+    },
+    "s_swarmViewReason": {
+      "view.html is over 64 KB": "view.html supera los 64 KB",
+      "no view.html yet": "aún no hay view.html",
+      "loading the narrator view": "cargando la vista del narrador"
     }
   },
   "valueRules": {

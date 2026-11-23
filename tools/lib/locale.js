@@ -19,6 +19,7 @@ const DEFAULT_ENGINE = path.join(repoRoot, 'assets', 'patches', 'engine.jsfrag')
 const PLACEHOLDER = 'LOCALE_DATA_PLACEHOLDER';
 const DEFAULT_DIALOG = path.join(repoRoot, 'assets', 'patches', 'dialog.jsfrag');
 const DIALOG_PLACEHOLDER = 'DIALOG_DATA_PLACEHOLDER';
+const SIDECAR_PLACEHOLDER = 'SIDECAR_ENGINE_PLACEHOLDER';
 
 // Mirrors the field list of buildPreloadFragment in internal/core/locale.go.
 // Native maps (menu, dialogs) and report-only metadata (allowSourceEqual) are
@@ -74,7 +75,17 @@ function buildDialogFragment(locale, templatePath = DEFAULT_DIALOG) {
   const at = template.indexOf(DIALOG_PLACEHOLDER);
   if (at < 0) throw new Error(`${templatePath} has no ${DIALOG_PLACEHOLDER}`);
   const native = { ...(locale.menu || {}), ...(locale.dialogs || {}) };
-  return template.slice(0, at) + JSON.stringify(native) + template.slice(at + DIALOG_PLACEHOLDER.length);
+  const out = template.slice(0, at) + JSON.stringify(native) + template.slice(at + DIALOG_PLACEHOLDER.length);
+  const engineAt = out.indexOf(SIDECAR_PLACEHOLDER);
+  if (engineAt < 0) throw new Error(`${templatePath} has no ${SIDECAR_PLACEHOLDER}`);
+  const engine = JSON.stringify(sidecarEngine(buildPreloadFragment(locale)));
+  return out.slice(0, engineAt) + engine + out.slice(engineAt + SIDECAR_PLACEHOLDER.length);
+}
+
+// Mirrors sidecarEngine in internal/core/locale.go: the renderer engine
+// embedded in main.js, without the block sentinels.
+function sidecarEngine(engine) {
+  return engine.split(/\/\* (?:antigravity-i18n|polygravity|antigravity-zh):(?:begin|end) \*\//).join('').trim();
 }
 
 module.exports = {

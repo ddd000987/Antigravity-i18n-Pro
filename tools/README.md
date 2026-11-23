@@ -56,7 +56,7 @@ Most of a translator's cost is fixed start-up context, so the way it is briefed 
 | --- | --- |
 | Antigravity install | `%LOCALAPPDATA%\Programs\antigravity` (the patched archive is `resources\app.asar`) |
 | React UI bundle | Served by `resources\bin\language_server.exe` and cached by Chromium in `%APPDATA%\antigravity\Cache\Cache_Data`. The `f_*` files that start with a gzip header contain it; the largest decompressed one (about 12 MB) is `main.js`. `cache-js.js` extracts them all; `ungz.js` extracts the gzip members of a single file. |
-| Other UI code | The Swarm board is plain JavaScript in small uncompressed cache files (`f_*` that start with `/*`); `ui-notes.js` accepts them as extra bundles. Font files (`wOF2`) can be ignored. |
+| Other UI code | The Swarm side panel is a sidecar page (plain JavaScript that builds HTML strings) whose sources are on disk in `~/.gemini/antigravity/builtin/plugins/swarm/sidecars/swarm_board` (`index.html`, `app.js`, `hive.js`); the cache also holds copies (`f_*` files that start with `/*`). `ui-notes.js` accepts them as extra bundles. The app shows it in a `plugin://` frame, where the main-process fragment runs the renderer engine, so its strings go into the same zh-TW `text` and `patterns`. Text inside `<select>` is never translated. Font files (`wOF2`) can be ignored. |
 | Marketplace plugin descriptions | `~/.gemini/antigravity/cache/marketplaces/<name>/marketplace.json` |
 
 The cache can hold several versions of the bundle (the file modification time tells which is newest; the new release has strings the old one lacks). Open the app once after updating so the new bundle is cached.

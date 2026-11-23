@@ -4306,7 +4306,158 @@
     "Minimized": "Свёрнуто",
     "Starting preview…": "Запуск предпросмотра…",
     "Pan": "Панорамирование",
-    "Grid": "Сетка"
+    "Grid": "Сетка",
+    "Active": "Активен",
+    "Active: mid-turn (thinking, running a tool, or waiting on the model)": "Активен: в процессе хода (размышляет, выполняет инструмент или ожидает модель)",
+    "Waiting: turn ended, asleep on the board until a post wakes it": "Ожидает: ход завершён, спит на доске, пока новая публикация не разбудит его",
+    "Killed: removed from the swarm": "Завершён: удалён из роя",
+    "Swarms started in this conversation appear here automatically, with their board, members and @mention graph. Start one with <>.": "Рои, запущенные в этом диалоге, автоматически появляются здесь вместе с доской, участниками и графом @упоминаний. Запустите рой с помощью <>.",
+    "Open this pane from a conversation to see its swarm. Swarms started there appear here automatically; start one with <>.": "Откройте эту панель из диалога, чтобы увидеть его рой. Рои, запущенные там, автоматически появляются здесь; запустите рой с помощью <>.",
+    "Reconnecting": "Переподключение",
+    "Updates automatically": "Обновляется автоматически",
+    "Click to hide from the board": "Нажмите, чтобы скрыть с доски",
+    "Posts in every channel": "Публикации во всех каналах",
+    "main: the whole swarm reads it": "main: читает весь рой",
+    "All channels": "Все каналы",
+    "all channels": "все каналы",
+    "Filters (active)": "Фильтры (активны)",
+    "Not on the roster": "Нет в списке участников",
+    "not on roster": "нет в списке",
+    "No posts match": "Нет подходящих публикаций",
+    "Try a different search or member filter.": "Попробуйте другой поисковый запрос или фильтр по участникам.",
+    "No posts yet": "Публикаций пока нет",
+    "Posts to the swarm board will appear here as members talk.": "Публикации на доске роя появятся здесь по мере общения участников.",
+    "Click to open conversation": "Нажмите, чтобы открыть диалог",
+    "Pause replay": "Приостановить воспроизведение",
+    "Play replay": "Воспроизвести запись",
+    "Exporting…": "Экспорт…",
+    "Nothing to export yet.": "Пока нечего экспортировать.",
+    "Could not download GIF from embedded pane.": "Не удалось скачать GIF из встроенной панели.",
+    "Could not export GIF.": "Не удалось экспортировать GIF.",
+    "Export GIF": "Экспортировать GIF",
+    "The narrator (<>) was stopped. Ask the coordinator to add a new one (<>).": "Рассказчик (<>) остановлен. Попросите координатора добавить нового (<>).",
+    "The narrator's view.json is over 64 KB, so it isn't shown.": "Файл view.json рассказчика превышает 64 КБ, поэтому он не отображается.",
+    "The narrator's view.json isn't valid JSON yet.": "Файл view.json рассказчика пока не является допустимым JSON.",
+    "The narrator hasn't published an overview yet.": "Рассказчик ещё не опубликовал обзор.",
+    "The narrator is updating the overview": "Рассказчик обновляет обзор",
+    "The narrator is waiting for new board posts": "Рассказчик ожидает новых публикаций на доске",
+    "The narrator was killed; the overview no longer updates": "Рассказчик завершён; обзор больше не обновляется",
+    "updating": "обновляет",
+    "watching": "наблюдает",
+    "stopped": "остановлен",
+    "paused: quota": "пауза: квота",
+    "paused: error": "пауза: ошибка",
+    "stale": "устарело",
+    "Retry narrator's page": "Повторить для страницы рассказчика",
+    "Narrator's page": "Страница рассказчика",
+    "Narrator’s page": "Страница рассказчика",
+    "narrator's page · AI-generated": "страница рассказчика · создано ИИ",
+    "overview · from the narrator's notes": "обзор · из заметок рассказчика",
+    "overview · from the narrator’s notes": "обзор · из заметок рассказчика",
+    "That link isn't allowed here.": "Эта ссылка здесь не разрешена.",
+    "Opening files needs the app.": "Для открытия файлов требуется приложение.",
+    "Narrator view (AI-generated)": "Представление рассказчика (создано ИИ)",
+    "Click a link in the view to open it.": "Нажмите на ссылку в представлении, чтобы открыть её.",
+    "Copy failed": "Не удалось скопировать",
+    "The team": "Команда",
+    "Planned next": "Запланировано далее",
+    "Threads": "Потоки",
+    "Progress": "Прогресс",
+    "Compare with now": "Сравнить с текущим",
+    "Open full timeline": "Открыть полную шкалу времени",
+    "Nothing blocked": "Нет заблокированных",
+    "Needs you": "Требует вашего внимания",
+    "Stuck": "Застряло",
+    "Nothing waiting": "Нет ожидающих",
+    "Nothing stuck": "Нет застрявших",
+    "Nothing needs you": "Ничто не требует вашего внимания",
+    "Nothing running": "Нет выполняющихся",
+    "Nothing planned": "Нет запланированных",
+    "Latest action": "Последнее действие",
+    "No tasks completed yet.": "Завершённых задач пока нет.",
+    "<> tasks done": "<> задач выполнено",
+    "Hide compare": "Скрыть сравнение",
+    "Compare then and now": "Сравнить тогда и сейчас",
+    "Scrub through progress": "Прокрутить прогресс",
+    "Moving": "В работе",
+    "Swarm stalled — no agents working": "Рой остановлен — ни один агент не работает",
+    "Search members": "Поиск участников",
+    "Coordinator · Working": "Координатор · Работает",
+    "Retired": "Выведен из работы",
+    "Team": "Команда",
+    "Standing by": "В режиме ожидания",
+    "Your swarm is starting": "Ваш рой запускается",
+    "One goal": "Одна цель",
+    "The coordinator splits it into tasks.": "Координатор разбивает её на задачи.",
+    "Many workers": "Много исполнителей",
+    "Each takes a task, and they run in parallel.": "Каждый берёт задачу, и они выполняются параллельно.",
+    "One board": "Одна доска",
+    "Updates land here. You step in only when asked.": "Обновления приходят сюда. Вы подключаетесь только по запросу.",
+    "Waiting for the first update": "Ожидание первого обновления",
+    "All workers": "Все исполнители",
+    "Filter by worker": "Фильтр по исполнителю",
+    "Frames": "Кадры",
+    "The coordinator asked. Answer it in its chat.": "Координатор задал вопрос. Ответьте ему в его чате.",
+    "Resting": "Отдыхает",
+    "no tasks": "нет задач",
+    "No one is on this thread yet.": "В этой ветке пока никого нет.",
+    "Tasks done": "Задачи выполнены",
+    "Message just sent": "Сообщение только что отправлено",
+    "Waiting on": "Ожидает",
+    "Fit the whole swarm": "Вместить весь рой",
+    "Where each worker is, by thread": "Где находится каждый исполнитель, по веткам",
+    "Give feedback on this item": "Оставить отзыв об этом элементе",
+    "Looking for this conversation's swarm…": "Поиск роя для этого диалога…",
+    "Looking for this conversation’s swarm…": "Поиск роя для этого диалога…",
+    "Board": "Доска",
+    "Graph": "Граф",
+    "Want this view different? Tell the coordinator.": "Хотите изменить это представление? Скажите координатору.",
+    "Open coordinator chat": "Открыть чат координатора",
+    "Follow": "Следить",
+    "Latest": "Последнее",
+    "Hive": "Улей",
+    "Hide inactive": "Скрыть неактивных",
+    "Expand @all": "Развернуть @all",
+    "@mention, width = count": "@упоминание, толщина = количество",
+    "via @all": "через @all",
+    "posted with no mention": "опубликовано без упоминания",
+    "@all posts, drawn by Expand @all": "сообщения @all, отображаются при «Развернуть @all»",
+    "No swarm in this conversation": "В этом диалоге нет роя",
+    "Watching for a swarm": "Отслеживание роя",
+    "Right-click image to save, or open in a new tab.": "Нажмите правой кнопкой мыши на изображение, чтобы сохранить его, или откройте в новой вкладке.",
+    "Swarm views": "Представления роя",
+    "System alerts": "Системные оповещения",
+    "Search posts": "Поиск сообщений",
+    "Channels": "Каналы",
+    "Show posts by one member": "Показать сообщения одного участника",
+    "Filter by poster": "Фильтр по автору",
+    "Show posts that call on one member": "Показать сообщения, обращённые к одному участнику",
+    "Filter by recipient": "Фильтр по получателю",
+    "Show posts in one channel": "Показать сообщения в одном канале",
+    "Filter by channel": "Фильтр по каналу",
+    "Keep the newest post in view": "Удерживать последнее сообщение в поле зрения",
+    "Show or hide each member's posts": "Показать или скрыть сообщения каждого участника",
+    "Replay": "Повтор",
+    "Jump to start": "Перейти к началу",
+    "Previous post (←)": "Предыдущее сообщение (←)",
+    "Previous post": "Предыдущее сообщение",
+    "Play / pause replay (space)": "Воспроизвести / приостановить повтор (пробел)",
+    "Next post (→)": "Следующее сообщение (→)",
+    "Next post": "Следующее сообщение",
+    "Scrub through board posts": "Перемотка по сообщениям доски",
+    "Replay position": "Позиция повтора",
+    "Show everything and follow live": "Показать всё и следить в реальном времени",
+    "Graph view": "Просмотр графа",
+    "Threads as cells, with each worker where it works": "Потоки в виде ячеек, с каждым воркером на его рабочем месте",
+    "Who @mentions whom": "Кто кого @упоминает",
+    "Hide killed and inactive members from the graph": "Скрыть завершённых и неактивных участников на графе",
+    "Draw @all as an edge to every member": "Отображать @all как ребро к каждому участнику",
+    "Replay pacing": "Темп повтора",
+    "Replay speed": "Скорость повтора",
+    "Export graph replay as an animated GIF": "Экспортировать повтор графа как анимированный GIF",
+    "Close preview": "Закрыть предпросмотр",
+    "Exported swarm graph replay": "Экспортированный повтор графа роя",
+    "Clear filters": "Сбросить фильтры"
   },
   "patterns": [
     {
@@ -6135,16 +6286,34 @@
       "sample": "Label for X"
     },
     {
+      "id": "swarmLastSeenDay",
+      "pattern": "^last seen ([\\d,]+)d ago$",
+      "template": "последняя активность {1} дн. назад",
+      "sample": "last seen 3d ago"
+    },
+    {
       "id": "ui134",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)d ago$",
       "template": "последняя активность {1} д назад",
       "sample": "last seen Xd ago"
     },
     {
+      "id": "swarmLastSeenHour",
+      "pattern": "^last seen ([\\d,]+)h ago$",
+      "template": "последняя активность {1} ч назад",
+      "sample": "last seen 2h ago"
+    },
+    {
       "id": "ui135",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)h ago$",
       "template": "последняя активность {1} ч назад",
       "sample": "last seen Xh ago"
+    },
+    {
+      "id": "swarmLastSeenMin",
+      "pattern": "^last seen ([\\d,]+)m ago$",
+      "template": "последняя активность {1} мин назад",
+      "sample": "last seen 5m ago"
     },
     {
       "id": "ui136",
@@ -8159,6 +8328,336 @@
       "sample": "Message queued. 3 messages in queue. Sends after agent finishes working. Actions available: Send Now, Edit, Delete."
     },
     {
+      "id": "swarmChannelArchived",
+      "pattern": "^#(\\S+) is archived: this addresses nobody$",
+      "template": "#{1} в архиве: это никому не адресовано",
+      "sample": "#design is archived: this addresses nobody"
+    },
+    {
+      "id": "swarmChannelEveryone",
+      "pattern": "^Everyone in #(\\S+)$",
+      "template": "Все в #{1}",
+      "sample": "Everyone in #design"
+    },
+    {
+      "id": "swarmRunsElsewhere",
+      "pattern": "^(.+) runs on another machine; open it there\\.$",
+      "template": "{1} запущен на другой машине; откройте его там.",
+      "sample": "worker-1 runs on another machine; open it there."
+    },
+    {
+      "id": "swarmRunsOnOpen",
+      "pattern": "^(.+) runs on (.+); open it there\\.$",
+      "template": "{1} запущен на {2}; откройте его там.",
+      "sample": "worker-1 runs on devbox; open it there."
+    },
+    {
+      "id": "swarmEdgeVia",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct, ([\\d,]+) via @all$",
+      "template": "{1} → {2}: {3} напрямую, {4} через @all",
+      "sample": "lead → worker-1: 3 direct, 2 via @all"
+    },
+    {
+      "id": "swarmEdge",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct$",
+      "template": "{1} → {2}: {3} напрямую",
+      "sample": "lead → worker-1: 3 direct"
+    },
+    {
+      "id": "swarmNotOnRoster",
+      "pattern": "^(.+) \\(not on the roster\\)$",
+      "template": "{1} (нет в списке)",
+      "sample": "worker-9 (not on the roster)"
+    },
+    {
+      "id": "swarmGraphReplayAlt",
+      "pattern": "^(.+) graph replay$",
+      "template": "Воспроизведение графа «{1}»",
+      "sample": "Fix the build graph replay"
+    },
+    {
+      "id": "swarmExported",
+      "pattern": "^Exported (.+) \\(([\\d,]+) frames? · (.+)\\)$",
+      "template": "Экспортировано: {1} ({2} кадр. · {3})",
+      "sample": "Exported swarm.gif (12 frames · 1.2 MB)"
+    },
+    {
+      "id": "swarmGifReady",
+      "pattern": "^GIF ready \\(([\\d,]+) frames? · (.+)\\) — right-click image to save\\.$",
+      "templates": {
+        "one": "GIF готов ({1} кадр · {2}) — нажмите правой кнопкой мыши по изображению, чтобы сохранить.",
+        "few": "GIF готов ({1} кадра · {2}) — нажмите правой кнопкой мыши по изображению, чтобы сохранить.",
+        "many": "GIF готов ({1} кадров · {2}) — нажмите правой кнопкой мыши по изображению, чтобы сохранить.",
+        "other": "GIF готов ({1} кадра · {2}) — нажмите правой кнопкой мыши по изображению, чтобы сохранить."
+      },
+      "sample": "GIF ready (12 frames · 1.2 MB) — right-click image to save."
+    },
+    {
+      "id": "swarmExportingPct",
+      "pattern": "^Exporting (\\d+)%$",
+      "template": "Экспорт: {1}%",
+      "sample": "Exporting 40%"
+    },
+    {
+      "id": "swarmDurAgo",
+      "pattern": "^(\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "{1} назад",
+      "sample": "3m 05s ago"
+    },
+    {
+      "id": "swarmNarratorFailed",
+      "pattern": "^The narrator's last step failed: (.+)$",
+      "template": "Последний шаг рассказчика завершился ошибкой: {1}",
+      "sample": "The narrator's last step failed: quota exceeded"
+    },
+    {
+      "id": "swarmPostsSinceView",
+      "pattern": "^([\\d,]+) posts? since the view was updated$",
+      "templates": {
+        "one": "{1} сообщение с момента обновления представления",
+        "few": "{1} сообщения с момента обновления представления",
+        "many": "{1} сообщений с момента обновления представления",
+        "other": "{1} сообщения с момента обновления представления"
+      },
+      "sample": "3 posts since the view was updated"
+    },
+    {
+      "id": "swarmNarratorReadUpTo",
+      "pattern": "^Narrator read up to #([\\d,]+) of ([\\d,]+)$",
+      "template": "Рассказчик прочитал до #{1} из {2}",
+      "sample": "Narrator read up to #12 of 15"
+    },
+    {
+      "id": "swarmReadUpdated",
+      "pattern": "^read #([\\d,]+) · updated (\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "прочитано до #{1} · обновлено {2} назад",
+      "sample": "read #12 · updated 3m 05s ago"
+    },
+    {
+      "id": "swarmRead",
+      "pattern": "^read #([\\d,]+)$",
+      "template": "прочитано до #{1}",
+      "sample": "read #12"
+    },
+    {
+      "id": "swarmLastChange",
+      "pattern": "^Last change: “(.+)”$",
+      "template": "Последнее изменение: «{1}»",
+      "sample": "Last change: “bigger cards”"
+    },
+    {
+      "id": "swarmOverviewReason",
+      "pattern": "^overview · from the narrator's notes · (.+)$",
+      "template": "обзор · из заметок рассказчика · {1}",
+      "sample": "overview · from the narrator's notes · no view.html yet",
+      "replace": {
+        "1": "s_swarmViewReason"
+      }
+    },
+    {
+      "id": "swarmOpenNeedsApp",
+      "pattern": "^Opening (.+)'s conversation needs the app\\.$",
+      "template": "Чтобы открыть диалог {1}, требуется приложение.",
+      "sample": "Opening worker-1's conversation needs the app."
+    },
+    {
+      "id": "swarmCopiedRemoteIts",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on its machine\\.$",
+      "template": "Скопировано: «{1}». Вставьте это координатору на его машине.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on its machine."
+    },
+    {
+      "id": "swarmCopiedRemote",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on (.+)\\.$",
+      "template": "Скопировано: «{1}». Вставьте это координатору на {2}.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on devbox."
+    },
+    {
+      "id": "swarmTellRemoteIts",
+      "pattern": "^Tell it “(.+) …” to the coordinator on its machine\\.$",
+      "template": "Скажите координатору на его машине: «{1} …»",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on its machine."
+    },
+    {
+      "id": "swarmTellRemote",
+      "pattern": "^Tell it “(.+) …” to the coordinator on (.+)\\.$",
+      "template": "Скажите координатору на {2}: «{1} …»",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on devbox."
+    },
+    {
+      "id": "swarmCopiedLocal",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator and say what you want changed\\.$",
+      "template": "Скопировано: «{1}». Вставьте это координатору и напишите, что вы хотите изменить.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator and say what you want changed."
+    },
+    {
+      "id": "swarmTellLocal",
+      "pattern": "^Tell the coordinator: “(.+) …”$",
+      "template": "Скажите координатору: «{1} …»",
+      "sample": "Tell the coordinator: “user feedback on card t1: …”"
+    },
+    {
+      "id": "swarmMoreItems",
+      "pattern": "^\\+([\\d,]+) more$",
+      "template": "ещё {1}",
+      "sample": "+3 more"
+    },
+    {
+      "id": "swarmWaitingCount",
+      "pattern": "^([\\d,]+) waiting on @(\\S+)$",
+      "templates": {
+        "one": "{1} ожидает @{2}",
+        "other": "{1} ожидают @{2}"
+      },
+      "sample": "2 waiting on @coordinator"
+    },
+    {
+      "id": "swarmWaitingOn",
+      "pattern": "^Waiting on (@?\\S+)$",
+      "template": "Ожидает {1}",
+      "sample": "Waiting on @coordinator"
+    },
+    {
+      "id": "swarmStuckCount",
+      "pattern": "^([\\d,]+) stuck$",
+      "template": "Застряло: {1}",
+      "sample": "1 stuck"
+    },
+    {
+      "id": "swarmNeedsYouCount",
+      "pattern": "^([\\d,]+) needs? you$",
+      "templates": {
+        "one": "{1} требует вашего внимания",
+        "other": "{1} требуют вашего внимания"
+      },
+      "sample": "2 need you"
+    },
+    {
+      "id": "swarmInReviewCount",
+      "pattern": "^([\\d,]+) in review$",
+      "template": "{1} на проверке",
+      "sample": "3 in review"
+    },
+    {
+      "id": "swarmThreadsOpen",
+      "pattern": "^([\\d,]+) threads? open$",
+      "templates": {
+        "one": "{1} открытая ветка",
+        "few": "{1} открытые ветки",
+        "many": "{1} открытых веток",
+        "other": "{1} открытой ветки"
+      },
+      "sample": "2 threads open"
+    },
+    {
+      "id": "s131",
+      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
+      "scope": "sentence",
+      "template": "{1} из {2}",
+      "sample": "3 of 3"
+    },
+    {
+      "id": "swarmOfCount",
+      "pattern": "^([\\d,]+) of ([\\d,]+)$",
+      "template": "{1} из {2}",
+      "sample": "3 of 5"
+    },
+    {
+      "id": "swarmUpNext",
+      "pattern": "^Up next · ([\\d,]+)$",
+      "template": "Далее · {1}",
+      "sample": "Up next · 4"
+    },
+    {
+      "id": "swarmSourceMachines",
+      "pattern": "^(.+) · ([\\d,]+) machines?$",
+      "template": "{1} · машин: {2}",
+      "sample": "Team board · 2 machines"
+    },
+    {
+      "id": "swarmSourceReconnecting",
+      "pattern": "^(.+) · reconnecting$",
+      "template": "{1} · повторное подключение",
+      "sample": "Team board · reconnecting"
+    },
+    {
+      "id": "swarmSourceConnecting",
+      "pattern": "^(.+) · connecting$",
+      "template": "{1} · подключение",
+      "sample": "Team board · connecting"
+    },
+    {
+      "id": "swarmSourceUnavailable",
+      "pattern": "^(.+) · unavailable$",
+      "template": "{1} · недоступно",
+      "sample": "Team board · unavailable"
+    },
+    {
+      "id": "swarmGoToPost",
+      "pattern": "^Go to #([\\d,]+) on the Board$",
+      "template": "Перейти к #{1} на доске",
+      "sample": "Go to #12 on the Board"
+    },
+    {
+      "id": "swarmRunsOn",
+      "pattern": "^Runs on (.+)$",
+      "template": "Работает на {1}",
+      "sample": "Runs on devbox"
+    },
+    {
+      "id": "swarmPostFromText",
+      "pattern": "^#([\\d,]+) from @(\\S+): (.+)$",
+      "template": "#{1} от @{2}: {3}",
+      "sample": "#12 from @lead: please review"
+    },
+    {
+      "id": "swarmPostFrom",
+      "pattern": "^#([\\d,]+) from @(\\S+)$",
+      "template": "#{1} от @{2}",
+      "sample": "#12 from @lead"
+    },
+    {
+      "id": "swarmCoordinatorDone",
+      "pattern": "^Coordinator · ([\\d,]+) of ([\\d,]+) done$",
+      "template": "Координатор · выполнено {1} из {2}",
+      "sample": "Coordinator · 3 of 5 done"
+    },
+    {
+      "id": "swarmOfDone",
+      "pattern": "^([\\d,]+) of ([\\d,]+) done$",
+      "template": "выполнено {1} из {2}",
+      "sample": "3 of 5 done"
+    },
+    {
+      "id": "swarmSlashDone",
+      "pattern": "^([\\d,]+)/([\\d,]+) done$",
+      "template": "{1}/{2} выполнено",
+      "sample": "3/5 done"
+    },
+    {
+      "id": "swarmWorkingFor",
+      "pattern": "^Working for @(\\S+)$",
+      "template": "Работает для @{1}",
+      "sample": "Working for @lead"
+    },
+    {
+      "id": "swarmBees",
+      "pattern": "^([\\d,]+) bees?$",
+      "templates": {
+        "one": "{1} пчела",
+        "few": "{1} пчелы",
+        "many": "{1} пчёл",
+        "other": "{1} пчелы"
+      },
+      "sample": "3 bees"
+    },
+    {
+      "id": "swarmOpenMember",
+      "pattern": "^Open @(\\S+)$",
+      "template": "Открыть @{1}",
+      "sample": "Open @worker-1"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "scope": "sentence",
@@ -8543,13 +9042,6 @@
       "sample": "<>3 of 3"
     },
     {
-      "id": "s131",
-      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
-      "scope": "sentence",
-      "template": "{1} из {2}",
-      "sample": "3 of 3"
-    },
-    {
       "id": "s139",
       "pattern": "^Triggered ([^a-z\\s].*?|\\S+?)$",
       "scope": "sentence",
@@ -8675,6 +9167,11 @@
     "ru_emptyMessagePlural": {
       "scheduled tasks": "запланированных задач",
       "automations": "автоматизаций"
+    },
+    "s_swarmViewReason": {
+      "view.html is over 64 KB": "view.html превышает 64 КБ",
+      "no view.html yet": "view.html ещё нет",
+      "loading the narrator view": "загрузка представления рассказчика"
     }
   },
   "valueRules": {

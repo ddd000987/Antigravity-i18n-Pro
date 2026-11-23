@@ -213,6 +213,17 @@ func TestSwitchingLocaleReplacesTheEngine(t *testing.T) {
 	if n := strings.Count(preload, `"language":"ja"`); n != 0 {
 		t.Fatalf("the previous language's engine is still present")
 	}
+	// main.js embeds the engine for sidecar frames as a string literal; the
+	// sentinels must still bound exactly one block, holding the new language.
+	main := string(mustReadFile(t, asarPath, "dist/main.js"))
+	for _, marker := range blockSentinels[0] {
+		if n := strings.Count(main, marker); n != 1 {
+			t.Fatalf("%s appears %d times in main.js after switching locale, want 1", marker, n)
+		}
+	}
+	if strings.Contains(main, `\"language\":\"ja\"`) || !strings.Contains(main, `\"language\":\"`+DefaultLocale+`\"`) {
+		t.Fatalf("main.js does not carry the active language's sidecar engine")
+	}
 
 	if _, err := svc.RestoreOfficial(base); err != nil {
 		t.Fatalf("restore: %v", err)

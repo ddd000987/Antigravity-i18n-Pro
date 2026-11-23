@@ -152,5 +152,50 @@
             });
         });
     }
+
+    // Sidecar UIs (the Swarm board and other agent panels) are pages served
+    // by local helper processes and shown in plugin:// frames, which the
+    // preload engine never reaches: it runs only in the Hub's own frame. The
+    // same engine, with the same locale data, is run in every plugin:// frame
+    // as soon as its document commits, and again when it finishes loading in
+    // case the first attempt came too early. A flag on the frame's window
+    // keeps a second run in the same document from starting a second engine.
+    const SIDECAR_ENGINE = SIDECAR_ENGINE_PLACEHOLDER;
+    const SIDECAR_SCRIPT = '(() => {\n'
+        + "const key = Symbol.for('antigravity-i18n.engine');\n"
+        + 'if (window[key]) return;\n'
+        + 'window[key] = true;\n'
+        + SIDECAR_ENGINE
+        + '\n})();';
+    const webFrameMain = electron_1.webFrameMain;
+    const frameOf = (event, processId, routingId) => {
+        if (typeof processId === 'number' && typeof routingId === 'number'
+            && webFrameMain && typeof webFrameMain.fromId === 'function') {
+            return webFrameMain.fromId(processId, routingId);
+        }
+        return event && event.frame;
+    };
+    const translateSidecar = (frame) => {
+        try {
+            if (!frame || (frame.isDestroyed && frame.isDestroyed())) return;
+            if (new URL(frame.url).protocol !== 'plugin:') return;
+            Promise.resolve(frame.executeJavaScript(SIDECAR_SCRIPT)).catch(() => {
+                // The frame navigated away or closed before the script ran.
+            });
+        } catch {
+            // An unreadable frame is left untranslated.
+        }
+    };
+    if (app && typeof app.on === 'function') {
+        app.on('web-contents-created', (_event, contents) => {
+            if (!contents || typeof contents.on !== 'function') return;
+            contents.on('did-frame-navigate', (event, _url, _code, _status, _isMainFrame, processId, routingId) => {
+                translateSidecar(frameOf(event, processId, routingId));
+            });
+            contents.on('did-frame-finish-load', (event, _isMainFrame, processId, routingId) => {
+                translateSidecar(frameOf(event, processId, routingId));
+            });
+        });
+    }
 })();
 /* antigravity-i18n:end */

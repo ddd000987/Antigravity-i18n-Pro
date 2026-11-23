@@ -1774,16 +1774,34 @@
       "sample": "Label for X"
     },
     {
+      "id": "swarmLastSeenDay",
+      "pattern": "^last seen ([\\d,]+)d ago$",
+      "template": "上次上線：{1} 天前",
+      "sample": "last seen 3d ago"
+    },
+    {
       "id": "ui134",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)d ago$",
       "template": "{1} 天前最後上線",
       "sample": "last seen Xd ago"
     },
     {
+      "id": "swarmLastSeenHour",
+      "pattern": "^last seen ([\\d,]+)h ago$",
+      "template": "上次上線：{1} 小時前",
+      "sample": "last seen 2h ago"
+    },
+    {
       "id": "ui135",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)h ago$",
       "template": "{1} 小時前最後上線",
       "sample": "last seen Xh ago"
+    },
+    {
+      "id": "swarmLastSeenMin",
+      "pattern": "^last seen ([\\d,]+)m ago$",
+      "template": "上次上線：{1} 分鐘前",
+      "sample": "last seen 5m ago"
     },
     {
       "id": "ui136",
@@ -3688,6 +3706,310 @@
       "sample": "Message queued. 3 messages in queue. Sends after agent finishes working. Actions available: Send Now, Edit, Delete."
     },
     {
+      "id": "swarmChannelArchived",
+      "pattern": "^#(\\S+) is archived: this addresses nobody$",
+      "template": "#{1} 已封存：這不會傳給任何人",
+      "sample": "#design is archived: this addresses nobody"
+    },
+    {
+      "id": "swarmChannelEveryone",
+      "pattern": "^Everyone in #(\\S+)$",
+      "template": "#{1} 中的所有人",
+      "sample": "Everyone in #design"
+    },
+    {
+      "id": "swarmRunsElsewhere",
+      "pattern": "^(.+) runs on another machine; open it there\\.$",
+      "template": "{1} 在另一台電腦上執行；請在那裡開啟。",
+      "sample": "worker-1 runs on another machine; open it there."
+    },
+    {
+      "id": "swarmRunsOnOpen",
+      "pattern": "^(.+) runs on (.+); open it there\\.$",
+      "template": "{1} 在 {2} 上執行；請在那裡開啟。",
+      "sample": "worker-1 runs on devbox; open it there."
+    },
+    {
+      "id": "swarmEdgeVia",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct, ([\\d,]+) via @all$",
+      "template": "{1} → {2}：{3} 次直接，{4} 次透過 @all",
+      "sample": "lead → worker-1: 3 direct, 2 via @all"
+    },
+    {
+      "id": "swarmEdge",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct$",
+      "template": "{1} → {2}：{3} 次直接",
+      "sample": "lead → worker-1: 3 direct"
+    },
+    {
+      "id": "swarmNotOnRoster",
+      "pattern": "^(.+) \\(not on the roster\\)$",
+      "template": "{1}（不在名冊上）",
+      "sample": "worker-9 (not on the roster)"
+    },
+    {
+      "id": "swarmGraphReplayAlt",
+      "pattern": "^(.+) graph replay$",
+      "template": "{1} 關係圖重播",
+      "sample": "Fix the build graph replay"
+    },
+    {
+      "id": "swarmExported",
+      "pattern": "^Exported (.+) \\(([\\d,]+) frames? · (.+)\\)$",
+      "template": "已匯出 {1}（{2} 個影格 · {3}）",
+      "sample": "Exported swarm.gif (12 frames · 1.2 MB)"
+    },
+    {
+      "id": "swarmGifReady",
+      "pattern": "^GIF ready \\(([\\d,]+) frames? · (.+)\\) — right-click image to save\\.$",
+      "template": "GIF 已就緒（{1} 個影格 · {2}）— 在圖片上按右鍵即可儲存。",
+      "sample": "GIF ready (12 frames · 1.2 MB) — right-click image to save."
+    },
+    {
+      "id": "swarmExportingPct",
+      "pattern": "^Exporting (\\d+)%$",
+      "template": "正在匯出 {1}%",
+      "sample": "Exporting 40%"
+    },
+    {
+      "id": "swarmDurAgo",
+      "pattern": "^(\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "{1}前",
+      "sample": "3m 05s ago"
+    },
+    {
+      "id": "swarmNarratorFailed",
+      "pattern": "^The narrator's last step failed: (.+)$",
+      "template": "旁白的上一個步驟失敗：{1}",
+      "sample": "The narrator's last step failed: quota exceeded"
+    },
+    {
+      "id": "swarmPostsSinceView",
+      "pattern": "^([\\d,]+) posts? since the view was updated$",
+      "template": "檢視更新後已有 {1} 則貼文",
+      "sample": "3 posts since the view was updated"
+    },
+    {
+      "id": "swarmNarratorReadUpTo",
+      "pattern": "^Narrator read up to #([\\d,]+) of ([\\d,]+)$",
+      "template": "旁白已讀到 #{1}（共 {2} 則）",
+      "sample": "Narrator read up to #12 of 15"
+    },
+    {
+      "id": "swarmReadUpdated",
+      "pattern": "^read #([\\d,]+) · updated (\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "已讀 #{1} · {2}前更新",
+      "sample": "read #12 · updated 3m 05s ago"
+    },
+    {
+      "id": "swarmRead",
+      "pattern": "^read #([\\d,]+)$",
+      "template": "已讀 #{1}",
+      "sample": "read #12"
+    },
+    {
+      "id": "swarmLastChange",
+      "pattern": "^Last change: “(.+)”$",
+      "template": "上次變更：「{1}」",
+      "sample": "Last change: “bigger cards”"
+    },
+    {
+      "id": "swarmOverviewReason",
+      "pattern": "^overview · from the narrator's notes · (.+)$",
+      "template": "總覽 · 取自旁白的筆記 · {1}",
+      "sample": "overview · from the narrator's notes · no view.html yet",
+      "replace": {
+        "1": "s_swarmViewReason"
+      }
+    },
+    {
+      "id": "swarmOpenNeedsApp",
+      "pattern": "^Opening (.+)'s conversation needs the app\\.$",
+      "template": "需要在應用程式中才能開啟 {1} 的對話。",
+      "sample": "Opening worker-1's conversation needs the app."
+    },
+    {
+      "id": "swarmCopiedRemoteIts",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on its machine\\.$",
+      "template": "已複製「{1}」。請貼給其所在電腦上的協調器。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on its machine."
+    },
+    {
+      "id": "swarmCopiedRemote",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on (.+)\\.$",
+      "template": "已複製「{1}」。請貼給 {2} 上的協調器。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on devbox."
+    },
+    {
+      "id": "swarmTellRemoteIts",
+      "pattern": "^Tell it “(.+) …” to the coordinator on its machine\\.$",
+      "template": "請告訴其所在電腦上的協調器：「{1} …」",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on its machine."
+    },
+    {
+      "id": "swarmTellRemote",
+      "pattern": "^Tell it “(.+) …” to the coordinator on (.+)\\.$",
+      "template": "請告訴 {2} 上的協調器：「{1} …」",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on devbox."
+    },
+    {
+      "id": "swarmCopiedLocal",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator and say what you want changed\\.$",
+      "template": "已複製「{1}」。請貼給協調器，並說明您想變更的內容。",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator and say what you want changed."
+    },
+    {
+      "id": "swarmTellLocal",
+      "pattern": "^Tell the coordinator: “(.+) …”$",
+      "template": "請告訴協調器：「{1} …」",
+      "sample": "Tell the coordinator: “user feedback on card t1: …”"
+    },
+    {
+      "id": "swarmMoreItems",
+      "pattern": "^\\+([\\d,]+) more$",
+      "template": "還有 {1} 個",
+      "sample": "+3 more"
+    },
+    {
+      "id": "swarmWaitingCount",
+      "pattern": "^([\\d,]+) waiting on @(\\S+)$",
+      "template": "{1} 個正在等待 @{2}",
+      "sample": "2 waiting on @coordinator"
+    },
+    {
+      "id": "swarmWaitingOn",
+      "pattern": "^Waiting on (@?\\S+)$",
+      "template": "正在等待 {1}",
+      "sample": "Waiting on @coordinator"
+    },
+    {
+      "id": "swarmStuckCount",
+      "pattern": "^([\\d,]+) stuck$",
+      "template": "{1} 個卡住",
+      "sample": "1 stuck"
+    },
+    {
+      "id": "swarmNeedsYouCount",
+      "pattern": "^([\\d,]+) needs? you$",
+      "template": "{1} 個需要您處理",
+      "sample": "2 need you"
+    },
+    {
+      "id": "swarmInReviewCount",
+      "pattern": "^([\\d,]+) in review$",
+      "template": "{1} 個審查中",
+      "sample": "3 in review"
+    },
+    {
+      "id": "swarmThreadsOpen",
+      "pattern": "^([\\d,]+) threads? open$",
+      "template": "{1} 個工作串進行中",
+      "sample": "2 threads open"
+    },
+    {
+      "id": "s131",
+      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
+      "template": "{1} / {2}",
+      "sample": "3 of 3",
+      "scope": "sentence"
+    },
+    {
+      "id": "swarmOfCount",
+      "pattern": "^([\\d,]+) of ([\\d,]+)$",
+      "template": "{1} / {2}",
+      "sample": "3 of 5"
+    },
+    {
+      "id": "swarmUpNext",
+      "pattern": "^Up next · ([\\d,]+)$",
+      "template": "接下來 · {1}",
+      "sample": "Up next · 4"
+    },
+    {
+      "id": "swarmSourceMachines",
+      "pattern": "^(.+) · ([\\d,]+) machines?$",
+      "template": "{1} · {2} 台電腦",
+      "sample": "Team board · 2 machines"
+    },
+    {
+      "id": "swarmSourceReconnecting",
+      "pattern": "^(.+) · reconnecting$",
+      "template": "{1} · 正在重新連線",
+      "sample": "Team board · reconnecting"
+    },
+    {
+      "id": "swarmSourceConnecting",
+      "pattern": "^(.+) · connecting$",
+      "template": "{1} · 正在連線",
+      "sample": "Team board · connecting"
+    },
+    {
+      "id": "swarmSourceUnavailable",
+      "pattern": "^(.+) · unavailable$",
+      "template": "{1} · 無法使用",
+      "sample": "Team board · unavailable"
+    },
+    {
+      "id": "swarmGoToPost",
+      "pattern": "^Go to #([\\d,]+) on the Board$",
+      "template": "前往看板上的 #{1}",
+      "sample": "Go to #12 on the Board"
+    },
+    {
+      "id": "swarmRunsOn",
+      "pattern": "^Runs on (.+)$",
+      "template": "在 {1} 上執行",
+      "sample": "Runs on devbox"
+    },
+    {
+      "id": "swarmPostFromText",
+      "pattern": "^#([\\d,]+) from @(\\S+): (.+)$",
+      "template": "來自 @{2} 的 #{1}：{3}",
+      "sample": "#12 from @lead: please review"
+    },
+    {
+      "id": "swarmPostFrom",
+      "pattern": "^#([\\d,]+) from @(\\S+)$",
+      "template": "來自 @{2} 的 #{1}",
+      "sample": "#12 from @lead"
+    },
+    {
+      "id": "swarmCoordinatorDone",
+      "pattern": "^Coordinator · ([\\d,]+) of ([\\d,]+) done$",
+      "template": "協調器 · 已完成 {1} / {2}",
+      "sample": "Coordinator · 3 of 5 done"
+    },
+    {
+      "id": "swarmOfDone",
+      "pattern": "^([\\d,]+) of ([\\d,]+) done$",
+      "template": "已完成 {1} / {2}",
+      "sample": "3 of 5 done"
+    },
+    {
+      "id": "swarmSlashDone",
+      "pattern": "^([\\d,]+)/([\\d,]+) done$",
+      "template": "已完成 {1} / {2}",
+      "sample": "3/5 done"
+    },
+    {
+      "id": "swarmWorkingFor",
+      "pattern": "^Working for @(\\S+)$",
+      "template": "正在為 @{1} 工作",
+      "sample": "Working for @lead"
+    },
+    {
+      "id": "swarmBees",
+      "pattern": "^([\\d,]+) bees?$",
+      "template": "{1} 隻蜜蜂",
+      "sample": "3 bees"
+    },
+    {
+      "id": "swarmOpenMember",
+      "pattern": "^Open @(\\S+)$",
+      "template": "開啟 @{1}",
+      "sample": "Open @worker-1"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "清除{1}",
@@ -4017,13 +4339,6 @@
       "scope": "sentence"
     },
     {
-      "id": "s131",
-      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
-      "template": "{1} / {2}",
-      "sample": "3 of 3",
-      "scope": "sentence"
-    },
-    {
       "id": "s139",
       "pattern": "^Triggered ([^a-z\\s].*?|\\S+?)$",
       "template": "觸發時間：{1}",
@@ -4092,6 +4407,11 @@
     "s_emptyMessagePlural": {
       "scheduled tasks": "排程任務",
       "automations": "自動化"
+    },
+    "s_swarmViewReason": {
+      "view.html is over 64 KB": "view.html 超過 64 KB",
+      "no view.html yet": "尚無 view.html",
+      "loading the narrator view": "正在載入旁白檢視"
     }
   },
   "valueRules": {
@@ -8459,6 +8779,157 @@
     "Minimized": "已最小化",
     "Starting preview…": "正在啟動預覽…",
     "Pan": "平移",
-    "Grid": "格線"
+    "Grid": "格線",
+    "Active": "作用中",
+    "Active: mid-turn (thinking, running a tool, or waiting on the model)": "作用中：回合進行中（正在思考、執行工具或等待模型回應）",
+    "Waiting: turn ended, asleep on the board until a post wakes it": "等待中：回合已結束，在看板上休眠，直到有貼文喚醒它",
+    "Killed: removed from the swarm": "已終止：已從 swarm 中移除",
+    "Swarms started in this conversation appear here automatically, with their board, members and @mention graph. Start one with <>.": "在此對話中啟動的 swarm 會自動顯示在這裡，包含它們的看板、成員和 @提及關係圖。輸入 <> 即可啟動一個。",
+    "Open this pane from a conversation to see its swarm. Swarms started there appear here automatically; start one with <>.": "請從對話中開啟此窗格，以檢視該對話的 swarm。在那裡啟動的 swarm 會自動顯示在這裡；輸入 <> 即可啟動一個。",
+    "Reconnecting": "正在重新連線",
+    "Updates automatically": "自動更新",
+    "Click to hide from the board": "點選即可從看板隱藏",
+    "Posts in every channel": "所有頻道中的貼文",
+    "main: the whole swarm reads it": "main：整個 swarm 都會讀取",
+    "All channels": "所有頻道",
+    "all channels": "所有頻道",
+    "Filters (active)": "篩選器（已啟用）",
+    "Not on the roster": "不在名冊上",
+    "not on roster": "不在名冊上",
+    "No posts match": "沒有符合的貼文",
+    "Try a different search or member filter.": "請嘗試其他搜尋或成員篩選條件。",
+    "No posts yet": "尚無貼文",
+    "Posts to the swarm board will appear here as members talk.": "成員交談時，發布到 swarm 看板的貼文會顯示在這裡。",
+    "Click to open conversation": "點選即可開啟對話",
+    "Pause replay": "暫停重播",
+    "Play replay": "播放重播",
+    "Exporting…": "正在匯出…",
+    "Nothing to export yet.": "目前沒有可匯出的內容。",
+    "Could not download GIF from embedded pane.": "無法從內嵌窗格下載 GIF。",
+    "Could not export GIF.": "無法匯出 GIF。",
+    "Export GIF": "匯出 GIF",
+    "The narrator (<>) was stopped. Ask the coordinator to add a new one (<>).": "旁白（<>）已停止。請要求協調器新增一位（<>）。",
+    "The narrator's view.json is over 64 KB, so it isn't shown.": "旁白的 view.json 超過 64 KB，因此不會顯示。",
+    "The narrator's view.json isn't valid JSON yet.": "旁白的 view.json 還不是有效的 JSON。",
+    "The narrator hasn't published an overview yet.": "旁白尚未發布總覽。",
+    "The narrator is updating the overview": "旁白正在更新總覽",
+    "The narrator is waiting for new board posts": "旁白正在等待看板上的新貼文",
+    "The narrator was killed; the overview no longer updates": "旁白已被終止；總覽不再更新",
+    "updating": "更新中",
+    "watching": "監看中",
+    "stopped": "已停止",
+    "paused: quota": "已暫停：配額",
+    "paused: error": "已暫停：錯誤",
+    "stale": "已過時",
+    "Retry narrator's page": "重試旁白的頁面",
+    "Narrator's page": "旁白的頁面",
+    "Narrator’s page": "旁白的頁面",
+    "narrator's page · AI-generated": "旁白的頁面 · AI 生成",
+    "overview · from the narrator's notes": "總覽 · 取自旁白的筆記",
+    "overview · from the narrator’s notes": "總覽 · 取自旁白的筆記",
+    "That link isn't allowed here.": "這裡不允許開啟該連結。",
+    "Opening files needs the app.": "需要在應用程式中才能開啟檔案。",
+    "Narrator view (AI-generated)": "旁白檢視（AI 生成）",
+    "Click a link in the view to open it.": "點選檢視中的連結即可開啟。",
+    "Copy failed": "複製失敗",
+    "The team": "團隊",
+    "Planned next": "接下來的計畫",
+    "Threads": "工作串",
+    "Progress": "進度",
+    "Compare with now": "與現在比較",
+    "Open full timeline": "開啟完整時間軸",
+    "Nothing blocked": "沒有受阻的項目",
+    "Needs you": "需要您處理",
+    "Stuck": "卡住",
+    "Nothing waiting": "沒有等待中的項目",
+    "Nothing stuck": "沒有卡住的項目",
+    "Nothing needs you": "沒有需要您處理的項目",
+    "Nothing running": "沒有執行中的項目",
+    "Nothing planned": "沒有計畫中的項目",
+    "Latest action": "最新動作",
+    "No tasks completed yet.": "尚無已完成的任務。",
+    "<> tasks done": "<> 個任務已完成",
+    "Hide compare": "隱藏比較",
+    "Compare then and now": "比較過去與現在",
+    "Scrub through progress": "拖曳瀏覽進度",
+    "Moving": "移動中",
+    "Swarm stalled — no agents working": "Swarm 已停滯 — 沒有代理程式在工作",
+    "Search members": "搜尋成員",
+    "Coordinator · Working": "協調器 · 工作中",
+    "Retired": "已退役",
+    "Team": "團隊",
+    "Standing by": "待命中",
+    "Your swarm is starting": "您的 swarm 正在啟動",
+    "One goal": "一個目標",
+    "The coordinator splits it into tasks.": "協調器會將它拆成多項任務。",
+    "Many workers": "多個工作者",
+    "Each takes a task, and they run in parallel.": "每個工作者各自處理一項任務，並同時進行。",
+    "One board": "一個看板",
+    "Updates land here. You step in only when asked.": "進度更新都會出現在這裡。只有在被要求時才需要您介入。",
+    "Waiting for the first update": "正在等待第一則更新",
+    "All workers": "所有工作者",
+    "Filter by worker": "依工作者篩選",
+    "Frames": "影格",
+    "The coordinator asked. Answer it in its chat.": "協調器提出了問題。請在它的對話中回答。",
+    "Resting": "休息中",
+    "no tasks": "沒有任務",
+    "No one is on this thread yet.": "這個工作串目前還沒有人。",
+    "Tasks done": "已完成的任務",
+    "Message just sent": "剛傳送的訊息",
+    "Waiting on": "正在等待",
+    "Fit the whole swarm": "顯示整個 swarm",
+    "Where each worker is, by thread": "依工作串顯示每個工作者的位置",
+    "Give feedback on this item": "對此項目提供意見",
+    "Looking for this conversation's swarm…": "正在尋找此對話的 swarm…",
+    "Looking for this conversation’s swarm…": "正在尋找此對話的 swarm…",
+    "Board": "看板",
+    "Graph": "關係圖",
+    "Want this view different? Tell the coordinator.": "想換個檢視方式嗎？請告訴協調器。",
+    "Open coordinator chat": "開啟協調器對話",
+    "Follow": "跟隨",
+    "Latest": "最新",
+    "Hive": "蜂巢",
+    "Hide inactive": "隱藏非活躍成員",
+    "Expand @all": "展開 @all",
+    "@mention, width = count": "@提及，線寬 = 次數",
+    "via @all": "透過 @all",
+    "posted with no mention": "發文時未提及任何人",
+    "@all posts, drawn by Expand @all": "@all 貼文，由「展開 @all」繪製",
+    "No swarm in this conversation": "此對話中沒有 swarm",
+    "Watching for a swarm": "正在監看 swarm",
+    "Right-click image to save, or open in a new tab.": "在圖片上按右鍵即可儲存，或在新分頁中開啟。",
+    "Swarm views": "Swarm 檢視",
+    "System alerts": "系統警示",
+    "Search posts": "搜尋貼文",
+    "Channels": "頻道",
+    "Show posts by one member": "只顯示某位成員的貼文",
+    "Filter by poster": "依發文者篩選",
+    "Show posts that call on one member": "只顯示呼叫某位成員的貼文",
+    "Filter by recipient": "依接收者篩選",
+    "Show posts in one channel": "只顯示某個頻道的貼文",
+    "Filter by channel": "依頻道篩選",
+    "Keep the newest post in view": "讓最新的貼文保持在畫面中",
+    "Show or hide each member's posts": "顯示或隱藏各成員的貼文",
+    "Replay": "重播",
+    "Jump to start": "跳到開頭",
+    "Previous post (←)": "上一則貼文 (←)",
+    "Previous post": "上一則貼文",
+    "Play / pause replay (space)": "播放／暫停重播（空白鍵）",
+    "Next post (→)": "下一則貼文 (→)",
+    "Next post": "下一則貼文",
+    "Scrub through board posts": "拖曳瀏覽看板貼文",
+    "Replay position": "重播位置",
+    "Show everything and follow live": "顯示全部並即時跟隨",
+    "Graph view": "關係圖檢視",
+    "Threads as cells, with each worker where it works": "以格子表示工作串，並把每個工作者放在其工作的位置",
+    "Who @mentions whom": "誰 @提及了誰",
+    "Hide killed and inactive members from the graph": "在關係圖中隱藏已終止和非活躍的成員",
+    "Draw @all as an edge to every member": "將 @all 畫成連到每位成員的連線",
+    "Replay pacing": "重播間隔",
+    "Replay speed": "重播速度",
+    "Export graph replay as an animated GIF": "將關係圖重播匯出為動畫 GIF",
+    "Close preview": "關閉預覽",
+    "Exported swarm graph replay": "已匯出的 swarm 關係圖重播",
+    "Clear filters": "清除篩選器"
   }
 }

@@ -1788,16 +1788,34 @@
       "sample": "Label for X"
     },
     {
+      "id": "swarmLastSeenDay",
+      "pattern": "^last seen ([\\d,]+)d ago$",
+      "template": "son görülme {1} gün önce",
+      "sample": "last seen 3d ago"
+    },
+    {
       "id": "ui134",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)d ago$",
       "template": "son görülme {1}g önce",
       "sample": "last seen Xd ago"
     },
     {
+      "id": "swarmLastSeenHour",
+      "pattern": "^last seen ([\\d,]+)h ago$",
+      "template": "son görülme {1} sa önce",
+      "sample": "last seen 2h ago"
+    },
+    {
       "id": "ui135",
       "pattern": "^last seen ([^a-z\\s].*?|\\S+?)h ago$",
       "template": "son görülme {1}sa önce",
       "sample": "last seen Xh ago"
+    },
+    {
+      "id": "swarmLastSeenMin",
+      "pattern": "^last seen ([\\d,]+)m ago$",
+      "template": "son görülme {1} dk önce",
+      "sample": "last seen 5m ago"
     },
     {
       "id": "ui136",
@@ -3702,6 +3720,310 @@
       "sample": "Message queued. 3 messages in queue. Sends after agent finishes working. Actions available: Send Now, Edit, Delete."
     },
     {
+      "id": "swarmChannelArchived",
+      "pattern": "^#(\\S+) is archived: this addresses nobody$",
+      "template": "#{1} arşivlendi: bu kimseye ulaşmaz",
+      "sample": "#design is archived: this addresses nobody"
+    },
+    {
+      "id": "swarmChannelEveryone",
+      "pattern": "^Everyone in #(\\S+)$",
+      "template": "#{1} kanalındaki herkes",
+      "sample": "Everyone in #design"
+    },
+    {
+      "id": "swarmRunsElsewhere",
+      "pattern": "^(.+) runs on another machine; open it there\\.$",
+      "template": "{1} başka bir makinede çalışıyor; orada açın.",
+      "sample": "worker-1 runs on another machine; open it there."
+    },
+    {
+      "id": "swarmRunsOnOpen",
+      "pattern": "^(.+) runs on (.+); open it there\\.$",
+      "template": "{1}, {2} üzerinde çalışıyor; orada açın.",
+      "sample": "worker-1 runs on devbox; open it there."
+    },
+    {
+      "id": "swarmEdgeVia",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct, ([\\d,]+) via @all$",
+      "template": "{1} → {2}: {3} doğrudan, {4} @all aracılığıyla",
+      "sample": "lead → worker-1: 3 direct, 2 via @all"
+    },
+    {
+      "id": "swarmEdge",
+      "pattern": "^(.+) → (.+): ([\\d,]+) direct$",
+      "template": "{1} → {2}: {3} doğrudan",
+      "sample": "lead → worker-1: 3 direct"
+    },
+    {
+      "id": "swarmNotOnRoster",
+      "pattern": "^(.+) \\(not on the roster\\)$",
+      "template": "{1} (listede yok)",
+      "sample": "worker-9 (not on the roster)"
+    },
+    {
+      "id": "swarmGraphReplayAlt",
+      "pattern": "^(.+) graph replay$",
+      "template": "{1} grafik tekrarı",
+      "sample": "Fix the build graph replay"
+    },
+    {
+      "id": "swarmExported",
+      "pattern": "^Exported (.+) \\(([\\d,]+) frames? · (.+)\\)$",
+      "template": "{1} dışa aktarıldı ({2} kare · {3})",
+      "sample": "Exported swarm.gif (12 frames · 1.2 MB)"
+    },
+    {
+      "id": "swarmGifReady",
+      "pattern": "^GIF ready \\(([\\d,]+) frames? · (.+)\\) — right-click image to save\\.$",
+      "template": "GIF hazır ({1} kare · {2}) — kaydetmek için görsele sağ tıklayın.",
+      "sample": "GIF ready (12 frames · 1.2 MB) — right-click image to save."
+    },
+    {
+      "id": "swarmExportingPct",
+      "pattern": "^Exporting (\\d+)%$",
+      "template": "Dışa aktarılıyor %{1}",
+      "sample": "Exporting 40%"
+    },
+    {
+      "id": "swarmDurAgo",
+      "pattern": "^(\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "{1} önce",
+      "sample": "3m 05s ago"
+    },
+    {
+      "id": "swarmNarratorFailed",
+      "pattern": "^The narrator's last step failed: (.+)$",
+      "template": "Anlatıcının son adımı başarısız oldu: {1}",
+      "sample": "The narrator's last step failed: quota exceeded"
+    },
+    {
+      "id": "swarmPostsSinceView",
+      "pattern": "^([\\d,]+) posts? since the view was updated$",
+      "template": "Görünüm güncellendiğinden beri {1} gönderi",
+      "sample": "3 posts since the view was updated"
+    },
+    {
+      "id": "swarmNarratorReadUpTo",
+      "pattern": "^Narrator read up to #([\\d,]+) of ([\\d,]+)$",
+      "template": "Anlatıcı {2} içinden #{1} numaraya kadar okudu",
+      "sample": "Narrator read up to #12 of 15"
+    },
+    {
+      "id": "swarmReadUpdated",
+      "pattern": "^read #([\\d,]+) · updated (\\d+s|\\d+m \\d+s|\\d+h \\d+m) ago$",
+      "template": "#{1} okundu · {2} önce güncellendi",
+      "sample": "read #12 · updated 3m 05s ago"
+    },
+    {
+      "id": "swarmRead",
+      "pattern": "^read #([\\d,]+)$",
+      "template": "#{1} okundu",
+      "sample": "read #12"
+    },
+    {
+      "id": "swarmLastChange",
+      "pattern": "^Last change: “(.+)”$",
+      "template": "Son değişiklik: “{1}”",
+      "sample": "Last change: “bigger cards”"
+    },
+    {
+      "id": "swarmOverviewReason",
+      "pattern": "^overview · from the narrator's notes · (.+)$",
+      "template": "genel bakış · anlatıcının notlarından · {1}",
+      "sample": "overview · from the narrator's notes · no view.html yet",
+      "replace": {
+        "1": "s_swarmViewReason"
+      }
+    },
+    {
+      "id": "swarmOpenNeedsApp",
+      "pattern": "^Opening (.+)'s conversation needs the app\\.$",
+      "template": "{1} konuşmasını açmak için uygulama gerekir.",
+      "sample": "Opening worker-1's conversation needs the app."
+    },
+    {
+      "id": "swarmCopiedRemoteIts",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on its machine\\.$",
+      "template": "“{1}” kopyalandı. Bunu kendi makinesindeki koordinatöre yapıştırın.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on its machine."
+    },
+    {
+      "id": "swarmCopiedRemote",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator on (.+)\\.$",
+      "template": "“{1}” kopyalandı. Bunu {2} üzerindeki koordinatöre yapıştırın.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator on devbox."
+    },
+    {
+      "id": "swarmTellRemoteIts",
+      "pattern": "^Tell it “(.+) …” to the coordinator on its machine\\.$",
+      "template": "Kendi makinesindeki koordinatöre “{1} …” deyin.",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on its machine."
+    },
+    {
+      "id": "swarmTellRemote",
+      "pattern": "^Tell it “(.+) …” to the coordinator on (.+)\\.$",
+      "template": "{2} üzerindeki koordinatöre “{1} …” deyin.",
+      "sample": "Tell it “user feedback on card t1: …” to the coordinator on devbox."
+    },
+    {
+      "id": "swarmCopiedLocal",
+      "pattern": "^Copied “(.+)”\\. Paste it to the coordinator and say what you want changed\\.$",
+      "template": "“{1}” kopyalandı. Koordinatöre yapıştırın ve neyi değiştirmek istediğinizi söyleyin.",
+      "sample": "Copied “user feedback on card t1:”. Paste it to the coordinator and say what you want changed."
+    },
+    {
+      "id": "swarmTellLocal",
+      "pattern": "^Tell the coordinator: “(.+) …”$",
+      "template": "Koordinatöre şunu söyleyin: “{1} …”",
+      "sample": "Tell the coordinator: “user feedback on card t1: …”"
+    },
+    {
+      "id": "swarmMoreItems",
+      "pattern": "^\\+([\\d,]+) more$",
+      "template": "+{1} daha",
+      "sample": "+3 more"
+    },
+    {
+      "id": "swarmWaitingCount",
+      "pattern": "^([\\d,]+) waiting on @(\\S+)$",
+      "template": "@{2} bekleniyor ({1})",
+      "sample": "2 waiting on @coordinator"
+    },
+    {
+      "id": "swarmWaitingOn",
+      "pattern": "^Waiting on (@?\\S+)$",
+      "template": "{1} bekleniyor",
+      "sample": "Waiting on @coordinator"
+    },
+    {
+      "id": "swarmStuckCount",
+      "pattern": "^([\\d,]+) stuck$",
+      "template": "{1} takıldı",
+      "sample": "1 stuck"
+    },
+    {
+      "id": "swarmNeedsYouCount",
+      "pattern": "^([\\d,]+) needs? you$",
+      "template": "{1} sizi bekliyor",
+      "sample": "2 need you"
+    },
+    {
+      "id": "swarmInReviewCount",
+      "pattern": "^([\\d,]+) in review$",
+      "template": "{1} incelemede",
+      "sample": "3 in review"
+    },
+    {
+      "id": "swarmThreadsOpen",
+      "pattern": "^([\\d,]+) threads? open$",
+      "template": "{1} açık ileti dizisi",
+      "sample": "2 threads open"
+    },
+    {
+      "id": "s131",
+      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
+      "template": "{1} / {2}",
+      "sample": "3 of 3",
+      "scope": "sentence"
+    },
+    {
+      "id": "swarmOfCount",
+      "pattern": "^([\\d,]+) of ([\\d,]+)$",
+      "template": "{1} / {2}",
+      "sample": "3 of 5"
+    },
+    {
+      "id": "swarmUpNext",
+      "pattern": "^Up next · ([\\d,]+)$",
+      "template": "Sıradaki · {1}",
+      "sample": "Up next · 4"
+    },
+    {
+      "id": "swarmSourceMachines",
+      "pattern": "^(.+) · ([\\d,]+) machines?$",
+      "template": "{1} · {2} makine",
+      "sample": "Team board · 2 machines"
+    },
+    {
+      "id": "swarmSourceReconnecting",
+      "pattern": "^(.+) · reconnecting$",
+      "template": "{1} · yeniden bağlanılıyor",
+      "sample": "Team board · reconnecting"
+    },
+    {
+      "id": "swarmSourceConnecting",
+      "pattern": "^(.+) · connecting$",
+      "template": "{1} · bağlanılıyor",
+      "sample": "Team board · connecting"
+    },
+    {
+      "id": "swarmSourceUnavailable",
+      "pattern": "^(.+) · unavailable$",
+      "template": "{1} · kullanılamıyor",
+      "sample": "Team board · unavailable"
+    },
+    {
+      "id": "swarmGoToPost",
+      "pattern": "^Go to #([\\d,]+) on the Board$",
+      "template": "Panoda #{1} numaraya git",
+      "sample": "Go to #12 on the Board"
+    },
+    {
+      "id": "swarmRunsOn",
+      "pattern": "^Runs on (.+)$",
+      "template": "{1} üzerinde çalışıyor",
+      "sample": "Runs on devbox"
+    },
+    {
+      "id": "swarmPostFromText",
+      "pattern": "^#([\\d,]+) from @(\\S+): (.+)$",
+      "template": "@{2} tarafından #{1}: {3}",
+      "sample": "#12 from @lead: please review"
+    },
+    {
+      "id": "swarmPostFrom",
+      "pattern": "^#([\\d,]+) from @(\\S+)$",
+      "template": "@{2} tarafından #{1}",
+      "sample": "#12 from @lead"
+    },
+    {
+      "id": "swarmCoordinatorDone",
+      "pattern": "^Coordinator · ([\\d,]+) of ([\\d,]+) done$",
+      "template": "Koordinatör · {1}/{2} tamamlandı",
+      "sample": "Coordinator · 3 of 5 done"
+    },
+    {
+      "id": "swarmOfDone",
+      "pattern": "^([\\d,]+) of ([\\d,]+) done$",
+      "template": "{1}/{2} tamamlandı",
+      "sample": "3 of 5 done"
+    },
+    {
+      "id": "swarmSlashDone",
+      "pattern": "^([\\d,]+)/([\\d,]+) done$",
+      "template": "{1}/{2} tamamlandı",
+      "sample": "3/5 done"
+    },
+    {
+      "id": "swarmWorkingFor",
+      "pattern": "^Working for @(\\S+)$",
+      "template": "@{1} için çalışıyor",
+      "sample": "Working for @lead"
+    },
+    {
+      "id": "swarmBees",
+      "pattern": "^([\\d,]+) bees?$",
+      "template": "{1} arı",
+      "sample": "3 bees"
+    },
+    {
+      "id": "swarmOpenMember",
+      "pattern": "^Open @(\\S+)$",
+      "template": "@{1} öğesini aç",
+      "sample": "Open @worker-1"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "Temizle{1}",
@@ -4031,13 +4353,6 @@
       "scope": "sentence"
     },
     {
-      "id": "s131",
-      "pattern": "^(\\d[\\d,.]*) of (\\d[\\d,.]*)$",
-      "template": "{1} / {2}",
-      "sample": "3 of 3",
-      "scope": "sentence"
-    },
-    {
       "id": "s139",
       "pattern": "^Triggered ([^a-z\\s].*?|\\S+?)$",
       "template": "Tetiklendi: {1}",
@@ -4106,6 +4421,11 @@
     "s_emptyMessagePlural": {
       "scheduled tasks": "zamanlanmış görevler",
       "automations": "otomasyonlar"
+    },
+    "s_swarmViewReason": {
+      "view.html is over 64 KB": "view.html 64 KB boyutunu aşıyor",
+      "no view.html yet": "henüz view.html yok",
+      "loading the narrator view": "anlatıcı görünümü yükleniyor"
     }
   },
   "valueRules": {
@@ -8470,6 +8790,157 @@
     "Starting preview…": "Önizleme başlatılıyor…",
     "Pan": "Kaydır",
     "Grid": "Izgara",
+    "Active": "Etkin",
+    "Active: mid-turn (thinking, running a tool, or waiting on the model)": "Etkin: tur ortasında (düşünme, araç çalıştırma veya model bekleniyor)",
+    "Waiting: turn ended, asleep on the board until a post wakes it": "Bekliyor: tur sona erdi, bir gönderi uyandırana kadar panoda uyku modunda",
+    "Killed: removed from the swarm": "Sonlandırıldı: sürüden kaldırıldı",
+    "Swarms started in this conversation appear here automatically, with their board, members and @mention graph. Start one with <>.": "Bu konuşmada başlatılan sürüler; panosu, üyeleri ve @bahsetme grafiğiyle birlikte burada otomatik olarak görünür. <> ile bir tane başlatın.",
+    "Open this pane from a conversation to see its swarm. Swarms started there appear here automatically; start one with <>.": "Sürüsünü görmek için bu bölmeyi bir konuşmadan açın. Orada başlatılan sürüler burada otomatik olarak görünür; <> ile bir tane başlatın.",
+    "Reconnecting": "Yeniden bağlanıyor",
+    "Updates automatically": "Otomatik olarak güncellenir",
+    "Click to hide from the board": "Panodan gizlemek için tıklayın",
+    "Posts in every channel": "Tüm kanallardaki gönderiler",
+    "main: the whole swarm reads it": "main: tüm sürü okur",
+    "All channels": "Tüm kanallar",
+    "all channels": "tüm kanallar",
+    "Filters (active)": "Filtreler (etkin)",
+    "Not on the roster": "Üye listesinde değil",
+    "not on roster": "listede değil",
+    "No posts match": "Eşleşen gönderi yok",
+    "Try a different search or member filter.": "Farklı bir arama veya üye filtresi deneyin.",
+    "No posts yet": "Henüz gönderi yok",
+    "Posts to the swarm board will appear here as members talk.": "Üyeler konuştukça sürü panosuna yapılan gönderiler burada görünecektir.",
+    "Click to open conversation": "Konuşmayı açmak için tıklayın",
+    "Pause replay": "Tekrar oynatmayı duraklat",
+    "Play replay": "Tekrar oynat",
+    "Exporting…": "Dışa aktarılıyor…",
+    "Nothing to export yet.": "Henüz dışa aktarılacak bir şey yok.",
+    "Could not download GIF from embedded pane.": "Yerleşik bölmeden GIF indirilemedi.",
+    "Could not export GIF.": "GIF dışa aktarılamadı.",
+    "Export GIF": "GIF'i Dışa Aktar",
+    "The narrator (<>) was stopped. Ask the coordinator to add a new one (<>).": "Anlatıcı (<>) durduruldu. Koordinatörden yeni bir tane (<>) eklemesini isteyin.",
+    "The narrator's view.json is over 64 KB, so it isn't shown.": "Anlatıcının view.json dosyası 64 KB'ı aştığı için gösterilmiyor.",
+    "The narrator's view.json isn't valid JSON yet.": "Anlatıcının view.json dosyası henüz geçerli bir JSON değil.",
+    "The narrator hasn't published an overview yet.": "Anlatıcı henüz bir genel bakış yayınlamadı.",
+    "The narrator is updating the overview": "Anlatıcı genel bakışı güncelliyor",
+    "The narrator is waiting for new board posts": "Anlatıcı yeni pano gönderilerini bekliyor",
+    "The narrator was killed; the overview no longer updates": "Anlatıcı sonlandırıldı; genel bakış artık güncellenmiyor",
+    "updating": "güncelleniyor",
+    "watching": "izleniyor",
+    "stopped": "durduruldu",
+    "paused: quota": "duraklatıldı: kota",
+    "paused: error": "duraklatıldı: hata",
+    "stale": "güncel değil",
+    "Retry narrator's page": "Anlatıcı sayfasını yeniden dene",
+    "Narrator's page": "Anlatıcı sayfası",
+    "Narrator’s page": "Anlatıcı sayfası",
+    "narrator's page · AI-generated": "anlatıcı sayfası · yapay zeka ile oluşturuldu",
+    "overview · from the narrator's notes": "genel bakış · anlatıcının notlarından",
+    "overview · from the narrator’s notes": "genel bakış · anlatıcının notlarından",
+    "That link isn't allowed here.": "Bu bağlantıya burada izin verilmiyor.",
+    "Opening files needs the app.": "Dosyaları açmak için uygulama gerekiyor.",
+    "Narrator view (AI-generated)": "Anlatıcı görünümü (yapay zeka ile oluşturuldu)",
+    "Click a link in the view to open it.": "Açmak için görünümdeki bir bağlantıya tıklayın.",
+    "Copy failed": "Kopyalama başarısız",
+    "The team": "Ekip",
+    "Planned next": "Sırada planlanan",
+    "Threads": "İş parçacıkları",
+    "Progress": "İlerleme",
+    "Compare with now": "Şimdiyle karşılaştır",
+    "Open full timeline": "Tam zaman çizelgesini aç",
+    "Nothing blocked": "Engellenen yok",
+    "Needs you": "Sizi bekliyor",
+    "Stuck": "Takıldı",
+    "Nothing waiting": "Bekleyen yok",
+    "Nothing stuck": "Takılan yok",
+    "Nothing needs you": "Sizi bekleyen yok",
+    "Nothing running": "Çalışan yok",
+    "Nothing planned": "Planlanan yok",
+    "Latest action": "Son eylem",
+    "No tasks completed yet.": "Henüz tamamlanan görev yok.",
+    "<> tasks done": "<> görev tamamlandı",
+    "Hide compare": "Karşılaştırmayı gizle",
+    "Compare then and now": "Öncesini ve şimdiyi karşılaştır",
+    "Scrub through progress": "İlerlemede gezin",
+    "Moving": "Devam ediyor",
+    "Swarm stalled — no agents working": "Sürü durakladı — çalışan ajan yok",
+    "Search members": "Üyeleri ara",
+    "Coordinator · Working": "Koordinatör · Çalışıyor",
+    "Retired": "Ayrıldı",
+    "Team": "Ekip",
+    "Standing by": "Hazır bekliyor",
+    "Your swarm is starting": "Sürünüz başlatılıyor",
+    "One goal": "Tek hedef",
+    "The coordinator splits it into tasks.": "Koordinatör bunu görevlere böler.",
+    "Many workers": "Birden fazla çalışan",
+    "Each takes a task, and they run in parallel.": "Her biri bir görev alır ve paralel olarak çalışır.",
+    "One board": "Tek pano",
+    "Updates land here. You step in only when asked.": "Güncellemeler buraya düşer. Yalnızca sizden istendiğinde dahil olursunuz.",
+    "Waiting for the first update": "İlk güncelleme bekleniyor",
+    "All workers": "Tüm çalışanlar",
+    "Filter by worker": "Çalışana göre filtrele",
+    "Frames": "Kareler",
+    "The coordinator asked. Answer it in its chat.": "Koordinatör bir soru sordu. Kendi sohbetinde yanıtlayın.",
+    "Resting": "Dinleniyor",
+    "no tasks": "görev yok",
+    "No one is on this thread yet.": "Bu konuda henüz kimse yok.",
+    "Tasks done": "Tamamlanan görevler",
+    "Message just sent": "Mesaj az önce gönderildi",
+    "Waiting on": "Bekleniyor",
+    "Fit the whole swarm": "Tüm sürüyü sığdır",
+    "Where each worker is, by thread": "Konuya göre her çalışanın bulunduğu yer",
+    "Give feedback on this item": "Bu öğe hakkında geri bildirim ver",
+    "Looking for this conversation's swarm…": "Bu konuşmanın sürüsü aranıyor…",
+    "Looking for this conversation’s swarm…": "Bu konuşmanın sürüsü aranıyor…",
+    "Board": "Pano",
+    "Graph": "Grafik",
+    "Want this view different? Tell the coordinator.": "Bu görünümün farklı olmasını mı istiyorsunuz? Koordinatöre söyleyin.",
+    "Open coordinator chat": "Koordinatör sohbetini aç",
+    "Follow": "Takip et",
+    "Latest": "En son",
+    "Hive": "Kovan",
+    "Hide inactive": "Etkin olmayanları gizle",
+    "Expand @all": "@all'ı genişlet",
+    "@mention, width = count": "@bahsetme, genişlik = sayı",
+    "via @all": "@all aracılığıyla",
+    "posted with no mention": "bahsetme olmadan gönderildi",
+    "@all posts, drawn by Expand @all": "@all gönderileri, @all'ı genişlet ile çizilir",
+    "No swarm in this conversation": "Bu konuşmada sürü yok",
+    "Watching for a swarm": "Sürü bekleniyor",
+    "Right-click image to save, or open in a new tab.": "Kaydetmek için resme sağ tıklayın veya yeni bir sekmede açın.",
+    "Swarm views": "Sürü görünümleri",
+    "System alerts": "Sistem uyarıları",
+    "Search posts": "Gönderilerde ara",
+    "Channels": "Kanallar",
+    "Show posts by one member": "Tek bir üyenin gönderilerini göster",
+    "Filter by poster": "Gönderene göre filtrele",
+    "Show posts that call on one member": "Tek bir üyeye seslenen gönderileri göster",
+    "Filter by recipient": "Alıcıya göre filtrele",
+    "Show posts in one channel": "Tek bir kanaldaki gönderileri göster",
+    "Filter by channel": "Kanala göre filtrele",
+    "Keep the newest post in view": "En yeni gönderiyi görünümde tut",
+    "Show or hide each member's posts": "Her üyenin gönderilerini göster veya gizle",
+    "Replay": "Tekrar oynat",
+    "Jump to start": "Başa atla",
+    "Previous post (←)": "Önceki gönderi (←)",
+    "Previous post": "Önceki gönderi",
+    "Play / pause replay (space)": "Tekrar oynatmayı başlat / duraklat (Boşluk)",
+    "Next post (→)": "Sonraki gönderi (→)",
+    "Next post": "Sonraki gönderi",
+    "Scrub through board posts": "Pano gönderileri arasında gezinin",
+    "Replay position": "Tekrar oynatma konumu",
+    "Show everything and follow live": "Tümünü göster ve canlı takip et",
+    "Graph view": "Grafik görünümü",
+    "Threads as cells, with each worker where it works": "İş parçacıkları hücre olarak, her çalışan çalıştığı yerde",
+    "Who @mentions whom": "Kim kimi @bahsediyor",
+    "Hide killed and inactive members from the graph": "Sonlandırılan ve etkin olmayan üyeleri grafikten gizle",
+    "Draw @all as an edge to every member": "@all bahsetmesini her üyeye giden bir kenar olarak çiz",
+    "Replay pacing": "Tekrar oynatma temposu",
+    "Replay speed": "Tekrar oynatma hızı",
+    "Export graph replay as an animated GIF": "Grafik tekrarını hareketli GIF olarak dışa aktar",
+    "Close preview": "Önizlemeyi kapat",
+    "Exported swarm graph replay": "Dışa aktarılan sürü grafik tekrarı",
+    "Clear filters": "Filtreleri temizle",
     "For": "Şunlar için:",
     "Include at least one positive": "En az bir olumlu koşul ekleyin",
     "run in a dedicated": "özel bir ortamda çalışır",

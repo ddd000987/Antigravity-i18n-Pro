@@ -41,11 +41,14 @@ function fakeElectron() {
   for (const m of ['showMessageBox', 'showMessageBoxSync', 'showOpenDialog', 'showOpenDialogSync',
     'showSaveDialog', 'showSaveDialogSync', 'showErrorBox']) dialog[m] = record(m);
   // WebContents is reachable only through an instance, as in Electron.
-  class WebContents { constructor() { app.emit('web-contents-created', {}, this); } }
+  class WebContents extends require('events') { constructor() { super(); app.emit('web-contents-created', {}, this); } }
   WebContents.prototype.loadURL = record('loadURL');
   WebContents.prototype.send = record('send');
   const app = new (require('events'))();
-  return { electron: { Menu, MenuItem, dialog, app }, calls, WebContents };
+  // Frames are looked up by process and routing id, as with webFrameMain.fromId.
+  const frames = new Map();
+  const webFrameMain = { fromId: (processId, routingId) => frames.get(`${processId}:${routingId}`) };
+  return { electron: { Menu, MenuItem, dialog, app, webFrameMain }, calls, WebContents, frames };
 }
 
 function load(locale) {
@@ -169,9 +172,43 @@ t('real zh-TW locale builds a fragment that translates Confirm Quit', () => {
   assert.notStrictEqual(calls[0].args[0].title, 'Confirm Quit');
 });
 
+t('plugin:// sidecar frames get the renderer engine, other frames do not', async () => {
+  const zh = loadLocale('zh-TW');
+  const fake = load(zh);
+  const contents = new fake.WebContents();
+  const scripts = [];
+  const frame = (url) => ({ url, executeJavaScript: (s) => { scripts.push([url, s]); return Promise.resolve(); } });
+  fake.frames.set('1:2', frame('plugin://0123abcd/index.html'));
+  fake.frames.set('1:3', frame('http://localhost:5173/'));
+  fake.frames.set('1:4', { url: 'plugin://0123abcd/', isDestroyed: () => true, executeJavaScript: () => assert.fail('destroyed frame') });
+  contents.emit('did-frame-navigate', {}, 'plugin://0123abcd/index.html', 200, 'OK', false, 1, 2);
+  contents.emit('did-frame-finish-load', {}, false, 1, 2);
+  contents.emit('did-frame-finish-load', {}, false, 1, 3);
+  contents.emit('did-frame-finish-load', {}, false, 1, 4);
+  contents.emit('did-frame-finish-load', {}, false, 9, 9);
+  assert.deepStrictEqual(scripts.map((s) => s[0]), ['plugin://0123abcd/index.html', 'plugin://0123abcd/index.html']);
+  assert.ok(!/\/\* antigravity-i18n:(begin|end) \*\//.test(scripts[0][1]), 'the embedded engine has no block sentinels');
+
+  // Both events of one load run the script, the first while the document is
+  // still loading; the second must not start a second engine in it.
+  const { JSDOM } = require('jsdom');
+  const dom = new JSDOM('<!doctype html><body><button>Cancel</button></body>', { runScripts: 'outside-only' });
+  let observers = 0;
+  const Native = dom.window.MutationObserver;
+  dom.window.MutationObserver = class extends Native { constructor(cb) { super(cb); observers++; } };
+  dom.window.eval(scripts[0][1]);
+  await new Promise((resolve) => dom.window.addEventListener('load', resolve));
+  dom.window.eval(scripts[1][1]);
+  assert.strictEqual(observers, 1);
+  assert.strictEqual(dom.window.document.querySelector('button').textContent, zh.text.Cancel);
+  assert.strictEqual(dom.window.document.documentElement.getAttribute('lang'), zh.htmlLang || zh.language);
+});
+
 let failed = 0;
-for (const [name, fn] of tests) {
-  try { fn(); console.log('ok  ', name); } catch (e) { failed++; console.log('FAIL', name, '\n     ', e.message.split('\n').join('\n      ')); }
-}
-console.log(failed ? `${failed} failed` : `all ${tests.length} passed`);
-process.exit(failed ? 1 : 0);
+(async () => {
+  for (const [name, fn] of tests) {
+    try { await fn(); console.log('ok  ', name); } catch (e) { failed++; console.log('FAIL', name, '\n     ', e.message.split('\n').join('\n      ')); }
+  }
+  console.log(failed ? `${failed} failed` : `all ${tests.length} passed`);
+  process.exit(failed ? 1 : 0);
+})();
