@@ -137,7 +137,23 @@
     "Scan this QR code with the camera on the device that has your passkey for {0}": "{0} のパスキーが保存されているデバイスのカメラでこの QR コードをスキャンしてください",
     "Connecting to": "接続中：",
     "Asked again: your last answer may not have worked.": "再確認：前回の回答が機能しなかった可能性があります。",
-    "That's too long.": "長すぎます。"
+    "That's too long.": "長すぎます。",
+    "Setting up WSL: {0}": "WSL をセットアップ中：{0}",
+    "Touch your security key": "セキュリティ キーにタッチしてください",
+    "Password": "パスワード",
+    "Current password": "現在のパスワード",
+    "New password": "新しいパスワード",
+    "Confirm new password": "新しいパスワードの確認",
+    "Passphrase": "パスフレーズ",
+    "PIN": "PIN",
+    "Trust {0}?": "{0} を信頼しますか？",
+    "Connect to {0} anyway?": "このまま {0} に接続しますか？",
+    "Accept updated host keys?": "更新されたホスト キーを受け入れますか？",
+    "Add {0} to ssh-agent?": "{0} を ssh-agent に追加しますか？",
+    "Question from {0}": "{0} からの質問",
+    "Verification code for {0}": "{0} の確認コード",
+    "Password for {0}": "{0} のパスワード",
+    "PIN for {0}": "{0} の PIN"
   },
   "text": {
     "Run": "実行",
@@ -7760,6 +7776,12 @@
       }
     },
     {
+      "id": "appVersion",
+      "pattern": "^Version (\\d+(?:\\.\\d+)+)$",
+      "template": "バージョン {1}",
+      "sample": "Version 2.34.0"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "クリア{1}",
@@ -8124,7 +8146,6 @@
     "Window": "ウィンドウ",
     "Help": "ヘルプ",
     "New Window": "新しいウィンドウ",
-    "New Conversation": "新しい会話",
     "Check for Updates": "アップデートを確認",
     "Checking for Updates...": "アップデートを確認中...",
     "Downloading Update...": "アップデートをダウンロード中...",

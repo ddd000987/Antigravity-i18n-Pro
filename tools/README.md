@@ -66,7 +66,7 @@ The cache can hold several versions of the bundle (the file modification time te
 Steps 2–8 update zh-TW, the reference catalog; step 10 brings the other packs up to it.
 
 1. **Get the bundle.** Run Antigravity once, then `node cache-js.js scratch/js` extracts every distinct JavaScript file from the Chromium cache, largest first with its date. The newest file of about 12 MB is `main.js` (the cache can still hold the previous release's bundle too). Keep scratch files outside the repository.
-2. **Find the gaps.** `extract.js` (UI props and children), `sweep.js` (every sentence-like literal) and `sentences.js` (sentences split across elements) list what the locale does not cover. `splits.js`, `server-copy.js` and `server-names.js` give extra views; `gap.js`/`overlap.js` compare with another project's dictionary.
+2. **Find the gaps.** `extract.js` (UI props and children), `sweep.js` (every sentence-like literal) and `sentences.js` (sentences split across elements) list what the locale does not cover. `splits.js`, `server-copy.js` and `server-names.js` give extra views; `gap.js`/`overlap.js` compare with another project's dictionary. The main process (native menus, dialogs, the small `data:text/html` pages) is outside the bundle: `main-strings.js` lists its new strings and the zh-TW `menu`/`dialogs` keys the release no longer has. Add new interface text to zh-TW `dialogs` and record the rest in `main-strings.json` until it reports nothing.
 3. **Translate.** Turn the work files into batches (`batches.js`, or the sweep/gap files directly) and translate them following `translation-prompts/*.md`. The result files are `batch-N.out.json`, `sweep-N.out.json`, `gap-N.out.json` and `sent-N.out.json`.
 4. **Merge.** `merge.js`, `merge-sweep.js`, `merge-gap.js`, `merge-sent.js` add the translations to the locale and warn about suspicious values.
 5. **Order the rules.** `order-rules.js` puts the pattern rules in their final order so none is shadowed. Always run it after merging.
@@ -91,6 +91,12 @@ The batch workflow described above.
 `node glossary-seed.js --locale <code[,...]|all> [--force]` records each pack's rendering of the glossary terms; existing notes and terms are kept unless `--force`.
 `node glossary-check.js [--locale <code[,...]|all>] [--term <en>] [--limit 20]` audits whole packs with the same glossary and keep checks `merge-todo.js` applies to new translations.
 `todo.test.js` (part of `npm test`) is the round-trip test.
+
+### main-strings.js
+
+Checks the main-process strings of a release against the menu and dialogs maps: option fields of dialogs and menu items (`title`, `message`, `detail`, `label`, `buttons`, ...), `showErrorBox`, and the text of the `data:text/html` pages, with `{n}` for the values the app fills in.
+`node main-strings.js [app.asar] [--locale zh-TW] [--json]` reads `app.asar.clean-backup` by default; right after an official update, before applying again, pass `resourcesapp.asar`, which is then the new unpatched release.
+`main-strings.json` holds `ignore` (strings never shown, or not reachable by the patch; `ignoreNotes` says why per file) and `assembled` (keys the app builds at run time, or Electron role labels, which are not searched for). `main-strings.test.js` (part of `npm test`) covers it.
 
 ### cache-js.js
 

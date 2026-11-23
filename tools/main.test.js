@@ -43,6 +43,7 @@ function fakeElectron() {
   // WebContents is reachable only through an instance, as in Electron.
   class WebContents { constructor() { app.emit('web-contents-created', {}, this); } }
   WebContents.prototype.loadURL = record('loadURL');
+  WebContents.prototype.send = record('send');
   const app = new (require('events'))();
   return { electron: { Menu, MenuItem, dialog, app }, calls, WebContents };
 }
@@ -141,6 +142,18 @@ t('data: HTML pages have their text translated, scripts and styles untouched', (
   assert.strictEqual(calls[0].self, second);
   assert.strictEqual(calls[1].args[0], 'https://example.com/Cancel');
   assert.strictEqual(calls[2].args[0], 'data:text/html,<p>Other</p>', 'an untranslated page keeps its URL');
+});
+
+t('the SSH prompt title sent over IPC is translated, other channels are not', () => {
+  const locale = { ...testLocale, dialogs: { ...testLocale.dialogs, 'Password for {0}': '{0} 的密碼' } };
+  const { calls, WebContents } = load(locale);
+  const contents = new WebContents();
+  const payload = { title: 'Password for me@devbox', label: 'devbox', secret: true };
+  contents.send('ssh-prompt:show', payload);
+  contents.send('other', { title: 'Password for me@devbox' });
+  assert.deepStrictEqual(calls[0].args, ['ssh-prompt:show', { title: 'me@devbox 的密碼', label: 'devbox', secret: true }]);
+  assert.strictEqual(payload.title, 'Password for me@devbox', 'the caller payload is not mutated');
+  assert.strictEqual(calls[1].args[1].title, 'Password for me@devbox');
 });
 
 t('a broken argument never blocks the native call', () => {

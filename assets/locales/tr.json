@@ -3641,6 +3641,12 @@
       "sample": "Gemini Flash Next (experimental)"
     },
     {
+      "id": "appVersion",
+      "pattern": "^Version (\\d+(?:\\.\\d+)+)$",
+      "template": "Sürüm {1}",
+      "sample": "Version 2.34.0"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "Temizle{1}",
@@ -4100,7 +4106,6 @@
     "Window": "Pencere",
     "Help": "Yardım",
     "New Window": "Yeni Pencere",
-    "New Conversation": "Yeni Konuşma",
     "Check for Updates": "Güncellemeleri Denetle",
     "Checking for Updates...": "Güncellemeler denetleniyor...",
     "Downloading Update...": "Güncelleme indiriliyor...",
@@ -4243,7 +4248,23 @@
     "Scan this QR code with the camera on the device that has your passkey for {0}": "{0} için geçiş anahtarınızın bulunduğu cihazın kamerasıyla bu QR kodunu tarayın",
     "Connecting to": "Bağlanılıyor:",
     "Asked again: your last answer may not have worked.": "Tekrar soruldu: son yanıtınız işe yaramamış olabilir.",
-    "That's too long.": "Bu çok uzun."
+    "That's too long.": "Bu çok uzun.",
+    "Setting up WSL: {0}": "WSL kuruluyor: {0}",
+    "Touch your security key": "Güvenlik anahtarınıza dokunun",
+    "Password": "Parola",
+    "Current password": "Mevcut parola",
+    "New password": "Yeni parola",
+    "Confirm new password": "Yeni parolayı onayla",
+    "Passphrase": "Parola tümcesi",
+    "PIN": "PIN",
+    "Trust {0}?": "{0} öğesine güvenilsin mi?",
+    "Connect to {0} anyway?": "Yine de {0} ile bağlantı kurulsun mu?",
+    "Accept updated host keys?": "Güncellenmiş ana bilgisayar anahtarları kabul edilsin mi?",
+    "Add {0} to ssh-agent?": "{0}, ssh-agent'a eklensin mi?",
+    "Question from {0}": "{0} tarafından gelen soru",
+    "Verification code for {0}": "{0} için doğrulama kodu",
+    "Password for {0}": "{0} için parola",
+    "PIN for {0}": "{0} için PIN"
   },
   "text": {
     "Run": "Çalıştır",

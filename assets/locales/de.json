@@ -200,7 +200,23 @@
     "Scan this QR code with the camera on the device that has your passkey for {0}": "Scannen Sie diesen QR-Code mit der Kamera auf dem Gerät, auf dem Ihr Passkey für {0} gespeichert ist",
     "Connecting to": "Verbindung wird hergestellt mit",
     "Asked again: your last answer may not have worked.": "Erneut gefragt: Ihre letzte Antwort hat möglicherweise nicht funktioniert.",
-    "That's too long.": "Das ist zu lang."
+    "That's too long.": "Das ist zu lang.",
+    "Setting up WSL: {0}": "WSL wird eingerichtet: {0}",
+    "Touch your security key": "Berühren Sie Ihren Sicherheitsschlüssel",
+    "Password": "Passwort",
+    "Current password": "Aktuelles Passwort",
+    "New password": "Neues Passwort",
+    "Confirm new password": "Neues Passwort bestätigen",
+    "Passphrase": "Passphrase",
+    "PIN": "PIN",
+    "Trust {0}?": "{0} vertrauen?",
+    "Connect to {0} anyway?": "Trotzdem mit {0} verbinden?",
+    "Accept updated host keys?": "Aktualisierte Host-Schlüssel akzeptieren?",
+    "Add {0} to ssh-agent?": "{0} zu ssh-agent hinzufügen?",
+    "Question from {0}": "Frage von {0}",
+    "Verification code for {0}": "Bestätigungscode für {0}",
+    "Password for {0}": "Passwort für {0}",
+    "PIN for {0}": "PIN für {0}"
   },
   "text": {
     "Run": "Ausführen",
@@ -7913,6 +7929,12 @@
       "sample": "Resets in 2d 3h"
     },
     {
+      "id": "appVersion",
+      "pattern": "^Version (\\d+(?:\\.\\d+)+)$",
+      "template": "Version {1}",
+      "sample": "Version 2.34.0"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "scope": "sentence",
@@ -8310,7 +8332,6 @@
     "Window": "Fenster",
     "Help": "Hilfe",
     "New Window": "Neues Fenster",
-    "New Conversation": "Neue Unterhaltung",
     "Check for Updates": "Nach Updates suchen",
     "Checking for Updates...": "Suche nach Updates...",
     "Downloading Update...": "Update wird heruntergeladen...",

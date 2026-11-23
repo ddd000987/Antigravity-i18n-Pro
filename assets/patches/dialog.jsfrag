@@ -131,15 +131,24 @@
         .split(/(<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>)/i)
         .map((part, i) => (i % 2 ? part : part.replace(/>([^<>]+)</g, translateText)))
         .join('');
+    // The SSH prompt page gets its title over IPC after it loads. Only this
+    // channel is touched: other payloads carry the user's own data.
+    const PAYLOAD_TITLES = new Set(['ssh-prompt:show']);
     const app = electron_1.app;
     if (app && typeof app.once === 'function') {
         app.once('web-contents-created', (_event, contents) => {
-            wrap(Object.getPrototypeOf(contents), 'loadURL', (args) => {
+            const proto = Object.getPrototypeOf(contents);
+            wrap(proto, 'loadURL', (args) => {
                 const m = typeof args[0] === 'string' && DATA_HTML.exec(args[0]);
                 if (!m) return;
                 const html = decodeURIComponent(args[0].slice(m[0].length));
                 const translated = translateHtml(html);
                 if (translated !== html) args[0] = `data:text/html;charset=utf-8,${encodeURIComponent(translated)}`;
+            });
+            wrap(proto, 'send', (args) => {
+                const payload = args[1];
+                if (!PAYLOAD_TITLES.has(args[0]) || !payload || typeof payload.title !== 'string') return;
+                args[1] = { ...payload, title: translate(payload.title) };
             });
         });
     }

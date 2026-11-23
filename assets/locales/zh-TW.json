@@ -3628,6 +3628,12 @@
       "sample": "Gemini Flash Next (experimental)"
     },
     {
+      "id": "appVersion",
+      "pattern": "^Version (\\d+(?:\\.\\d+)+)$",
+      "template": "版本 {1}",
+      "sample": "Version 2.34.0"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "清除{1}",
@@ -4087,7 +4093,6 @@
     "Window": "視窗",
     "Help": "說明",
     "New Window": "新增視窗",
-    "New Conversation": "新增對話",
     "Check for Updates": "檢查更新",
     "Checking for Updates...": "正在檢查更新...",
     "Downloading Update...": "正在下載更新...",
@@ -4230,7 +4235,23 @@
     "Scan this QR code with the camera on the device that has your passkey for {0}": "請用存有 {0} 密碼金鑰的裝置相機掃描此 QR 圖碼",
     "Connecting to": "正在連線至",
     "Asked again: your last answer may not have worked.": "再次詢問：您上次的回答可能沒有生效。",
-    "That's too long.": "太長了。"
+    "That's too long.": "太長了。",
+    "Setting up WSL: {0}": "正在設定 WSL：{0}",
+    "Touch your security key": "請觸碰您的安全金鑰",
+    "Password": "密碼",
+    "Current password": "目前的密碼",
+    "New password": "新密碼",
+    "Confirm new password": "確認新密碼",
+    "Passphrase": "通關密語",
+    "PIN": "PIN 碼",
+    "Trust {0}?": "要信任 {0} 嗎？",
+    "Connect to {0} anyway?": "仍要連線至 {0} 嗎？",
+    "Accept updated host keys?": "要接受更新後的主機金鑰嗎？",
+    "Add {0} to ssh-agent?": "要將 {0} 加入 ssh-agent 嗎？",
+    "Question from {0}": "來自 {0} 的問題",
+    "Verification code for {0}": "{0} 的驗證碼",
+    "Password for {0}": "{0} 的密碼",
+    "PIN for {0}": "{0} 的 PIN 碼"
   },
   "text": {
     "Run": "執行",

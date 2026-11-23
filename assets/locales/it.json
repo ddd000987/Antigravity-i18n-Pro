@@ -3685,6 +3685,12 @@
       "sample": "Gemini Flash Next (experimental)"
     },
     {
+      "id": "appVersion",
+      "pattern": "^Version (\\d+(?:\\.\\d+)+)$",
+      "template": "Versione {1}",
+      "sample": "Version 2.34.0"
+    },
+    {
       "id": "s11",
       "pattern": "^Clear(\\s*[^A-Za-z\\s].*?)$",
       "template": "Cancella{1}",
@@ -4177,7 +4183,6 @@
     "Window": "Finestra",
     "Help": "Aiuto",
     "New Window": "Nuova finestra",
-    "New Conversation": "Nuova conversazione",
     "Check for Updates": "Verifica aggiornamenti",
     "Checking for Updates...": "Verifica aggiornamenti in corso...",
     "Downloading Update...": "Download dell'aggiornamento in corso...",
@@ -4320,7 +4325,23 @@
     "Scan this QR code with the camera on the device that has your passkey for {0}": "Scansiona questo codice QR con la fotocamera del dispositivo che contiene la tua passkey per {0}",
     "Connecting to": "Connessione a",
     "Asked again: your last answer may not have worked.": "Richiesto di nuovo: la tua ultima risposta potrebbe non aver funzionato.",
-    "That's too long.": "È troppo lungo."
+    "That's too long.": "È troppo lungo.",
+    "Setting up WSL: {0}": "Configurazione di WSL: {0}",
+    "Touch your security key": "Tocca la chiave di sicurezza",
+    "Password": "Password",
+    "Current password": "Password attuale",
+    "New password": "Nuova password",
+    "Confirm new password": "Conferma nuova password",
+    "Passphrase": "Passphrase",
+    "PIN": "PIN",
+    "Trust {0}?": "Considerare attendibile {0}?",
+    "Connect to {0} anyway?": "Connettersi comunque a {0}?",
+    "Accept updated host keys?": "Accettare le chiavi host aggiornate?",
+    "Add {0} to ssh-agent?": "Aggiungere {0} a ssh-agent?",
+    "Question from {0}": "Domanda da {0}",
+    "Verification code for {0}": "Codice di verifica per {0}",
+    "Password for {0}": "Password per {0}",
+    "PIN for {0}": "PIN per {0}"
   },
   "text": {
     "Run": "Esegui",
