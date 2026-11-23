@@ -137,6 +137,50 @@ t('sentence-scoped rule skips a lone text node but joins pieces', () => run(test
   assert.strictEqual(doc.getElementById('b').textContent, '開啟 Foo 面板');
 }));
 
+// The preload's ipcRenderer, faked: records what each invoke() passes on.
+async function withIpc(locale, steps) {
+  const dom = new JSDOM('<!doctype html><html><body></body></html>', { runScripts: 'outside-only' });
+  const { window } = dom;
+  const sent = [];
+  const ipcRenderer = { invoke(channel, ...args) { sent.push({ self: this, channel, args }); return Promise.resolve('cmi-0'); } };
+  window.require = (name) => { if (name !== 'electron') throw new Error(`unexpected require ${name}`); return { ipcRenderer }; };
+  window.eval(buildPreloadFragment(locale));
+  await steps(ipcRenderer, sent);
+  window.close();
+}
+const menuLocale = { ...testLocale, text: { ...testLocale.text, Default: '預設', 'Side Panel': '側邊面板', Copy: '複製' } };
+
+t('native context menu labels are translated, submenus included', () => withIpc(menuLocale, async (ipc, sent) => {
+  const items = [
+    { id: 'a', label: 'Save', type: 'normal', accelerator: 'CmdOrCtrl+S' },
+    { id: 'b', type: 'separator' },
+    { id: 'c', label: 'Unknown thing', type: 'normal' },
+    { id: 'd', label: 'Open', type: 'submenu', submenu: [{ id: 'd-0', label: 'No automations yet' }] },
+  ];
+  const result = await ipc.invoke('window:show-context-menu', items);
+  assert.strictEqual(result, 'cmi-0', 'the clicked id comes back unchanged');
+  assert.strictEqual(sent[0].self, ipc, 'original invoke keeps its receiver');
+  const out = sent[0].args[0];
+  assert.deepStrictEqual(out.map((i) => i.label), ['儲存', undefined, 'Unknown thing', '開啟']);
+  assert.strictEqual(out[3].submenu[0].label, '尚無自動化');
+  assert.deepStrictEqual(out.map((i) => i.id), ['a', 'b', 'c', 'd'], 'ids untouched');
+  assert.strictEqual(out[0].accelerator, 'CmdOrCtrl+S');
+  assert.strictEqual(items[0].label, 'Save', "the page's own items are not mutated");
+}));
+
+t('a qualified context menu label translates both parts', () => withIpc(menuLocale, async (ipc, sent) => {
+  await ipc.invoke('window:show-context-menu', [{ id: 'x', label: 'Side Panel (Default)' }, { id: 'y', label: 'Side Panel (Beta)' }]);
+  assert.deepStrictEqual(sent[0].args[0].map((i) => i.label), ['側邊面板 (預設)', 'Side Panel (Beta)']);
+}));
+
+t('other IPC channels pass through untouched', () => withIpc(menuLocale, async (ipc, sent) => {
+  const payload = [{ label: 'Copy' }];
+  await ipc.invoke('window:other', payload, 2);
+  assert.strictEqual(sent[0].channel, 'window:other');
+  assert.strictEqual(sent[0].args[0], payload);
+  assert.strictEqual(sent[0].args[1], 2);
+}));
+
 t('real zh-TW locale loads and translates a known string', () => run(loadLocale('zh-TW'), '<span id=s>Settings</span>', async (doc) => {
   assert.notStrictEqual(doc.getElementById('s').textContent, 'Settings');
 }));

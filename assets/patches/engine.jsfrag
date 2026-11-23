@@ -521,6 +521,76 @@ function installLocalePatch() {
         attributeFilter: agAttributeNames,
     });
 }
+// ---------------------------------------------------------------------------
+// Native context menus. The page sends its menu items ({ id, label, submenu })
+// over IPC and the main process builds a native menu outside the DOM, so the
+// observer never sees those labels. They are translated on the way out; the
+// main process reports the clicked item by id, so the label is display only.
+// ---------------------------------------------------------------------------
+const AG_CONTEXT_MENU_CHANNEL = 'window:show-context-menu';
+
+function agTranslateMenuLabel(label) {
+    if (typeof label !== 'string') {
+        return label;
+    }
+    const translated = translateString(label);
+    if (translated !== label) {
+        return translated;
+    }
+    // A qualifier the page appends to a known label, such as
+    // "Side Panel (Default)", is translated piece by piece.
+    const qualified = label.match(/^(.*\S)\s*\(([^()]+)\)$/);
+    if (qualified) {
+        const core = translateString(qualified[1]);
+        const qualifier = translateString(qualified[2]);
+        if (core !== qualified[1] && qualifier !== qualified[2]) {
+            return `${core} (${qualifier})`;
+        }
+    }
+    return label;
+}
+
+function agTranslateMenuItems(items) {
+    return items.map((item) => {
+        if (!item || typeof item !== 'object') {
+            return item;
+        }
+        const copy = { ...item };
+        if (typeof copy.label === 'string') {
+            copy.label = agTranslateMenuLabel(copy.label);
+        }
+        if (Array.isArray(copy.submenu)) {
+            copy.submenu = agTranslateMenuItems(copy.submenu);
+        }
+        return copy;
+    });
+}
+
+(function installContextMenuTranslation() {
+    let ipc;
+    try {
+        ipc = typeof require === 'function' ? require('electron').ipcRenderer : undefined;
+    }
+    catch {
+        return;
+    }
+    if (!ipc || typeof ipc.invoke !== 'function') {
+        return;
+    }
+    const invoke = ipc.invoke;
+    ipc.invoke = function (channel, ...args) {
+        if (channel === AG_CONTEXT_MENU_CHANNEL && Array.isArray(args[0])) {
+            try {
+                args[0] = agTranslateMenuItems(args[0]);
+            }
+            catch {
+                // An unexpected item shape must never block the menu itself.
+            }
+        }
+        return Reflect.apply(invoke, this, [channel, ...args]);
+    };
+})();
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', installLocalePatch, { once: true });
 }
